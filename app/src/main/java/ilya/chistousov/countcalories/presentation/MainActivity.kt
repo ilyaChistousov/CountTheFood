@@ -1,7 +1,8 @@
-package ilya.chistousov.countcalories
+package ilya.chistousov.countcalories.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ilya.chistousov.countcalories.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
