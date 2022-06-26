@@ -38,21 +38,17 @@ android {
 
 dependencies {
 
-    def room_version = "2.4.2"
-    def coroutines_version = "1.6.2"
-    def livedata_version = "2.4.1"
-
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:2.4.2"
+    implementation "androidx.room:room-runtime:2.4.2"
+    implementation "androidx.room:room-ktx:2.4.2"
 
     //coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2"
 
     //liveData
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$livedata_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
 
     //recyclerView
 //    implementation "androidx.recyclerview:recyclerview:1.2.1"
