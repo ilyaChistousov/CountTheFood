@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/diary_graph"
+    app:startDestination="@id/diaryFragment">
+
+    <fragment
+        android:id="@+id/diaryFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.DiaryFragment"
+        android:label="DiaryFragment" >
+        <action
+            android:id="@+id/action_diaryFragment_to_mealDetailFragment"
+            app:destination="@id/mealDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mealDetailFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.MealDetailFragment"
+        android:label="fragment_meal_detail"
+        tools:layout="@layout/fragment_meal_detail" />
+</navigation>
