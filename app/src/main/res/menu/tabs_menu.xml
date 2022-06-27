@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itemDiary"
+        android:title="@string/diary"
+        android:icon="@drawable/book"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/itemWater"
+        android:title="@string/water"
+        android:icon="@drawable/water"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/itemAnalytics"
+        android:title="@string/analytics"
+        android:icon="@drawable/analytics"
+        app:showAsAction="ifRoom"/>
+</menu>
