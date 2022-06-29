@@ -3,16 +3,17 @@ package ilya.chistousov.countcalories.presentation.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
-import ilya.chistousov.countcalories.databinding.FragmentDiaryBinding
+import ilya.chistousov.countcalories.databinding.FragmentDinnerBinding
 
-class MealDetailFragment : Fragment(R.layout.fragment_meal_detail) {
+class DinnerFragment : Fragment(R.layout.fragment_dinner) {
 
-    private lateinit var binding: FragmentDiaryBinding
+    private lateinit var binding: FragmentDinnerBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentDiaryBinding.bind(view)
+        binding = FragmentDinnerBinding.bind(view)
     }
 
 
