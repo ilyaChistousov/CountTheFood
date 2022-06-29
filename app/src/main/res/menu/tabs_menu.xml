@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/itemDiary"
+        android:id="@+id/diaryFragment"
         android:title="@string/diary"
         android:icon="@drawable/book"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/itemWater"
+        android:id="@+id/waterFragment"
         android:title="@string/water"
         android:icon="@drawable/water"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/itemAnalytics"
+        android:id="@+id/analyticsFragment"
         android:title="@string/analytics"
         android:icon="@drawable/analytics"
         app:showAsAction="ifRoom"/>

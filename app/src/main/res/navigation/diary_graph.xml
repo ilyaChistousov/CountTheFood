@@ -6,16 +6,41 @@
     app:startDestination="@id/diaryFragment">
 
     <fragment
+        android:id="@+id/breakfastFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.BreakfastFragment"
+        android:label="fragment_breakfast"
+        tools:layout="@layout/fragment_breakfast" />
+    <fragment
+        android:id="@+id/lunchFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.LunchFragment"
+        android:label="fragment_lunch"
+        tools:layout="@layout/fragment_lunch" />
+    <fragment
+        android:id="@+id/dinnerFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.DinnerFragment"
+        android:label="fragment_dinner"
+        tools:layout="@layout/fragment_dinner" />
+    <fragment
+        android:id="@+id/snackFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.SnackFragment"
+        android:label="fragment_snack"
+        tools:layout="@layout/fragment_snack" />
+    <fragment
         android:id="@+id/diaryFragment"
         android:name="ilya.chistousov.countcalories.presentation.fragments.DiaryFragment"
-        android:label="DiaryFragment" >
+        android:label="fragment_diary"
+        tools:layout="@layout/fragment_diary" >
         <action
-            android:id="@+id/action_diaryFragment_to_mealDetailFragment"
-            app:destination="@id/mealDetailFragment" />
+            android:id="@+id/action_diaryFragment_to_breakfastFragment"
+            app:destination="@id/breakfastFragment" />
+        <action
+            android:id="@+id/action_diaryFragment_to_lunchFragment"
+            app:destination="@id/lunchFragment" />
+        <action
+            android:id="@+id/action_diaryFragment_to_dinnerFragment"
+            app:destination="@id/dinnerFragment" />
+        <action
+            android:id="@+id/action_diaryFragment_to_snackFragment"
+            app:destination="@id/snackFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/mealDetailFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.MealDetailFragment"
-        android:label="fragment_meal_detail"
-        tools:layout="@layout/fragment_meal_detail" />
 </navigation>
