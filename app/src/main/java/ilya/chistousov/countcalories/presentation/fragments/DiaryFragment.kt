@@ -6,6 +6,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentDiaryBinding
+import ilya.chistousov.countcalories.presentation.breakfast.BreakfastFragment
 import java.lang.IllegalStateException
 
 
@@ -20,6 +21,7 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
         showDinnerDetail()
         showLunchDetail()
         showSnackDetail()
+        getFoodInfoFromBreakfastFragment()
     }
 
     private fun navigateMealDetail(fragmentName : String) {
@@ -54,6 +56,20 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
     private fun showSnackDetail() {
         binding.cardViewSnack.setOnClickListener {
             navigateMealDetail(SNACK)
+        }
+    }
+
+    private fun getFoodInfoFromBreakfastFragment() {
+        parentFragmentManager.setFragmentResultListener(BreakfastFragment.REQUEST_CODE, viewLifecycleOwner) { _, data ->
+            val currentCalories = data.getDouble(BreakfastFragment.EXTRA_CALORIES_SUM)
+            val currentProteins = data.getDouble(BreakfastFragment.EXTRA_PROTEINS_SUM)
+            val currentFats = data.getDouble(BreakfastFragment.EXTRA_FATS_SUM)
+            val currentCarbs = data.getDouble(BreakfastFragment.EXTRA_CARBS_SUM)
+
+            binding.tvBreakfastCalories.text = currentCalories.toString()
+            binding.tvBreakfastProtein.text = currentProteins.toString()
+            binding.tvBreakfastFat.text = currentFats.toString()
+            binding.tvBreakfastCarbs.text = currentCarbs.toString()
         }
     }
 

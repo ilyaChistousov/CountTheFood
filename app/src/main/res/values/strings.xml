@@ -13,4 +13,6 @@
     <string name="lunch">Обед</string>
     <string name="dinner">Ужин</string>
     <string name="snack">Перекус</string>
+    <string name="add_food">Введите название еды</string>
+    <string name="add">Добавить</string>
 </resources>
