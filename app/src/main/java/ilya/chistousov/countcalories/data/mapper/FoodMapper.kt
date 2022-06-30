@@ -10,9 +10,10 @@ class FoodMapper : BaseMapper<FoodDbEntity, Food> {
             dbEntity.id,
             dbEntity.name,
             dbEntity.calories,
-            dbEntity.protein,
-            dbEntity.fat,
-            dbEntity.carbs
+            dbEntity.proteins,
+            dbEntity.fats,
+            dbEntity.carbs,
+            dbEntity.meal
         )
     }
 
@@ -21,9 +22,10 @@ class FoodMapper : BaseMapper<FoodDbEntity, Food> {
             model.id,
             model.name,
             model.calories,
-            model.protein,
-            model.fat,
-            model.carbs
+            model.proteins,
+            model.fats,
+            model.carbs,
+            model.meal
         )
     }
 }

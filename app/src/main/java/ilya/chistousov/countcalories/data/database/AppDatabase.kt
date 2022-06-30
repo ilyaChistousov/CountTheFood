@@ -1,6 +1,7 @@
 package ilya.chistousov.countcalories.data.database
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -17,11 +18,11 @@ abstract class AppDatabase : RoomDatabase() {
         private const val DATABASE_NAME = "AppDatabase"
 
         @Synchronized
-        fun getInstance(application: Application) : AppDatabase{
+        fun getInstance(context: Context) : AppDatabase{
             var db = INSTANCE
             if (db == null) {
                 db = Room.databaseBuilder(
-                    application,
+                    context,
                     AppDatabase::class.java,
                     DATABASE_NAME
                 ).build()

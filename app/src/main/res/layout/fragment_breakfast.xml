@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.BreakfastFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.breakfast.BreakfastFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textViewCaloriesSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/calories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textViewProteinsSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/protein"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toEndOf="@id/textViewCaloriesSum"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewFatsSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fats"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toEndOf="@id/textViewProteinsSum"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewCarbsSum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/carbs"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintStart_toEndOf="@id/textViewFatsSum"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCarbsSum">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/add_food"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonAddFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        app:layout_constraintTop_toBottomOf="@id/textLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/buttonAddFood"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
