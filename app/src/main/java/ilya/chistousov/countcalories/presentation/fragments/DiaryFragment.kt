@@ -3,16 +3,23 @@ package ilya.chistousov.countcalories.presentation.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentDiaryBinding
-import ilya.chistousov.countcalories.presentation.breakfast.BreakfastFragment
-import java.lang.IllegalStateException
+import ilya.chistousov.countcalories.domain.model.Food
+import ilya.chistousov.countcalories.domain.model.Meal
+import ilya.chistousov.countcalories.domain.model.Meal.*
+import ilya.chistousov.countcalories.presentation.util.filterListFoodByMeal
+import ilya.chistousov.countcalories.presentation.viewmodels.FoodViewModel
 
 
 class DiaryFragment : Fragment(R.layout.fragment_diary) {
 
     private lateinit var binding: FragmentDiaryBinding
+    private val viewModel: FoodViewModel by lazy {
+        ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory(requireActivity().application))[FoodViewModel::class.java]
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -21,18 +28,7 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
         showDinnerDetail()
         showLunchDetail()
         showSnackDetail()
-        getFoodInfoFromBreakfastFragment()
-    }
-
-    private fun navigateMealDetail(fragmentName : String) {
-        val fragmentId = when(fragmentName) {
-            BREAKFAST -> R.id.action_diaryFragment_to_breakfastFragment
-            LUNCH -> R.id.action_diaryFragment_to_lunchFragment
-            DINNER -> R.id.action_diaryFragment_to_dinnerFragment
-            SNACK -> R.id.action_diaryFragment_to_snackFragment
-            else -> throw IllegalStateException("Not such fragment = $fragmentName")
-        }
-        findNavController().navigate(fragmentId)
+        observeViewModel()
     }
 
     private fun showBreakfastDetail() {
@@ -59,25 +55,44 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
         }
     }
 
-    private fun getFoodInfoFromBreakfastFragment() {
-        parentFragmentManager.setFragmentResultListener(BreakfastFragment.REQUEST_CODE, viewLifecycleOwner) { _, data ->
-            val currentCalories = data.getDouble(BreakfastFragment.EXTRA_CALORIES_SUM)
-            val currentProteins = data.getDouble(BreakfastFragment.EXTRA_PROTEINS_SUM)
-            val currentFats = data.getDouble(BreakfastFragment.EXTRA_FATS_SUM)
-            val currentCarbs = data.getDouble(BreakfastFragment.EXTRA_CARBS_SUM)
+    private fun navigateMealDetail(meal: Meal) {
+        val fragmentId = when (meal) {
+            BREAKFAST -> R.id.action_diaryFragment_to_breakfastFragment
+            LUNCH -> R.id.action_diaryFragment_to_lunchFragment
+            DINNER -> R.id.action_diaryFragment_to_dinnerFragment
+            SNACK -> R.id.action_diaryFragment_to_snackFragment
+        }
+        findNavController().navigate(fragmentId)
+    }
 
-            binding.tvBreakfastCalories.text = currentCalories.toString()
-            binding.tvBreakfastProtein.text = currentProteins.toString()
-            binding.tvBreakfastFat.text = currentFats.toString()
-            binding.tvBreakfastCarbs.text = currentCarbs.toString()
+    private fun observeViewModel() {
+        viewModel.foods.observe(viewLifecycleOwner) {
+            val breakfastFoodList = it.filterListFoodByMeal(BREAKFAST)
+            calculateInfoFromFood(breakfastFoodList, BREAKFAST)
+
+            val lunchFoodList = it.filterListFoodByMeal(LUNCH)
+            calculateInfoFromFood(lunchFoodList, LUNCH)
+
+            val dinnerFoodList = it.filterListFoodByMeal(DINNER)
+            calculateInfoFromFood(dinnerFoodList, DINNER)
+
+            val snackFoodList = it.filterListFoodByMeal(SNACK)
+            calculateInfoFromFood(snackFoodList, SNACK)
         }
     }
 
-    companion object {
-        private const val BREAKFAST = "Breakfast"
-        private const val LUNCH = "Lunch"
-        private const val DINNER = "Dinner"
-        private const val SNACK = "Snack"
+    private fun calculateInfoFromFood(foods: List<Food>, meal: Meal) {
+        var caloriesSum = BaseMealFragment.DEFAULT_VALUE
+
+        foods.forEach{ caloriesSum += it.calories}
+
+        when(meal) {
+            BREAKFAST -> binding.tvBreakfastCalories.text = caloriesSum.toString()
+            LUNCH -> binding.tvLunchCalories.text = caloriesSum.toString()
+            DINNER -> binding.tvDinnerCalories.text = caloriesSum.toString()
+            SNACK -> binding.tvSnackCalories.text = caloriesSum.toString()
+        }
     }
+
 
 }
