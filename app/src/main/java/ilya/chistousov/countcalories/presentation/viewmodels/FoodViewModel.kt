@@ -15,7 +15,7 @@ class FoodViewModel(application: Application ) : AndroidViewModel(application) {
     private val repository = FoodRepositoryImpl(database)
     private val foodUseCase = FoodUseCase(repository)
 
-    private val _foods = MutableLiveData<List<Food>>()
+    private val _foods = foodUseCase.getAllFoodUseCase()
     val foods: LiveData<List<Food>> = _foods
 
 
