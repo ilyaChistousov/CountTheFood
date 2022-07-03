@@ -9,7 +9,7 @@ data class FoodDbEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val name: String,
-    val calories: Double,
+    val calories: Int,
     val proteins: Double,
     val fats: Double,
     val carbs: Double,

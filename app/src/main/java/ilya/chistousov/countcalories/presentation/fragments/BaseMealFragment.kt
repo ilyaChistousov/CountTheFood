@@ -34,13 +34,12 @@ abstract class BaseMealFragment : Fragment(R.layout.fragment_base_meal) {
         binding.buttonAddFood.setOnClickListener {
             val foodName = binding.editText.text.toString()
             val newFood = Food(
-                0,
                 name = foodName,
-                100.0,
-                100.0,
-                100.0,
-                100.0,
-                this.meal)
+                calories = 100,
+                proteins = 100.0,
+                fats = 100.0,
+                carbs = 100.0,
+                meal = this.meal)
             foodViewModel.addFood(newFood)
         }
     }
@@ -60,7 +59,7 @@ abstract class BaseMealFragment : Fragment(R.layout.fragment_base_meal) {
 
 
     private fun getCurrentInfo(foodList: List<Food>) {
-        var caloriesSum = DEFAULT_VALUE
+        var caloriesSum = DEFAULT_VALUE.toInt()
         var proteinSum = DEFAULT_VALUE
         var fatsSum = DEFAULT_VALUE
         var carbsSum = DEFAULT_VALUE

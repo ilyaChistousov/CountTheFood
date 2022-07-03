@@ -5,14 +5,19 @@
     <string name="diary">Дневник</string>
     <string name="water">Вода</string>
     <string name="analytics">Статистика</string>
-    <string name="calories">Ккал: %s</string>
-    <string name="protein">Б: %s</string>
-    <string name="fats">Ж: %s</string>
-    <string name="carbs">У: %s</string>
+    <string name="caloriesAmount">Ккал: %s</string>
+    <string name="proteinsAmount">Б: %s</string>
+    <string name="fatsCount">Ж: %s</string>
+    <string name="carbsCount">У: %s</string>
     <string name="breakfast">Завтрак</string>
     <string name="lunch">Обед</string>
     <string name="dinner">Ужин</string>
     <string name="snack">Перекус</string>
     <string name="add_food">Введите название еды</string>
     <string name="add">Добавить</string>
+    <string name="caloriesAmountMain">%s\\%s\n\t\tКкал\nосталось</string>
+    <string name="proteins">Белки</string>
+    <string name="fatsDiary">Жиры</string>
+    <string name="amountInGrams">%s г.</string>
+    <string name="carbsDiary">Углеводы</string>
 </resources>
