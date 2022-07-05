@@ -20,4 +20,6 @@
     <string name="fatsDiary">Жиры</string>
     <string name="amountInGrams">%s г.</string>
     <string name="carbsDiary">Углеводы</string>
+    <string name="previous_date">предыдущая дата</string>
+    <string name="next_date">следующая дата</string>
 </resources>
