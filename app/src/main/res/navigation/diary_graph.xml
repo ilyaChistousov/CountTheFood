@@ -6,41 +6,37 @@
     app:startDestination="@id/diaryFragment">
 
     <fragment
-        android:id="@+id/breakfastFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.BreakfastFragment"
-        android:label="fragment_breakfast"
-        tools:layout="@layout/fragment_breakfast" />
-    <fragment
-        android:id="@+id/lunchFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.LunchFragment"
-        android:label="fragment_lunch"
-        tools:layout="@layout/fragment_lunch" />
-    <fragment
-        android:id="@+id/dinnerFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.DinnerFragment"
-        android:label="fragment_dinner"
-        tools:layout="@layout/fragment_dinner" />
-    <fragment
-        android:id="@+id/snackFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.SnackFragment"
-        android:label="fragment_snack"
-        tools:layout="@layout/fragment_snack" />
-    <fragment
         android:id="@+id/diaryFragment"
         android:name="ilya.chistousov.countcalories.presentation.fragments.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" >
         <action
-            android:id="@+id/action_diaryFragment_to_breakfastFragment"
-            app:destination="@id/breakfastFragment" />
+            android:id="@+id/action_diaryFragment_to_MealFragment"
+            app:destination="@id/mealFragment" />
         <action
-            android:id="@+id/action_diaryFragment_to_lunchFragment"
-            app:destination="@id/lunchFragment" />
-        <action
-            android:id="@+id/action_diaryFragment_to_dinnerFragment"
-            app:destination="@id/dinnerFragment" />
-        <action
-            android:id="@+id/action_diaryFragment_to_snackFragment"
-            app:destination="@id/snackFragment" />
+            android:id="@+id/action_diaryFragment_to_datePickerDialogFragment"
+            app:destination="@id/datePickerDialogFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mealFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.MealFragment"
+        android:label="BaseMealFragment" >
+        <argument
+            android:name="meal"
+            app:argType="ilya.chistousov.countcalories.domain.model.Meal" />
+    </fragment>
+    <dialog
+        android:id="@+id/datePickerDialogFragment"
+        android:name="ilya.chistousov.countcalories.presentation.fragments.DatePickerDialogFragment"
+        android:label="DatePickerDialogFragment" >
+        <argument
+            android:name="currentYear"
+            app:argType="integer" />
+        <argument
+            android:name="currentMonth"
+            app:argType="integer" />
+        <argument
+            android:name="currentDay"
+            app:argType="integer" />
+    </dialog>
 </navigation>
