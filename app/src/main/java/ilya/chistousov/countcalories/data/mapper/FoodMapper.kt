@@ -13,7 +13,8 @@ class FoodMapper : BaseMapper<FoodDbEntity, Food> {
             dbEntity.proteins,
             dbEntity.fats,
             dbEntity.carbs,
-            dbEntity.meal
+            dbEntity.meal,
+            dbEntity.addedDate
         )
     }
 
@@ -25,7 +26,8 @@ class FoodMapper : BaseMapper<FoodDbEntity, Food> {
             model.proteins,
             model.fats,
             model.carbs,
-            model.meal
+            model.meal,
+            model.addedDate
         )
     }
 }
