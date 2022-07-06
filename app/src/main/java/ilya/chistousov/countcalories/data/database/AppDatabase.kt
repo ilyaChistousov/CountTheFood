@@ -1,14 +1,16 @@
 package ilya.chistousov.countcalories.data.database
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import ilya.chistousov.countcalories.data.dao.FoodDao
 import ilya.chistousov.countcalories.data.entity.FoodDbEntity
+import ilya.chistousov.countcalories.data.entity.typeconvrerter.DateConverter
 
-@Database(entities = [FoodDbEntity::class], version = 1, exportSchema = false)
+@Database(entities = [FoodDbEntity::class],  version = 1, exportSchema = false)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun foodDao(): FoodDao

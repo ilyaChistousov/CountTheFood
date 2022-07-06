@@ -2,17 +2,17 @@ package ilya.chistousov.countcalories.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentMealBinding
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.presentation.recyclerview.adapter.FoodAdapter
-import ilya.chistousov.countcalories.presentation.util.filterListFoodByMeal
+import ilya.chistousov.countcalories.presentation.util.filterListFoodByMealAndDate
 import ilya.chistousov.countcalories.presentation.viewmodels.FoodViewModel
 
-open class MealFragment : Fragment(R.layout.fragment_meal) {
+open class MealFragment : BaseFragment<FragmentMealBinding>(
+    FragmentMealBinding::inflate
+) {
 
     private val foodViewModel: FoodViewModel by lazy {
         ViewModelProvider(
@@ -23,14 +23,12 @@ open class MealFragment : Fragment(R.layout.fragment_meal) {
 
     private val args: MealFragmentArgs by navArgs()
     private lateinit var adapter: FoodAdapter
-    private lateinit var binding: FragmentMealBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMealBinding.bind(view)
         adapter = FoodAdapter()
         addNewFood()
-        observeListFood()
+        getAllFood()
     }
 
     private fun addNewFood() {
@@ -42,15 +40,16 @@ open class MealFragment : Fragment(R.layout.fragment_meal) {
                 proteins = 100.0,
                 fats = 100.0,
                 carbs = 100.0,
-                meal = args.meal
+                meal = args.meal,
+                addedDate = args.addedDate
             )
             foodViewModel.addFood(newFood)
         }
     }
 
-    private fun observeListFood() {
+    private fun getAllFood() {
         foodViewModel.foods.observe(viewLifecycleOwner) {
-            val filteredListByMeal = it.filterListFoodByMeal(args.meal)
+            val filteredListByMeal = it.filterListFoodByMealAndDate(args.meal, args.addedDate)
             updateUi(filteredListByMeal)
             getCurrentInfo(filteredListByMeal)
         }

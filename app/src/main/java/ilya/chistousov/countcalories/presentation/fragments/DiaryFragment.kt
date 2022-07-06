@@ -1,9 +1,10 @@
 package ilya.chistousov.countcalories.presentation.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
@@ -11,88 +12,105 @@ import ilya.chistousov.countcalories.databinding.FragmentDiaryBinding
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.domain.model.Meal
 import ilya.chistousov.countcalories.domain.model.Meal.*
-import ilya.chistousov.countcalories.presentation.fragments.DatePickerDialogFragment.Companion.getFormattedDate
-import ilya.chistousov.countcalories.presentation.util.filterListFoodByMeal
 import ilya.chistousov.countcalories.presentation.viewmodels.FoodViewModel
 import ilya.chistousov.countcalories.presentation.fragments.MealFragment.Companion.DEFAULT_VALUE
+import ilya.chistousov.countcalories.presentation.util.filterListFoodByMealAndDate
+import ilya.chistousov.countcalories.presentation.viewmodels.DateViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DiaryFragment : Fragment(R.layout.fragment_diary) {
+class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
+    FragmentDiaryBinding::inflate
+) {
 
-    private lateinit var binding: FragmentDiaryBinding
-    private val viewModel: FoodViewModel by lazy {
+    private val foodViewModel: FoodViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
         )[FoodViewModel::class.java]
     }
 
-    private val calendar = Calendar.getInstance()
+    private val dateViewModel: DateViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (savedInstanceState != null) {
-            calendar.time = savedInstanceState.getSerializable(CURRENT_DATE_KEY) as Date
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentDiaryBinding.bind(view)
-        showMealDetail()
-        observeViewModel()
-        setDefaultDate()
-        selectDate()
-        selectNextDay()
-        selectPreviousDay()
+        getCurrentDate()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(CURRENT_DATE_KEY, calendar.time)
+    private fun getCurrentDate() {
+        dateViewModel.currentDate.observe(viewLifecycleOwner) {
+            selectNextDay()
+            selectPreviousDay()
+            setDateToDiaryFragment(it)
+            getAllFood(it)
+            showMealDetail(it)
+            selectDate(it)
+            Log.d("TAG", "currentDate = $it")
+        }
     }
 
-    private fun showMealDetail() {
+    private fun selectNextDay() {
+        binding.imageViewNextDate.setOnClickListener {
+            dateViewModel.selectNextDay()
+        }
+    }
+
+    private fun selectPreviousDay() {
+        binding.imageViewPreviousDate.setOnClickListener {
+            dateViewModel.selectPreviousDay()
+        }
+    }
+
+    private fun setDateToDiaryFragment(currentDate: Date) {
+        val simpleDateFormat = SimpleDateFormat(
+            DATE_PATTERN,
+            Locale("ru")
+        ).format(currentDate)
+        binding.textViewDate.text = simpleDateFormat
+    }
+
+    private fun showMealDetail(currentDate: Date) {
         binding.cardViewBreakfast.setOnClickListener {
-            openMealFragment(BREAKFAST)
+            openMealFragment(BREAKFAST, currentDate)
         }
         binding.cardViewLunch.setOnClickListener {
-            openMealFragment(LUNCH)
+            openMealFragment(LUNCH, currentDate)
         }
         binding.cardViewDinner.setOnClickListener {
-            openMealFragment(DINNER)
+            openMealFragment(DINNER, currentDate)
         }
         binding.cardViewSnack.setOnClickListener {
-            openMealFragment(SNACK)
+            openMealFragment(SNACK, currentDate)
         }
     }
 
-    private fun openMealFragment(meal: Meal) {
-        val direction = DiaryFragmentDirections.actionDiaryFragmentToMealFragment(meal)
+    private fun openMealFragment(meal: Meal, currentDate: Date) {
+        val direction = DiaryFragmentDirections.actionDiaryFragmentToMealFragment(meal, currentDate)
         findNavController().navigate(direction)
     }
 
-    private fun observeViewModel() {
-        viewModel.foods.observe(viewLifecycleOwner) {
-            updateMainCardInfo(it)
+    private fun getAllFood(currentDate: Date) {
+        foodViewModel.foods.observe(viewLifecycleOwner) {
+            val currentDayFoods = filterListFoodByDate(it, currentDate)
+            updateMainCardInfo(currentDayFoods)
 
-            val breakfastFoodList = it.filterListFoodByMeal(BREAKFAST)
-            updateUiInEachMeal(breakfastFoodList, BREAKFAST)
+            val breakfastFoodList = it.filterListFoodByMealAndDate(BREAKFAST, currentDate)
+            updateUiInCardMeal(breakfastFoodList, BREAKFAST)
 
-            val lunchFoodList = it.filterListFoodByMeal(LUNCH)
-            updateUiInEachMeal(lunchFoodList, LUNCH)
+            val lunchFoodList = it.filterListFoodByMealAndDate(LUNCH, currentDate)
+            updateUiInCardMeal(lunchFoodList, LUNCH)
 
-            val dinnerFoodList = it.filterListFoodByMeal(DINNER)
-            updateUiInEachMeal(dinnerFoodList, DINNER)
+            val dinnerFoodList = it.filterListFoodByMealAndDate(DINNER, currentDate)
+            updateUiInCardMeal(dinnerFoodList, DINNER)
 
-            val snackFoodList = it.filterListFoodByMeal(SNACK)
-            updateUiInEachMeal(snackFoodList, SNACK)
+            val snackFoodList = it.filterListFoodByMealAndDate(SNACK, currentDate)
+            updateUiInCardMeal(snackFoodList, SNACK)
         }
     }
 
-    private fun updateUiInEachMeal(foods: List<Food>, meal: Meal) {
+    private fun updateUiInCardMeal(foods: List<Food>, meal: Meal) {
         var calories = DEFAULT_VALUE.toInt()
 
         foods.forEach { calories += it.calories }
@@ -132,31 +150,10 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
         }
     }
 
-    private fun setDefaultDate() {
-        val simpleDateFormat = getFormattedDate(DATE_PATTERN).format(calendar.time)
 
-        binding.textViewDate.text = simpleDateFormat
-    }
-
-    private fun selectNextDay() {
-        binding.imageViewNextDate.setOnClickListener {
-            calendar.add(Calendar.DATE, 1)
-            val simpleDateFormat = getFormattedDate(DATE_PATTERN).format(calendar.time)
-
-            binding.textViewDate.text = simpleDateFormat
-        }
-    }
-
-    private fun selectPreviousDay() {
-        binding.imageViewPreviousDate.setOnClickListener {
-            calendar.add(Calendar.DATE, -1)
-            val simpleDateFormat = getFormattedDate(DATE_PATTERN).format(calendar.time)
-            binding.textViewDate.text = simpleDateFormat
-        }
-    }
-
-
-    private fun selectDate() {
+    private fun selectDate(currentDate: Date) {
+        val calendar = Calendar.getInstance()
+        calendar.time = currentDate
         binding.textViewDate.setOnClickListener {
             val direction = DiaryFragmentDirections.actionDiaryFragmentToDatePickerDialogFragment(
                 calendar.get(Calendar.YEAR),
@@ -165,16 +162,18 @@ class DiaryFragment : Fragment(R.layout.fragment_diary) {
             )
             findNavController().navigate(direction)
             setFragmentResultListener(DatePickerDialogFragment.REQUEST_KEY) { _, data ->
-                val date = data.getString(DatePickerDialogFragment.EXTRA_DATE)
-                val parse = getFormattedDate().parse(date!!)
-                calendar.time = parse!!
-                binding.textViewDate.text = getFormattedDate(DATE_PATTERN).format(calendar.time)
+                val date = data.getSerializable(DatePickerDialogFragment.EXTRA_DATE) as Date
+                dateViewModel.setDate(date)
             }
         }
     }
 
+    private fun filterListFoodByDate(foods: List<Food>, currentDate: Date) : List<Food>{
+        return foods.filter { it.addedDate == currentDate }
+    }
+
+
     companion object {
-        private const val CURRENT_DATE_KEY = "Current date key"
         private const val DATE_PATTERN = "EEE, d MMM"
     }
 

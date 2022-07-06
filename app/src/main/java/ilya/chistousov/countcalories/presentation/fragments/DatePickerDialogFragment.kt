@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
-import java.text.SimpleDateFormat
 import java.util.*
 
 class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
@@ -25,18 +24,12 @@ class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetLis
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        val selectedDate = getFormattedDate().format(calendar.time)
 
-        setFragmentResult(REQUEST_KEY, bundleOf(EXTRA_DATE to selectedDate))
+        setFragmentResult(REQUEST_KEY, bundleOf(EXTRA_DATE to calendar.time))
     }
 
     companion object {
         const val REQUEST_KEY = "Date request key"
         const val EXTRA_DATE = "Extra date"
-        private const val DEFAULT_DATE_PATTERN = "EEE, d MMM, yyyy"
-
-        fun getFormattedDate(pattern: String = DEFAULT_DATE_PATTERN) : SimpleDateFormat{
-            return SimpleDateFormat(pattern, Locale("ru"))
-        }
     }
 }
