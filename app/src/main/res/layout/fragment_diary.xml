@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.DiaryFragment">
+    android:background="#EDE7F6"
+    tools:context=".presentation.foods.fragments.DiaryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -53,7 +54,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewBreakfast"
             style="@style/CardView.CircleStyle"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/white"
             app:cardCornerRadius="90dp"
             app:cardElevation="2dp"
             app:layout_constraintStart_toStartOf="parent"
