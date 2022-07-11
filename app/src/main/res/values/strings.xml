@@ -22,4 +22,17 @@
     <string name="carbsDiary">Углеводы</string>
     <string name="previous_date">предыдущая дата</string>
     <string name="next_date">следующая дата</string>
+    <string name="next_screen">Следующий экран</string>
+    <string name="next_fragment">Следующий фрагмент</string>
+    <string name="next">Далее</string>
+    <string name="centimeters">см</string>
+    <string name="kilogram">кг</string>
+    <string name="error_input_weight">Введен некорректный вес</string>
+    <string name="error_input_weight_loss">В выбранной вашей цели, желаемый вес не может быть больше текущего</string>
+    <string name="error_input_weight_gain">В выбранной вашей цели, желаемый вес не может быть меньше текущего</string>
+    <string name="error_input_growth">Введен некорректный рост</string>
+    <string name="password">Пароль</string>
+    <string name="email">Эл. почта</string>
+    <string name="finish_register">Завершить регистрацию</string>
+    <string name="finish_register_text">Введите пароль и электронный адрес\n для заверешния регистрации</string>
 </resources>

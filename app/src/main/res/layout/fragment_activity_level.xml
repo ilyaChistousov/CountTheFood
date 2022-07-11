@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    tools:context=".presentation.register.screen.ActivityLevelScreen">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back_arrow" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выберите ваш уровень активности"
+        android:textSize="20sp"
+        style="@android:style/TextAppearance.Widget.TextView"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/passiveLifestyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LayoutMaterialCardView"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Сидячий"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Минимальный уровень физической активности, сидячая работа, отсутствие физических упражнений"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/inactiveLifestyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LayoutMaterialCardView"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passiveLifestyle"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Малоактивный"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Интенсивные аэробные упражнения не менее 20 минут 1-3 раза в неделю такие как : ходьба, бег трусцой, бакскетбол, танцы и т.д."/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/activeLifestyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LayoutMaterialCardView"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inactiveLifestyle"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Активный"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Интенсивные аэробные упражнения не менее 30 минут 3-4 раза в неделю"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/heavilyActiveLifestyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LayoutMaterialCardView"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activeLifestyle"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            style="@android:style/TextAppearance.Widget.TextView"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Очень активный"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Интенсивные физические упражнения и занятия спортом 5-7 раз в неделю. Так же в эту категорию подходит тяжелая физическая работа"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/extraActiveLifestyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/LayoutMaterialCardView"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heavilyActiveLifestyle"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Сверхактивный"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.Widget.TextView"
+                android:text="Включает чрезвычайно активные и/или очень энергозатратные виды деятельности: занятия спортом с почти ежедневным графиком и несколькими тренировками в течение дня"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonNextFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:text="@string/next"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:backgroundTint="#43A047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,3 +12,8 @@ data class Food(
     val meal: Meal,
     val addedDate: Date
 )
+
+enum class Meal {
+    BREAKFAST, LUNCH, DINNER, SNACK
+}
+

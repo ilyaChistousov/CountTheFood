@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/diaryFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.DiaryFragment"
+        android:name="ilya.chistousov.countcalories.presentation.foods.fragments.DiaryFragment"
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/mealFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.MealFragment"
+        android:name="ilya.chistousov.countcalories.presentation.foods.fragments.MealFragment"
         android:label="BaseMealFragment" >
         <argument
             android:name="meal"
@@ -30,7 +30,7 @@
     </fragment>
     <dialog
         android:id="@+id/datePickerDialogFragment"
-        android:name="ilya.chistousov.countcalories.presentation.fragments.DatePickerDialogFragment"
+        android:name="ilya.chistousov.countcalories.presentation.foods.fragments.DatePickerDialogFragment"
         android:label="DatePickerDialogFragment" >
         <argument
             android:name="currentYear"
