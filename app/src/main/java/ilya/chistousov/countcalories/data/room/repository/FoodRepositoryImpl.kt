@@ -1,4 +1,4 @@
-package ilya.chistousov.countcalories.data.repository
+package ilya.chistousov.countcalories.data.room.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations

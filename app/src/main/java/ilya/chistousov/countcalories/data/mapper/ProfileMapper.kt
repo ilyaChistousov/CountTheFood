@@ -8,7 +8,6 @@ class ProfileMapper : BaseMapper<ProfileDbEntity, Profile> {
 
     override fun mapFromDbEntityToModel(dbEntity: ProfileDbEntity): Profile {
         return Profile(
-            dbEntity.email,
             dbEntity.gender,
             dbEntity.goal,
             dbEntity.birthDate,
@@ -21,14 +20,13 @@ class ProfileMapper : BaseMapper<ProfileDbEntity, Profile> {
 
     override fun mapFromModelToDbEntity(model: Profile): ProfileDbEntity {
         return ProfileDbEntity(
-            model.email,
-            model.gender,
-            model.goal,
-            model.birthDate,
-            model.activityLevel,
-            model.currentGrowth,
-            model.currentWeight,
-            model.desiredWeight
+            gender = model.gender,
+            goal = model.goal,
+            birthDate = model.birthDate,
+            activityLevel = model.activityLevel,
+            currentGrowth = model.currentGrowth,
+            currentWeight = model.currentWeight,
+            desiredWeight = model.desiredWeight
         )
     }
 

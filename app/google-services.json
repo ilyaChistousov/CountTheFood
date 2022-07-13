@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "965997958000",
+    "project_id": "countcalories-1c24c",
+    "storage_bucket": "countcalories-1c24c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965997958000:android:748c73e19f01a69a2075b5",
+        "android_client_info": {
+          "package_name": "ilya.chistousov.countcalories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965997958000-led8d21pc42b5n606quipi2ncibns68e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ilya.chistousov.countcalories",
+            "certificate_hash": "bb132bdc58f27e970c629806fc16cc45693246d0"
+          }
+        },
+        {
+          "client_id": "965997958000-3impeq94fiv23gbsr21iq5302e8k78ic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAz-51Sr2da2DWXYuRoxbChL70deQh8GyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965997958000-3impeq94fiv23gbsr21iq5302e8k78ic.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

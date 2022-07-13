@@ -3,7 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/login_graph">
-    <include app:graph="@navigation/diary_graph" />
-    <include app:graph="@navigation/login_graph" />
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="ilya.chistousov.countcalories.presentation.register.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_viewPagerContainer"
+            app:destination="@id/viewPagerContainer" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPagerContainer"
+        android:name="ilya.chistousov.countcalories.presentation.register.screen.ViewPagerContainer"
+        android:label="fragment_viewpager_container"
+        tools:layout="@layout/fragment_viewpager_container" >
+        <action
+            android:id="@+id/action_viewPagerContainer_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="ilya.chistousov.countcalories.presentation.register.fragment.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_tabsFragment"
+            app:destination="@id/tabsFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/tabsFragment"
+        android:name="ilya.chistousov.countcalories.presentation.foods.fragments.TabsFragment"
+        android:label="fragment_tabs"
+        tools:layout="@layout/fragment_tabs" />
 </navigation>
