@@ -9,8 +9,8 @@ import java.util.*
 
 @Entity(tableName = "profile")
 data class ProfileDbEntity(
-    @PrimaryKey(autoGenerate = false)
-    val email: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val gender: Gender,
     val goal: Goal,
     val birthDate: Date,

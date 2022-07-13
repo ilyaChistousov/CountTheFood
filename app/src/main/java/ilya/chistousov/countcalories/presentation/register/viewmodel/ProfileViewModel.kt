@@ -4,12 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import ilya.chistousov.countcalories.data.database.AppDatabase
-import ilya.chistousov.countcalories.data.repository.ProfileRepositoryImpl
+import ilya.chistousov.countcalories.data.room.repository.ProfileRepositoryImpl
 import ilya.chistousov.countcalories.domain.model.ActivityLevel
 import ilya.chistousov.countcalories.domain.model.Gender
 import ilya.chistousov.countcalories.domain.model.Goal
+import ilya.chistousov.countcalories.domain.model.Profile
 import ilya.chistousov.countcalories.domain.usecases.profile.CreateProfileUseCase
+import kotlinx.coroutines.launch
 import java.util.*
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
@@ -73,5 +76,19 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     fun setGender(gender: Gender) {
         this._gender.value = gender
     }
+
+    fun createProfile() {
+        val profile = Profile(
+            _gender.value!!,
+            _goal.value!!,
+            _birthDate.value!!,
+            _activityLevel.value!!,
+            _currentGrowth.value!!,
+            _currentWeight.value!!,
+            _desiredWeight.value!!
+        )
+        viewModelScope.launch { createProfileUseCase(profile) }
+    }
+
 
 }

@@ -3,6 +3,7 @@ package ilya.chistousov.countcalories.presentation.register.screen
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.card.MaterialCardView
 import ilya.chistousov.countcalories.databinding.FragmentGoalBinding
 import ilya.chistousov.countcalories.domain.model.Goal.*
@@ -90,7 +91,7 @@ class GoalScreen
 
     private fun backToLoginMenu() {
         binding.toolBar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().popBackStack()
         }
     }
 

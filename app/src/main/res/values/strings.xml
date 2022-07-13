@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">CountCalories</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="diary">Дневник</string>
     <string name="water">Вода</string>
@@ -34,5 +33,6 @@
     <string name="password">Пароль</string>
     <string name="email">Эл. почта</string>
     <string name="finish_register">Завершить регистрацию</string>
-    <string name="finish_register_text">Введите пароль и электронный адрес\n для заверешния регистрации</string>
+    <string name="finish_register_text">Введите электронную почту и пароль\n для завершения регистрации</string>
+    <string name="invalid_email_input">Неверно введенная электронная почта</string>
 </resources>

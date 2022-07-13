@@ -3,7 +3,6 @@ package ilya.chistousov.countcalories.domain.model
 import java.util.*
 
 data class Profile(
-    val email: String,
     val gender: Gender,
     val goal: Goal,
     val birthDate: Date,

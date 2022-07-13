@@ -1,4 +1,4 @@
-package ilya.chistousov.countcalories.data.dao
+package ilya.chistousov.countcalories.data.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
