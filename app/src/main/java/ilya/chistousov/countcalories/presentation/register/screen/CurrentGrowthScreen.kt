@@ -6,18 +6,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentCurrentGrowthBinding
-import ilya.chistousov.countcalories.presentation.register.viewmodel.ProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 
 class CurrentGrowthScreen
     : BaseScreen<FragmentCurrentGrowthBinding>(
     FragmentCurrentGrowthBinding::inflate
 ) {
 
-    private val profileViewModel: ProfileViewModel by lazy {
+    private val createProfileViewModel: CreateProfileViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[ProfileViewModel::class.java]
+        )[CreateProfileViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,14 +36,14 @@ class CurrentGrowthScreen
             } else if (growth.toInt() > 250) {
                 Snackbar.make(requireView(), R.string.error_input_growth, Snackbar.LENGTH_SHORT).show()
             } else {
-                profileViewModel.setCurrentGrowth(growth.toInt())
+                createProfileViewModel.setCurrentGrowth(growth.toInt())
                 parentBinding.viewPager.currentItem = 5
             }
         }
     }
 
     private fun getCurrentGrowth() {
-        profileViewModel.currentGrowth.observe(viewLifecycleOwner) {
+        createProfileViewModel.currentGrowth.observe(viewLifecycleOwner) {
             binding.textInputCurrentGrowth.setText(it.toString())
         }
     }

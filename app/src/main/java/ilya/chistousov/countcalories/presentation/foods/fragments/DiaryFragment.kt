@@ -1,7 +1,6 @@
 package ilya.chistousov.countcalories.presentation.foods.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -9,20 +8,28 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentDiaryBinding
+import ilya.chistousov.countcalories.domain.model.ActivityLevel
+import ilya.chistousov.countcalories.domain.model.ActivityLevel.*
 import ilya.chistousov.countcalories.domain.model.Food
+import ilya.chistousov.countcalories.domain.model.Gender
 import ilya.chistousov.countcalories.domain.model.Meal
 import ilya.chistousov.countcalories.domain.model.Meal.*
-import ilya.chistousov.countcalories.presentation.foods.viewmodels.FoodViewModel
 import ilya.chistousov.countcalories.presentation.foods.fragments.MealFragment.Companion.DEFAULT_VALUE
-import ilya.chistousov.countcalories.presentation.util.filterListFoodByMealAndDate
 import ilya.chistousov.countcalories.presentation.foods.viewmodels.DateViewModel
-import java.text.SimpleDateFormat
+import ilya.chistousov.countcalories.presentation.foods.viewmodels.FoodViewModel
+import ilya.chistousov.countcalories.presentation.foods.viewmodels.ProfileViewModel
+import ilya.chistousov.countcalories.presentation.util.filterListFoodByDate
+import ilya.chistousov.countcalories.presentation.util.filterListFoodByMealAndDate
+import ilya.chistousov.countcalories.presentation.util.getYearFromDate
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.text.*
 
 
 class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     FragmentDiaryBinding::inflate
-)    {
+) {
 
     private val foodViewModel: FoodViewModel by lazy {
         ViewModelProvider(
@@ -31,12 +38,20 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         )[FoodViewModel::class.java]
     }
 
+    private val profileViewModel: ProfileViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+        )[ProfileViewModel::class.java]
+    }
+
     private val dateViewModel: DateViewModel by viewModels()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCurrentDate()
+        getCurrentProfile()
     }
 
     private fun getCurrentDate() {
@@ -62,15 +77,12 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         }
     }
 
-    private fun setDateToDiaryFragment(currentDate: Date) {
-        val simpleDateFormat = SimpleDateFormat(
-            DATE_PATTERN,
-            Locale("ru")
-        ).format(currentDate)
-        binding.textViewDate.text = simpleDateFormat
+    private fun setDateToDiaryFragment(currentDate: LocalDate) {
+        val formatter = DateTimeFormatter.ofPattern(DATE_PATTERN, Locale("ru"))
+        binding.textViewDate.text = currentDate.format(formatter)
     }
 
-    private fun showMealDetail(currentDate: Date) {
+    private fun showMealDetail(currentDate: LocalDate) {
         binding.cardViewBreakfast.setOnClickListener {
             openMealFragment(BREAKFAST, currentDate)
         }
@@ -85,14 +97,14 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         }
     }
 
-    private fun openMealFragment(meal: Meal, currentDate: Date) {
+    private fun openMealFragment(meal: Meal, currentDate: LocalDate) {
         val direction = DiaryFragmentDirections.actionDiaryFragmentToMealFragment(meal, currentDate)
         findNavController().navigate(direction)
     }
 
-    private fun getAllFood(currentDate: Date) {
+    private fun getAllFood(currentDate: LocalDate) {
         foodViewModel.foods.observe(viewLifecycleOwner) {
-            val currentDayFoods = filterListFoodByDate(it, currentDate)
+            val currentDayFoods = it.filterListFoodByDate(currentDate)
             updateMainCardInfo(currentDayFoods)
 
             val breakfastFoodList = it.filterListFoodByMealAndDate(BREAKFAST, currentDate)
@@ -140,35 +152,64 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         }
 
         with(binding.cardViewSummary) {
-            textViewCaloriesCount.text =
-                String.format(resources.getString(R.string.caloriesAmountMain), caloriesSum.toString(), 10000)
+            textViewCurrentCalories.text =
+                String.format(getString(R.string.calories_eaten), caloriesSum)
             textViewProteinsCount.text =
-                String.format(resources.getString(R.string.amountInGrams), proteinsSum.toString())
-            textViewFatsCount.text = String.format(resources.getString(R.string.amountInGrams), fatsSum.toString())
-            textViewCarbsCount.text = String.format(resources.getString(R.string.amountInGrams), carbsSum.toString())
+                String.format(getString(R.string.amount_in_grams), proteinsSum)
+            textViewFatsCount.text = String.format(resources.getString(R.string.amount_in_grams), fatsSum)
+            textViewCarbsCount.text = String.format(resources.getString(R.string.amount_in_grams), carbsSum)
         }
     }
 
 
-    private fun selectDate(currentDate: Date) {
-        val calendar = Calendar.getInstance()
-        calendar.time = currentDate
+    private fun selectDate(currentDate: LocalDate) {
         binding.textViewDate.setOnClickListener {
-            val direction = DiaryFragmentDirections.actionDiaryFragmentToDatePickerDialogFragment(
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
+            val navDirection = DiaryFragmentDirections.actionDiaryFragmentToDatePickerDialogFragment(
+                currentDate.year,
+                currentDate.monthValue - 1,
+                currentDate.dayOfMonth
             )
-            findNavController().navigate(direction)
+            findNavController().navigate(navDirection)
             setFragmentResultListener(DatePickerDialogFragment.REQUEST_KEY) { _, data ->
-                val date = data.getSerializable(DatePickerDialogFragment.EXTRA_DATE) as Date
-                dateViewModel.setDate(date)
+                val localDate = data.getSerializable(DatePickerDialogFragment.EXTRA_DATE) as LocalDate
+                dateViewModel.setDate(localDate)
             }
         }
     }
 
-    private fun filterListFoodByDate(foods: List<Food>, currentDate: Date) : List<Food>{
-        return foods.filter { it.addedDate == currentDate }
+    private fun getCurrentProfile() {
+        profileViewModel.currentProfile.observe(viewLifecycleOwner) {
+            val age = it.birthDate.getYearFromDate()
+            val requiredAmountCalories =
+                getFormulaForWeightLoss(it.gender, it.currentWeight, it.currentGrowth, age, it.activityLevel)
+            binding.cardViewSummary.textViewCaloriesAmount.text =
+                String.format(getString(R.string.calories_amount_main), requiredAmountCalories)
+        }
+    }
+
+    private fun getFormulaForWeightLoss(
+        gender: Gender,
+        weight: Int,
+        growth: Int,
+        age: Int,
+        activityLevel: ActivityLevel
+    ): Int {
+        val caloriesForKeepingWeight = if (gender == Gender.FEMALE) {
+            ((10 * weight) + (6.25 * growth) - (5 * age) - 161) * getActivityLevelMultiplier(activityLevel)
+        } else {
+            ((10 * weight) + (6.25 * growth) - (5 * age) + 5) * getActivityLevelMultiplier(activityLevel)
+        }
+        return caloriesForKeepingWeight.toInt()
+    }
+
+    private fun getActivityLevelMultiplier(activityLevel: ActivityLevel): Double {
+        return when (activityLevel) {
+            PASSIVE -> 1.2
+            INACTIVE -> 1.375
+            ACTIVE -> 1.55
+            HEAVILY_ACTIVE -> 1.725
+            EXTRA_ACTIVE -> 1.9
+        }
     }
 
 

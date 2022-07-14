@@ -7,19 +7,18 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.card.MaterialCardView
 import ilya.chistousov.countcalories.databinding.FragmentGoalBinding
 import ilya.chistousov.countcalories.domain.model.Goal.*
-import ilya.chistousov.countcalories.presentation.register.adapter.ViewPagerAdapter
-import ilya.chistousov.countcalories.presentation.register.viewmodel.ProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 
 class GoalScreen
     : BaseScreen<FragmentGoalBinding>(
     FragmentGoalBinding::inflate
 ) {
 
-    private val profileViewModel: ProfileViewModel by lazy {
+    private val createProfileViewModel: CreateProfileViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[ProfileViewModel::class.java]
+        )[CreateProfileViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +37,7 @@ class GoalScreen
             binding.cardViewWeightGain.isChecked = false
             binding.cardViewKeepingCurrentWeight.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setGoal(WEIGHT_LOSS)
+            createProfileViewModel.setGoal(WEIGHT_LOSS)
         }
     }
 
@@ -48,7 +47,7 @@ class GoalScreen
             binding.cardViewWeightLoss.isChecked = false
             binding.cardViewWeightGain.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setGoal(KEEPING_CURRENT_WEIGHT)
+            createProfileViewModel.setGoal(KEEPING_CURRENT_WEIGHT)
             Bundle().putSerializable("GOAL", KEEPING_CURRENT_WEIGHT)
         }
     }
@@ -59,7 +58,7 @@ class GoalScreen
             binding.cardViewWeightLoss.isChecked = false
             binding.cardViewKeepingCurrentWeight.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setGoal(WEIGHT_GAIN)
+            createProfileViewModel.setGoal(WEIGHT_GAIN)
         }
     }
 
@@ -74,7 +73,7 @@ class GoalScreen
     }
 
     private fun getSelectedGoal() {
-        profileViewModel.goal.observe(viewLifecycleOwner) {
+        createProfileViewModel.goal.observe(viewLifecycleOwner) {
             when (it) {
                 WEIGHT_LOSS -> enableCardView(binding.cardViewWeightLoss)
                 KEEPING_CURRENT_WEIGHT -> enableCardView(binding.cardViewKeepingCurrentWeight)

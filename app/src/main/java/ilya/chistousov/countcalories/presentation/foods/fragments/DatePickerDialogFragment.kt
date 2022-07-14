@@ -8,11 +8,11 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
+import java.time.LocalDate
 import java.util.*
 
 class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private val calendar = Calendar.getInstance()
     private val args: DatePickerDialogFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -21,11 +21,13 @@ class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetLis
 
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        calendar.set(Calendar.YEAR, year)
-        calendar.set(Calendar.MONTH, month)
-        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-        setFragmentResult(REQUEST_KEY, bundleOf(EXTRA_DATE to calendar.time))
+        val localDate = LocalDate.now()
+        val date = with(localDate) {
+            withYear(year)
+            withMonth(month)
+            withDayOfMonth(dayOfMonth)
+        }
+        setFragmentResult(REQUEST_KEY, bundleOf(EXTRA_DATE to date))
     }
 
     companion object {

@@ -14,11 +14,11 @@
     <string name="snack">Перекус</string>
     <string name="add_food">Введите название еды</string>
     <string name="add">Добавить</string>
-    <string name="caloriesAmountMain">%s\\%s\n\t\tКкал\nосталось</string>
+    <string name="calories_amount_main">%s\nКкал\nосталось</string>
     <string name="proteins">Белки</string>
-    <string name="fatsDiary">Жиры</string>
-    <string name="amountInGrams">%s г.</string>
-    <string name="carbsDiary">Углеводы</string>
+    <string name="fats_diary">Жиры</string>
+    <string name="amount_in_grams">%s г.</string>
+    <string name="carbs_diary">Углеводы</string>
     <string name="previous_date">предыдущая дата</string>
     <string name="next_date">следующая дата</string>
     <string name="next_screen">Следующий экран</string>
@@ -35,4 +35,5 @@
     <string name="finish_register">Завершить регистрацию</string>
     <string name="finish_register_text">Введите электронную почту и пароль\n для завершения регистрации</string>
     <string name="invalid_email_input">Неверно введенная электронная почта</string>
+    <string name="calories_eaten">%s \nКкал\nсъедено</string>
 </resources>

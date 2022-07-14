@@ -26,7 +26,7 @@
             app:argType="ilya.chistousov.countcalories.domain.model.Meal" />
         <argument
             android:name="addedDate"
-            app:argType="java.util.Date" />
+            app:argType="java.time.LocalDate" />
     </fragment>
     <dialog
         android:id="@+id/datePickerDialogFragment"
