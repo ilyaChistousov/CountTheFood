@@ -8,17 +8,17 @@ import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentDesiredWeightBinding
 import ilya.chistousov.countcalories.domain.model.Goal
 import ilya.chistousov.countcalories.domain.model.Goal.*
-import ilya.chistousov.countcalories.presentation.register.viewmodel.ProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 
 class DesiredWeightScreen
     : BaseScreen<FragmentDesiredWeightBinding>(
     FragmentDesiredWeightBinding::inflate
 ) {
-    private val profileViewModel: ProfileViewModel by lazy {
+    private val createProfileViewModel: CreateProfileViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[ProfileViewModel::class.java]
+        )[CreateProfileViewModel::class.java]
     }
 
     private var currentWeight = DEFAULT_WEIGHT
@@ -51,26 +51,26 @@ class DesiredWeightScreen
                 Snackbar.make(requireView(), getString(R.string.error_input_weight_gain), Snackbar.LENGTH_SHORT)
                     .show()
             } else {
-                profileViewModel.setDesiredWeight(weight.toInt())
+                createProfileViewModel.setDesiredWeight(weight.toInt())
                 parentBinding.viewPager.currentItem = 7
             }
         }
     }
 
     private fun getCurrentWeight() {
-        profileViewModel.currentWeight.observe(viewLifecycleOwner) {
+        createProfileViewModel.currentWeight.observe(viewLifecycleOwner) {
             currentWeight = it
         }
     }
 
     private fun getCurrentGoal() {
-        profileViewModel.goal.observe(viewLifecycleOwner) {
+        createProfileViewModel.goal.observe(viewLifecycleOwner) {
             currentGoal = it
         }
     }
 
     private fun getDesiredWeight() {
-        profileViewModel.desiredWeight.observe(viewLifecycleOwner) {
+        createProfileViewModel.desiredWeight.observe(viewLifecycleOwner) {
             binding.textInputDesiredWeight.setText(it.toString())
         }
     }

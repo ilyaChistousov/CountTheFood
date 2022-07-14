@@ -15,39 +15,32 @@ import ilya.chistousov.countcalories.domain.usecases.profile.CreateProfileUseCas
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ProfileViewModel(application: Application) : AndroidViewModel(application) {
+class CreateProfileViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = AppDatabase.getInstance(application)
     private val profileRepository = ProfileRepositoryImpl(database)
     private val createProfileUseCase = CreateProfileUseCase(profileRepository)
 
     private val _activityLevel = MutableLiveData<ActivityLevel>()
-    val activityLevel: LiveData<ActivityLevel>
-        get() = _activityLevel
+    val activityLevel: LiveData<ActivityLevel> = _activityLevel
 
     private val _birthDate = MutableLiveData<Date>()
-    val birthDate: LiveData<Date>
-        get() = _birthDate
+    val birthDate: LiveData<Date> = _birthDate
 
     private val _currentGrowth = MutableLiveData<Int>()
-    val currentGrowth: LiveData<Int>
-        get() = _currentGrowth
+    val currentGrowth: LiveData<Int> = _currentGrowth
 
     private val _currentWeight = MutableLiveData<Int>()
-    val currentWeight: LiveData<Int>
-        get() = _currentWeight
+    val currentWeight: LiveData<Int> = _currentWeight
 
     private val _desiredWeight = MutableLiveData<Int>()
-    val desiredWeight: LiveData<Int>
-        get() = _desiredWeight
+    val desiredWeight: LiveData<Int> = _desiredWeight
 
     private val _gender = MutableLiveData<Gender>()
-    val gender: LiveData<Gender>
-        get() = _gender
+    val gender: LiveData<Gender> = _gender
 
     private val _goal = MutableLiveData<Goal>()
-    val goal: LiveData<Goal>
-        get() = _goal
+    val goal: LiveData<Goal> = _goal
 
     fun setGoal(goal: Goal) {
         this._goal.value = goal

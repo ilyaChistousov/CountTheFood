@@ -7,17 +7,17 @@ import com.google.android.material.card.MaterialCardView
 import ilya.chistousov.countcalories.databinding.FragmentGenderBinding
 import ilya.chistousov.countcalories.domain.model.Gender.FEMALE
 import ilya.chistousov.countcalories.domain.model.Gender.MALE
-import ilya.chistousov.countcalories.presentation.register.viewmodel.ProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 
 class GenderScreen
     : BaseScreen<FragmentGenderBinding>(
     FragmentGenderBinding::inflate
 ){
-    private val profileViewModel: ProfileViewModel by lazy {
+    private val createProfileViewModel: CreateProfileViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[ProfileViewModel::class.java]
+        )[CreateProfileViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +34,7 @@ class GenderScreen
             binding.maleGender.isChecked = true
             binding.femaleGender.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setGender(MALE)
+            createProfileViewModel.setGender(MALE)
         }
     }
 
@@ -43,7 +43,7 @@ class GenderScreen
             binding.femaleGender.isChecked = true
             binding.maleGender.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setGender(FEMALE)
+            createProfileViewModel.setGender(FEMALE)
         }
     }
 
@@ -59,7 +59,7 @@ class GenderScreen
     }
 
     private fun getSelectedGender() {
-        profileViewModel.gender.observe(viewLifecycleOwner) {
+        createProfileViewModel.gender.observe(viewLifecycleOwner) {
             when(it) {
                 FEMALE -> enableCardView(binding.femaleGender)
                 MALE -> enableCardView(binding.maleGender)

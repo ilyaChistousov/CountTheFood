@@ -3,15 +3,10 @@ package ilya.chistousov.countcalories.presentation.register.screen
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.tabs.TabLayoutMediator
-import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentViewpagerContainerBinding
 import ilya.chistousov.countcalories.presentation.foods.fragments.BaseFragment
 import ilya.chistousov.countcalories.presentation.register.adapter.ViewPagerAdapter
-import ilya.chistousov.countcalories.presentation.register.viewmodel.ProfileViewModel
 
 class ViewPagerContainer : BaseFragment<FragmentViewpagerContainerBinding>(
     FragmentViewpagerContainerBinding::inflate

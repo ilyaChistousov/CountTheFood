@@ -6,22 +6,21 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentRegisterBinding
 import ilya.chistousov.countcalories.presentation.foods.fragments.BaseFragment
-import ilya.chistousov.countcalories.presentation.register.viewmodel.ProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 import ilya.chistousov.countcalories.presentation.register.viewmodel.RegisterAccountViewModel
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
     FragmentRegisterBinding::inflate
 ) {
 
-    private val profileViewModel: ProfileViewModel by lazy {
+    private val createProfileViewModel: CreateProfileViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[ProfileViewModel::class.java]
+        )[CreateProfileViewModel::class.java]
     }
 
     private val registerAccountViewModel: RegisterAccountViewModel by viewModels()
@@ -36,7 +35,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
         binding.buttonFinishRegister.setOnClickListener {
             if(binding.emailLayout.helperText == null) {
                 registerAccount()
-//                createProfile()
+                createProfile()
                 findNavController().navigate(R.id.action_registerFragment_to_tabsFragment)
             }
         }
@@ -66,7 +65,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
     }
 
     private fun createProfile() {
-        profileViewModel.createProfile()
+        createProfileViewModel.createProfile()
     }
 
     private fun showPreviousScreen() {

@@ -10,9 +10,10 @@ import ilya.chistousov.countcalories.data.room.dao.ProfileDao
 import ilya.chistousov.countcalories.data.entity.FoodDbEntity
 import ilya.chistousov.countcalories.data.entity.ProfileDbEntity
 import ilya.chistousov.countcalories.data.entity.typeconvrerter.DateConverter
+import ilya.chistousov.countcalories.data.entity.typeconvrerter.LocalDateTimeConverter
 
 @Database(entities = [FoodDbEntity::class, ProfileDbEntity::class],  version = 1, exportSchema = false)
-@TypeConverters(DateConverter::class)
+@TypeConverters(LocalDateTimeConverter::class, DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun foodDao(): FoodDao

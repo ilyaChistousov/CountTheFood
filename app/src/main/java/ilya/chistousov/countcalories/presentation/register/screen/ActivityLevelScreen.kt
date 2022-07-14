@@ -7,17 +7,17 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.card.MaterialCardView
 import ilya.chistousov.countcalories.databinding.FragmentActivityLevelBinding
 import ilya.chistousov.countcalories.domain.model.ActivityLevel.*
-import ilya.chistousov.countcalories.presentation.register.viewmodel.ProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 
 class ActivityLevelScreen
     : BaseScreen<FragmentActivityLevelBinding>(
     FragmentActivityLevelBinding::inflate
 ) {
-    private val profileViewModel: ProfileViewModel by lazy {
+    private val createProfileViewModel: CreateProfileViewModel by lazy {
         ViewModelProvider(
             requireActivity(),
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[ProfileViewModel::class.java]
+        )[CreateProfileViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +40,7 @@ class ActivityLevelScreen
             binding.heavilyActiveLifestyle.isChecked = false
             binding.extraActiveLifestyle.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setActivityLevel(PASSIVE)
+            createProfileViewModel.setActivityLevel(PASSIVE)
         }
     }
 
@@ -52,7 +52,7 @@ class ActivityLevelScreen
             binding.heavilyActiveLifestyle.isChecked = false
             binding.extraActiveLifestyle.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setActivityLevel(INACTIVE)
+            createProfileViewModel.setActivityLevel(INACTIVE)
         }
     }
 
@@ -64,7 +64,7 @@ class ActivityLevelScreen
             binding.heavilyActiveLifestyle.isChecked = false
             binding.extraActiveLifestyle.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setActivityLevel(ACTIVE)
+            createProfileViewModel.setActivityLevel(ACTIVE)
         }
     }
 
@@ -76,7 +76,7 @@ class ActivityLevelScreen
             binding.activeLifestyle.isChecked = false
             binding.extraActiveLifestyle.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setActivityLevel(HEAVILY_ACTIVE)
+            createProfileViewModel.setActivityLevel(HEAVILY_ACTIVE)
         }
     }
 
@@ -88,7 +88,7 @@ class ActivityLevelScreen
             binding.activeLifestyle.isChecked = false
             binding.heavilyActiveLifestyle.isChecked = false
             binding.buttonNextFragment.isEnabled = true
-            profileViewModel.setActivityLevel(EXTRA_ACTIVE)
+            createProfileViewModel.setActivityLevel(EXTRA_ACTIVE)
         }
     }
 
@@ -103,7 +103,7 @@ class ActivityLevelScreen
     }
 
     private fun getSelectedActivityLevel() {
-        profileViewModel.activityLevel.observe(viewLifecycleOwner) {
+        createProfileViewModel.activityLevel.observe(viewLifecycleOwner) {
             when(it) {
                 PASSIVE -> enableCardView(binding.passiveLifestyle)
                 INACTIVE -> enableCardView(binding.inactiveLifestyle)
