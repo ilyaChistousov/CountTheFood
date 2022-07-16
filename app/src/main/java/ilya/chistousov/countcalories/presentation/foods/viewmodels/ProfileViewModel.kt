@@ -1,17 +1,29 @@
 package ilya.chistousov.countcalories.presentation.foods.viewmodels
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import ilya.chistousov.countcalories.data.database.AppDatabase
-import ilya.chistousov.countcalories.data.room.repository.ProfileRepositoryImpl
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import ilya.chistousov.countcalories.domain.usecases.profile.GetProfileUseCase
+import javax.inject.Inject
 
-class ProfileViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val appDatabase = AppDatabase.getInstance(application)
-    private val repository =  ProfileRepositoryImpl(appDatabase)
-    private val getProfileUseCase = GetProfileUseCase(repository)
+class ProfileViewModel(getProfileUseCase: GetProfileUseCase) : ViewModel() {
 
     val currentProfile = getProfileUseCase()
 
+}
+
+
+class ProfileViewModelFactory @AssistedInject constructor(private val getProfileUseCase: GetProfileUseCase) :
+    ViewModelProvider.Factory {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return ProfileViewModel(getProfileUseCase) as T
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create() : ProfileViewModelFactory
+    }
 }

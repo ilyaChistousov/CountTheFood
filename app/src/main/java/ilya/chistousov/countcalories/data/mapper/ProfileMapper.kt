@@ -2,9 +2,10 @@ package ilya.chistousov.countcalories.data.mapper
 
 import ilya.chistousov.countcalories.data.entity.ProfileDbEntity
 import ilya.chistousov.countcalories.domain.model.Profile
+import javax.inject.Inject
 
 
-class ProfileMapper : BaseMapper<ProfileDbEntity, Profile> {
+class ProfileMapper @Inject constructor(): BaseMapper<ProfileDbEntity, Profile> {
 
     override fun mapFromDbEntityToModel(dbEntity: ProfileDbEntity): Profile {
         return Profile(

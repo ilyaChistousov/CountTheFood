@@ -1,24 +1,34 @@
 package ilya.chistousov.countcalories.presentation.register.screen
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.card.MaterialCardView
+import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentGoalBinding
 import ilya.chistousov.countcalories.domain.model.Goal.*
 import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModelFactory
+import javax.inject.Inject
 
 class GoalScreen
     : BaseScreen<FragmentGoalBinding>(
     FragmentGoalBinding::inflate
 ) {
 
-    private val createProfileViewModel: CreateProfileViewModel by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[CreateProfileViewModel::class.java]
+    private val createProfileViewModel: CreateProfileViewModel by viewModels {
+        createProfileFactory.create()
+    }
+
+    @Inject
+    lateinit var createProfileFactory: CreateProfileViewModelFactory.Factory
+
+    override fun onAttach(context: Context) {
+        context.appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

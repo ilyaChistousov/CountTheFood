@@ -14,10 +14,12 @@
     <string name="snack">Перекус</string>
     <string name="add_food">Введите название еды</string>
     <string name="add">Добавить</string>
-    <string name="calories_amount_main">%s\nКкал\nосталось</string>
+    <string name="calories_amount_main">%s / %s\nКкал\nосталось</string>
     <string name="proteins">Белки</string>
     <string name="fats_diary">Жиры</string>
-    <string name="amount_in_grams">%s г.</string>
+    <string name="proteins_amount_in_grams">%s / %s г.</string>
+    <string name="fats_amount_in_grams">%s / %s г.</string>
+    <string name="carbs_amount_in_grams">%s / %s г.</string>
     <string name="carbs_diary">Углеводы</string>
     <string name="previous_date">предыдущая дата</string>
     <string name="next_date">следующая дата</string>

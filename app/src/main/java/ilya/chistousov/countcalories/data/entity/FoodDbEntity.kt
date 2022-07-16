@@ -11,9 +11,9 @@ data class FoodDbEntity(
     val id: Int,
     val name: String,
     val calories: Int,
-    val proteins: Double,
-    val fats: Double,
-    val carbs: Double,
+    val proteins: Float,
+    val fats: Float,
+    val carbs: Float,
     val meal: Meal,
     val addedDate: LocalDate
 )

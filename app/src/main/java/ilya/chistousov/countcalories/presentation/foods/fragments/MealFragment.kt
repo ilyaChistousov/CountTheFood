@@ -1,32 +1,45 @@
 package ilya.chistousov.countcalories.presentation.foods.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentMealBinding
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.presentation.foods.recyclerview.adapter.FoodAdapter
 import ilya.chistousov.countcalories.presentation.util.filterListFoodByMealAndDate
-import ilya.chistousov.countcalories.presentation.foods.viewmodels.FoodViewModel
+import ilya.chistousov.countcalories.presentation.foods.viewmodels.DiaryViewModel
+import ilya.chistousov.countcalories.presentation.foods.viewmodels.MealViewModel
+import ilya.chistousov.countcalories.presentation.foods.viewmodels.MealViewModelFactory
+import javax.inject.Inject
 
 open class MealFragment : BaseFragment<FragmentMealBinding>(
     FragmentMealBinding::inflate
 ) {
 
-    private val foodViewModel: FoodViewModel by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[FoodViewModel::class.java]
+    private val mealViewModel: MealViewModel by viewModels() {
+        mealFactory.create()
     }
 
     private val args: MealFragmentArgs by navArgs()
-    private lateinit var adapter: FoodAdapter
+
+    @Inject
+    lateinit var mealFactory: MealViewModelFactory.Factory
+
+    private val adapter by lazy {
+        FoodAdapter()
+    }
+
+    override fun onAttach(context: Context) {
+        context.appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = FoodAdapter()
         addNewFood()
         getAllFood()
     }
@@ -37,18 +50,18 @@ open class MealFragment : BaseFragment<FragmentMealBinding>(
             val newFood = Food(
                 name = foodName,
                 calories = 100,
-                proteins = 100.0,
-                fats = 100.0,
-                carbs = 100.0,
+                proteins = 100.0f,
+                fats = 100.0f,
+                carbs = 100.0f,
                 meal = args.meal,
                 addedDate = args.addedDate
             )
-            foodViewModel.addFood(newFood)
+            mealViewModel.addFood(newFood)
         }
     }
 
     private fun getAllFood() {
-        foodViewModel.foods.observe(viewLifecycleOwner) {
+        mealViewModel.foods.observe(viewLifecycleOwner) {
             val filteredListByMeal = it.filterListFoodByMealAndDate(args.meal, args.addedDate)
             updateUi(filteredListByMeal)
             getCurrentInfo(filteredListByMeal)
@@ -62,16 +75,16 @@ open class MealFragment : BaseFragment<FragmentMealBinding>(
 
 
     private fun getCurrentInfo(foodList: List<Food>) {
-        var caloriesSum = DEFAULT_VALUE.toInt()
+        var caloriesSum = DEFAULT_VALUE
         var proteinSum = DEFAULT_VALUE
         var fatsSum = DEFAULT_VALUE
         var carbsSum = DEFAULT_VALUE
 
         foodList.forEach {
             caloriesSum += it.calories
-            proteinSum += it.proteins
-            fatsSum = +it.fats
-            carbsSum = +it.carbs
+            proteinSum += it.proteins.toInt()
+            fatsSum = +it.fats.toInt()
+            carbsSum = +it.carbs.toInt()
         }
 
         binding.textViewCaloriesSum.text = caloriesSum.toString()
@@ -82,6 +95,6 @@ open class MealFragment : BaseFragment<FragmentMealBinding>(
     }
 
     companion object {
-        const val DEFAULT_VALUE = 0.0
+        const val DEFAULT_VALUE = 0
     }
 }

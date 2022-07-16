@@ -14,7 +14,7 @@ fun DatePicker.getDate() : Date {
     return calendar.time
 }
 
-fun Date.getYearFromDate() : Int{
+fun Date.getYearFromDate() : Int {
     val calendar = Calendar.getInstance()
     calendar.time = this
     return Period.between(

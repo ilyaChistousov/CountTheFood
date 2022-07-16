@@ -33,13 +33,7 @@
         android:name="ilya.chistousov.countcalories.presentation.foods.fragments.DatePickerDialogFragment"
         android:label="DatePickerDialogFragment" >
         <argument
-            android:name="currentYear"
-            app:argType="integer" />
-        <argument
-            android:name="currentMonth"
-            app:argType="integer" />
-        <argument
-            android:name="currentDay"
-            app:argType="integer" />
+            android:name="currentDate"
+            app:argType="java.time.LocalDate" />
     </dialog>
 </navigation>
