@@ -2,8 +2,9 @@ package ilya.chistousov.countcalories.data.mapper
 
 import ilya.chistousov.countcalories.data.entity.FoodDbEntity
 import ilya.chistousov.countcalories.domain.model.Food
+import javax.inject.Inject
 
-class FoodMapper : BaseMapper<FoodDbEntity, Food> {
+class FoodMapper @Inject constructor(): BaseMapper<FoodDbEntity, Food> {
 
     override fun mapFromDbEntityToModel(dbEntity: FoodDbEntity): Food {
         return Food(

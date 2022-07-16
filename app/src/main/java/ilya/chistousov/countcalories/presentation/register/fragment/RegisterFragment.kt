@@ -1,29 +1,43 @@
 package ilya.chistousov.countcalories.presentation.register.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
+import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentRegisterBinding
 import ilya.chistousov.countcalories.presentation.foods.fragments.BaseFragment
 import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModelFactory
 import ilya.chistousov.countcalories.presentation.register.viewmodel.RegisterAccountViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.RegisterAccountViewModelFactory
+import javax.inject.Inject
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
     FragmentRegisterBinding::inflate
 ) {
 
-    private val createProfileViewModel: CreateProfileViewModel by lazy {
-        ViewModelProvider(
-            requireActivity(),
-            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        )[CreateProfileViewModel::class.java]
+    private val registerAccountViewModel: RegisterAccountViewModel by viewModels {
+        registerAccountFactory.create()
     }
 
-    private val registerAccountViewModel: RegisterAccountViewModel by viewModels()
+    private val createProfileViewModel: CreateProfileViewModel by viewModels {
+        createProfileFactory.create()
+    }
+
+    @Inject
+    lateinit var createProfileFactory: CreateProfileViewModelFactory.Factory
+
+    @Inject
+    lateinit var registerAccountFactory: RegisterAccountViewModelFactory.Factory
+
+    override fun onAttach(context: Context) {
+        context.appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         showPreviousScreen()

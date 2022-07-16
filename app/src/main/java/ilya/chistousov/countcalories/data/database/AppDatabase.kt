@@ -21,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private var INSTANCE: AppDatabase? = null
-        private const val DATABASE_NAME = "AppDatabase"
+        const val DATABASE_NAME = "AppDatabase"
 
         @Synchronized
         fun getInstance(context: Context) : AppDatabase{

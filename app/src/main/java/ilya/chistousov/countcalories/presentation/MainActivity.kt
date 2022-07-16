@@ -3,13 +3,14 @@ package ilya.chistousov.countcalories.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var binding: ActivityMainBinding
 
     private var firebaseAuth = FirebaseAuth.getInstance()
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         setNavigationGraph()
     }
 
@@ -38,6 +38,5 @@ class MainActivity : AppCompatActivity() {
             }
         )
         navController.graph = navGraph
-
     }
 }

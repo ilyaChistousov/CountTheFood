@@ -9,14 +9,20 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.navArgs
 import java.time.LocalDate
-import java.util.*
 
 class DatePickerDialogFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private val args: DatePickerDialogFragmentArgs by navArgs()
+    private val localDate = args.currentDate
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return DatePickerDialog(requireActivity(), this, args.currentYear, args.currentMonth, args.currentDay)
+        return DatePickerDialog(
+            requireActivity(),
+            this,
+            localDate.year,
+            localDate.monthValue - 1,
+            localDate.dayOfMonth
+        )
     }
 
 

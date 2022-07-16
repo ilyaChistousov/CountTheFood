@@ -5,7 +5,7 @@ import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-object LocalDateTimeConverter {
+class LocalDateTimeConverter {
     private val formatter = DateTimeFormatter.ISO_DATE
 
     @TypeConverter

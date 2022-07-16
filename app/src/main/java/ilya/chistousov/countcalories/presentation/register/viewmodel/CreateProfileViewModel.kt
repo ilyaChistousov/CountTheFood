@@ -1,10 +1,9 @@
 package ilya.chistousov.countcalories.presentation.register.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import ilya.chistousov.countcalories.data.database.AppDatabase
 import ilya.chistousov.countcalories.data.room.repository.ProfileRepositoryImpl
 import ilya.chistousov.countcalories.domain.model.ActivityLevel
@@ -14,12 +13,9 @@ import ilya.chistousov.countcalories.domain.model.Profile
 import ilya.chistousov.countcalories.domain.usecases.profile.CreateProfileUseCase
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class CreateProfileViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val database = AppDatabase.getInstance(application)
-    private val profileRepository = ProfileRepositoryImpl(database)
-    private val createProfileUseCase = CreateProfileUseCase(profileRepository)
+class CreateProfileViewModel(private val createProfileUseCase: CreateProfileUseCase) : ViewModel() {
 
     private val _activityLevel = MutableLiveData<ActivityLevel>()
     val activityLevel: LiveData<ActivityLevel> = _activityLevel
@@ -82,6 +78,18 @@ class CreateProfileViewModel(application: Application) : AndroidViewModel(applic
         )
         viewModelScope.launch { createProfileUseCase(profile) }
     }
+}
 
+class CreateProfileViewModelFactory @AssistedInject constructor(private val createProfileUseCase: CreateProfileUseCase) :
+    ViewModelProvider.Factory {
 
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return CreateProfileViewModel(createProfileUseCase) as T
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create() : CreateProfileViewModelFactory
+    }
 }
