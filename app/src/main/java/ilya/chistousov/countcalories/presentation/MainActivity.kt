@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 R.id.tabsFragment
             }
         )
+        navGraph.setStartDestination(R.id.tabsFragment)
         navController.graph = navGraph
     }
 }

@@ -9,10 +9,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#2E8B57</color>
     <color name="pink">#F8BBD0</color>
-    <color name="light_green">#43A047</color>
+    <color name="light_green">#7f64D09E</color>
     <color name="pb_1">#086fa1</color>
     <color name="pb_2">#2419b1</color>
     <color name="pb_3">#fe0d01</color>
     <color name="pb_4">#778899</color>
     <color name="pb_5">#696969</color>
+    <color name="porcelain_white">#ECECEC</color>
+    <color name="light_gray">#BFC9CA</color>
+    <color name="green_gray">#8AB6A9</color>
 </resources>

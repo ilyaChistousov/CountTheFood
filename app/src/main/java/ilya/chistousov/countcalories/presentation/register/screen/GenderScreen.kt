@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.card.MaterialCardView
 import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentGenderBinding

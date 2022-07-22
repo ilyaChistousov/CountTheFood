@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.appComponent
@@ -27,7 +26,7 @@ class DesiredWeightScreen
     lateinit var createProfileFactory: CreateProfileViewModelFactory.Factory
 
     private var currentWeight = DEFAULT_WEIGHT
-    private lateinit var currentGoal: Goal
+    private var currentGoal: Goal? = null
 
     override fun onAttach(context: Context) {
         context.appComponent.inject(this)
