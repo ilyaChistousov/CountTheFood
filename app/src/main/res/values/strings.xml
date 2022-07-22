@@ -13,14 +13,15 @@
     <string name="dinner">Ужин</string>
     <string name="snack">Перекус</string>
     <string name="add_food">Введите название еды</string>
+    <string name="add_food_to_meal">Добавить еду</string>
     <string name="add">Добавить</string>
-    <string name="calories_amount_main">%s / %s\nКкал\nосталось</string>
-    <string name="proteins">Белки</string>
-    <string name="fats_diary">Жиры</string>
+    <string name="calories_amount_main">%s / %s\nккал</string>
+    <string name="proteins">белки</string>
+    <string name="fats_diary">жиры</string>
     <string name="proteins_amount_in_grams">%s / %s г.</string>
     <string name="fats_amount_in_grams">%s / %s г.</string>
     <string name="carbs_amount_in_grams">%s / %s г.</string>
-    <string name="carbs_diary">Углеводы</string>
+    <string name="carbs_diary">углеводы</string>
     <string name="previous_date">предыдущая дата</string>
     <string name="next_date">следующая дата</string>
     <string name="next_screen">Следующий экран</string>
@@ -38,4 +39,8 @@
     <string name="finish_register_text">Введите электронную почту и пароль\n для завершения регистрации</string>
     <string name="invalid_email_input">Неверно введенная электронная почта</string>
     <string name="calories_eaten">%s \nКкал\nсъедено</string>
+    <string name="breakfast_image">breakfast image</string>
+    <string name="lunch_image">lunch image</string>
+    <string name="dinner_image">dinner image</string>
+    <string name="snack_image">snack image</string>
 </resources>

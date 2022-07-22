@@ -1,11 +1,8 @@
 package ilya.chistousov.countcalories.presentation.register.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import ilya.chistousov.countcalories.data.database.AppDatabase
-import ilya.chistousov.countcalories.data.room.repository.ProfileRepositoryImpl
 import ilya.chistousov.countcalories.domain.model.ActivityLevel
 import ilya.chistousov.countcalories.domain.model.Gender
 import ilya.chistousov.countcalories.domain.model.Goal
@@ -13,7 +10,6 @@ import ilya.chistousov.countcalories.domain.model.Profile
 import ilya.chistousov.countcalories.domain.usecases.profile.CreateProfileUseCase
 import kotlinx.coroutines.launch
 import java.util.*
-import javax.inject.Inject
 
 class CreateProfileViewModel(private val createProfileUseCase: CreateProfileUseCase) : ViewModel() {
 

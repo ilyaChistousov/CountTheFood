@@ -2,7 +2,7 @@ package ilya.chistousov.countcalories.data.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import ilya.chistousov.countcalories.data.entity.FoodDbEntity
+import ilya.chistousov.countcalories.data.room.entity.FoodDbEntity
 import ilya.chistousov.countcalories.domain.model.Meal
 
 @Dao

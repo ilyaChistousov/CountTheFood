@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import ilya.chistousov.countcalories.data.entity.ProfileDbEntity
+import ilya.chistousov.countcalories.data.room.entity.ProfileDbEntity
 
 @Dao
 interface ProfileDao {

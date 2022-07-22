@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentRegisterBinding
-import ilya.chistousov.countcalories.presentation.foods.fragments.BaseFragment
+import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModelFactory
 import ilya.chistousov.countcalories.presentation.register.viewmodel.RegisterAccountViewModel

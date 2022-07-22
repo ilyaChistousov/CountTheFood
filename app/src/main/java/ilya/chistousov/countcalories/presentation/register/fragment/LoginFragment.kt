@@ -5,7 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentLoginBinding
-import ilya.chistousov.countcalories.presentation.foods.fragments.BaseFragment
+import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(

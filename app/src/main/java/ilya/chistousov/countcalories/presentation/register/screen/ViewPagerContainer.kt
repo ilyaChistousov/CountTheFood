@@ -5,7 +5,7 @@ import android.view.View
 import androidx.activity.OnBackPressedCallback
 import com.google.android.material.tabs.TabLayoutMediator
 import ilya.chistousov.countcalories.databinding.FragmentViewpagerContainerBinding
-import ilya.chistousov.countcalories.presentation.foods.fragments.BaseFragment
+import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 import ilya.chistousov.countcalories.presentation.register.adapter.ViewPagerAdapter
 
 class ViewPagerContainer : BaseFragment<FragmentViewpagerContainerBinding>(

@@ -2,7 +2,7 @@ package ilya.chistousov.countcalories.data.room.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import ilya.chistousov.countcalories.data.mapper.FoodMapper
+import ilya.chistousov.countcalories.data.room.mapper.FoodMapper
 import ilya.chistousov.countcalories.data.room.dao.FoodDao
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.domain.model.Meal
