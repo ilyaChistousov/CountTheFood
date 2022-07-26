@@ -1,14 +1,13 @@
 package ilya.chistousov.countcalories.presentation.register.screen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import ilya.chistousov.countcalories.appComponent
-import ilya.chistousov.countcalories.databinding.FragmentViewpagerContainerBinding
+import ilya.chistousov.countcalories.databinding.FragmentRegisterContainerBinding
+import ilya.chistousov.countcalories.presentation.register.fragment.RegisterFragmentContainer
 import java.lang.IllegalArgumentException
 
 abstract class BaseScreen<VB : ViewBinding>
@@ -19,14 +18,14 @@ abstract class BaseScreen<VB : ViewBinding>
     val binding: VB
         get() = _binding as VB
 
-    private var _parentBinding: FragmentViewpagerContainerBinding? = null
+    private var _parentBinding: FragmentRegisterContainerBinding? = null
 
-    val parentBinding: FragmentViewpagerContainerBinding
-        get() = _parentBinding as FragmentViewpagerContainerBinding
+    val parentBinding: FragmentRegisterContainerBinding
+        get() = _parentBinding as FragmentRegisterContainerBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = bindingInflater.invoke(inflater)
-        _parentBinding = (parentFragment as ViewPagerContainer).binding
+        _parentBinding = (parentFragment as RegisterFragmentContainer).binding
 
         if (_binding == null) {
             throw IllegalArgumentException("binding cannot be null")

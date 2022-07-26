@@ -13,29 +13,29 @@
 
         <include
             android:id="@+id/cardViewSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             layout="@layout/card_view_summary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
             android:id="@+id/imageViewPreviousDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/previous_date"
             android:src="@drawable/back"
-            app:layout_constraintTop_toBottomOf="@id/cardViewSummary"
             app:layout_constraintStart_toStartOf="parent"
-            android:contentDescription="@string/previous_date" />
+            app:layout_constraintTop_toBottomOf="@id/cardViewSummary" />
 
         <TextView
             android:id="@+id/textViewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="18sp"
             android:fontFamily="@font/hero"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/imageViewNextDate"
             app:layout_constraintStart_toEndOf="@+id/imageViewPreviousDate"
             app:layout_constraintTop_toBottomOf="@id/cardViewSummary"
@@ -47,16 +47,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/next_date"
             android:src="@drawable/next"
-            app:layout_constraintTop_toBottomOf="@id/cardViewSummary"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/next_date"/>
+            app:layout_constraintTop_toBottomOf="@id/cardViewSummary" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewBreakfast"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             style="@style/MealCardViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,51 +72,51 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/breakfast_image"
                     android:src="@drawable/breakfast"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/breakfast_image" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvBreakfastTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:fontFamily="@font/hero"
                     android:text="@string/breakfast"
                     android:textSize="15sp"
-                    android:fontFamily="@font/hero"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/breakfastImage"
-                    app:layout_constraintBottom_toTopOf="@id/tvBreakfastCalories" />
+                    app:layout_constraintBottom_toTopOf="@id/tvBreakfastCalories"
+                    app:layout_constraintStart_toEndOf="@id/breakfastImage" />
 
                 <TextView
                     android:id="@+id/tvBreakfastCalories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:fontFamily="@font/hero"
                     android:text="@string/caloriesAmount"
                     android:textSize="15sp"
-                    android:fontFamily="@font/hero"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/breakfastImage" />
 
                 <ImageView
                     android:id="@+id/imageAddBreakfast"
-                    android:layout_height="wrap_content"
                     style="@style/AddFoodButtonStyle"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/add_food_to_meal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="@string/add_food_to_meal" />
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewLunch"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             style="@style/MealCardViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -132,42 +132,42 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/lunch_image"
                     android:src="@drawable/lunch"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/lunch_image" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvLunchTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:textSize="15sp"
-                    android:text="@string/lunch"
                     android:fontFamily="@font/hero"
+                    android:text="@string/lunch"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/lunchImage"
-                    app:layout_constraintBottom_toTopOf="@id/tvLunchCalories"/>
+                    app:layout_constraintBottom_toTopOf="@id/tvLunchCalories"
+                    app:layout_constraintStart_toEndOf="@id/lunchImage" />
 
                 <TextView
                     android:id="@+id/tvLunchCalories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:textSize="15sp"
                     android:fontFamily="@font/hero"
                     android:text="@string/caloriesAmount"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/lunchImage" />
 
                 <ImageView
                     android:id="@+id/imageAddLunch"
-                    android:layout_height="wrap_content"
                     style="@style/AddFoodButtonStyle"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/add_food_to_meal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="@string/add_food_to_meal" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -175,9 +175,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewDinner"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             style="@style/MealCardViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -193,42 +193,42 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/dinner_image"
                     android:src="@drawable/dinner"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/dinner_image" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvDinnerTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/dinner"
+                    android:layout_marginStart="8dp"
                     android:fontFamily="@font/hero"
+                    android:text="@string/dinner"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toEndOf="@id/dinnerImage"
-                    app:layout_constraintBottom_toTopOf="@id/tvDinnerCalories"/>
+                    app:layout_constraintBottom_toTopOf="@id/tvDinnerCalories"
+                    app:layout_constraintStart_toEndOf="@id/dinnerImage" />
 
                 <TextView
                     android:id="@+id/tvDinnerCalories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/caloriesAmount"
-                    android:fontFamily="@font/hero"
-                    android:textSize="15sp"
                     android:layout_marginStart="8dp"
+                    android:fontFamily="@font/hero"
+                    android:text="@string/caloriesAmount"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/dinnerImage" />
 
                 <ImageView
                     android:id="@+id/imageAddDinner"
-                    android:layout_height="wrap_content"
                     style="@style/AddFoodButtonStyle"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/add_food_to_meal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="@string/add_food_to_meal" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -236,9 +236,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewSnack"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             style="@style/MealCardViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -254,22 +254,22 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    android:contentDescription="@string/snack_image"
                     android:src="@drawable/snack"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/snack_image" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvSnackTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:fontFamily="@font/hero"
                     android:text="@string/snack"
                     android:textSize="15sp"
-                    android:layout_marginStart="8dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/snackImage"
-                    app:layout_constraintBottom_toTopOf="@id/tvSnackCalories"/>
+                    app:layout_constraintBottom_toTopOf="@id/tvSnackCalories"
+                    app:layout_constraintStart_toEndOf="@id/snackImage" />
 
                 <TextView
                     android:id="@+id/tvSnackCalories"
@@ -277,19 +277,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/hero"
-                    android:textSize="15sp"
                     android:text="@string/caloriesAmount"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/snackImage"  />
+                    app:layout_constraintStart_toEndOf="@id/snackImage" />
 
                 <ImageView
                     android:id="@+id/imageAddSnack"
-                    android:layout_height="wrap_content"
                     style="@style/AddFoodButtonStyle"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/add_food_to_meal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:contentDescription="@string/add_food_to_meal" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

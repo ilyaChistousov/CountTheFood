@@ -3,10 +3,9 @@ package ilya.chistousov.countcalories.presentation.diary.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ilya.chistousov.countcalories.presentation.util.convertToDate
-import ilya.chistousov.countcalories.presentation.util.convertToLocalDate
+import ilya.chistousov.countcalories.util.convertToDate
+import ilya.chistousov.countcalories.util.convertToLocalDate
 import java.time.LocalDate
-import java.time.ZoneId
 import java.util.*
 
 class DateViewModel : ViewModel() {

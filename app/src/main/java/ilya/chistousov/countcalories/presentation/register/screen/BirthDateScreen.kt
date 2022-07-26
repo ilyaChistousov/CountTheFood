@@ -4,12 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentBirthDateBinding
 import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
 import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModelFactory
-import ilya.chistousov.countcalories.presentation.util.getDate
+import ilya.chistousov.countcalories.util.getDate
 import java.util.*
 import javax.inject.Inject
 

@@ -6,14 +6,14 @@ data class Food(
     val id: Int = 0,
     val name: String,
     val calories: Int,
-    val proteins: Float,
-    val fats: Float,
+    val protein: Float,
+    val fat: Float,
     val carbs: Float,
-    val meal: Meal,
+    val meal: Meal = Meal.NONE,
     val addedDate: LocalDate
 )
 
 enum class Meal {
-    BREAKFAST, LUNCH, DINNER, SNACK
+    BREAKFAST, LUNCH, DINNER, SNACK, NONE
 }
 

@@ -4,59 +4,43 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
+import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentMealBinding
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
-import ilya.chistousov.countcalories.presentation.meal.recyclerview.adapter.FoodAdapter
-import ilya.chistousov.countcalories.presentation.util.filterListFoodByMealAndDate
+import ilya.chistousov.countcalories.presentation.meal.adapter.FoodAdapter
+import ilya.chistousov.countcalories.util.filterListFoodByMealAndDate
 import ilya.chistousov.countcalories.presentation.foods.viewmodels.MealViewModel
 import ilya.chistousov.countcalories.presentation.foods.viewmodels.MealViewModelFactory
+import ilya.chistousov.countcalories.presentation.meal.adapter.RecyclerViewOnItemClickListener
 import javax.inject.Inject
 
-open class MealFragment : BaseFragment<FragmentMealBinding>(
+class MealFragment : BaseFragment<FragmentMealBinding>(
     FragmentMealBinding::inflate
-) {
-
-    private val mealViewModel: MealViewModel by viewModels() {
-        mealFactory.create()
-    }
+), RecyclerViewOnItemClickListener {
 
     private val args: MealFragmentArgs by navArgs()
 
-    @Inject
-    lateinit var mealFactory: MealViewModelFactory.Factory
+    private lateinit var mealViewModel: MealViewModel
 
     private val adapter by lazy {
-        FoodAdapter()
+        FoodAdapter(this)
     }
 
     override fun onAttach(context: Context) {
-        context.appComponent.inject(this)
+        mealViewModel = context.appComponent.factory.create(MealViewModel::class.java)
         super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addNewFood()
         getAllFood()
-    }
-
-    private fun addNewFood() {
-        binding.buttonAddFood.setOnClickListener {
-            val foodName = binding.editText.text.toString()
-            val newFood = Food(
-                name = foodName,
-                calories = 100,
-                proteins = 100.0f,
-                fats = 100.0f,
-                carbs = 100.0f,
-                meal = args.meal,
-                addedDate = args.addedDate
-            )
-            mealViewModel.addFood(newFood)
-        }
+        navigateToSearchFood()
+        setSeparatorItemRecycler()
     }
 
     private fun getAllFood() {
@@ -81,19 +65,27 @@ open class MealFragment : BaseFragment<FragmentMealBinding>(
 
         foodList.forEach {
             caloriesSum += it.calories
-            proteinSum += it.proteins.toInt()
-            fatsSum = +it.fats.toInt()
+            proteinSum += it.protein.toInt()
+            fatsSum = +it.fat.toInt()
             carbsSum = +it.carbs.toInt()
         }
+    }
 
-        binding.textViewCaloriesSum.text = caloriesSum.toString()
-        binding.textViewProteinsSum.text = proteinSum.toString()
-        binding.textViewFatsSum.text = fatsSum.toString()
-        binding.textViewCarbsSum.text = carbsSum.toString()
+    private fun navigateToSearchFood() {
+        binding.buttonAddFood.setOnClickListener {
+            findNavController().navigate(R.id.action_mealFragment_to_addFoodFragmentContainer)
+        }
+    }
 
+    private fun setSeparatorItemRecycler() {
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
     companion object {
         const val DEFAULT_VALUE = 0
+    }
+
+    override fun onItemClick(position: Int) {
+        TODO("Not yet implemented")
     }
 }

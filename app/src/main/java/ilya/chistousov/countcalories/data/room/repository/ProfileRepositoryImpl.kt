@@ -14,11 +14,11 @@ class ProfileRepositoryImpl @Inject constructor(
 ) : ProfileRepository {
 
     override suspend fun createProfile(profile: Profile) {
-        dao.createProfile(mapper.mapFromModelToDbEntity(profile))
+        dao.createProfile(mapper.mapFromModelToEntity(profile))
     }
 
     override fun getProfile(): LiveData<Profile> {
         return Transformations.map(dao.getProfile())
-        { mapper.mapFromDbEntityToModel(it) }
+        { mapper.mapFromEntityToModel(it) }
     }
 }

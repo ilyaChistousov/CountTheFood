@@ -11,22 +11,8 @@
         android:label="fragment_diary"
         tools:layout="@layout/fragment_diary" >
         <action
-            android:id="@+id/action_diaryFragment_to_MealFragment"
-            app:destination="@id/mealFragment" />
-        <action
             android:id="@+id/action_diaryFragment_to_datePickerDialogFragment"
             app:destination="@id/datePickerDialogFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mealFragment"
-        android:name="ilya.chistousov.countcalories.presentation.meal.fragment.MealFragment"
-        android:label="BaseMealFragment" >
-        <argument
-            android:name="meal"
-            app:argType="ilya.chistousov.countcalories.domain.model.Meal" />
-        <argument
-            android:name="addedDate"
-            app:argType="java.time.LocalDate" />
     </fragment>
     <dialog
         android:id="@+id/datePickerDialogFragment"

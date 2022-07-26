@@ -25,20 +25,3 @@ class MealViewModel(
 
     fun deleteFood(food: Food) = viewModelScope.launch { deleteFoodUseCase(food) }
 }
-
-class MealViewModelFactory @AssistedInject constructor(
-    private val getAllFoodUseCase: GetAllFoodUseCase,
-    private val addFoodUseCase: AddFoodUseCase,
-    private val deleteFoodUseCase: DeleteFoodUseCase
-) : ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return MealViewModel(getAllFoodUseCase, addFoodUseCase, deleteFoodUseCase) as T
-    }
-
-    @AssistedFactory
-    interface Factory {
-        fun create() : MealViewModelFactory
-    }
-}

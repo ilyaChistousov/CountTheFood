@@ -6,14 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.meal.fragment.MealFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
     <TextView
         android:id="@+id/textViewCaloriesSum"
         android:layout_width="wrap_content"
@@ -25,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/textViewProteinsSum"
+        android:id="@+id/textViewProteinAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/proteinsAmount"
@@ -35,49 +27,31 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/textViewFatsSum"
+        android:id="@+id/textViewFatAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fatsCount"
         android:layout_marginTop="24dp"
         android:layout_marginStart="40dp"
-        app:layout_constraintStart_toEndOf="@id/textViewProteinsSum"
+        app:layout_constraintStart_toEndOf="@id/textViewProteinAmount"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/textViewCarbsSum"
+        android:id="@+id/textViewCarbsAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/carbsCount"
         android:layout_marginTop="24dp"
         android:layout_marginStart="40dp"
-        app:layout_constraintStart_toEndOf="@id/textViewFatsSum"
+        app:layout_constraintStart_toEndOf="@id/textViewFatAmount"
         app:layout_constraintTop_toTopOf="parent"/>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCarbsSum">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/add_food"
-            android:inputType="text"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/buttonAddFood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/add"
-        app:layout_constraintTop_toBottomOf="@id/textLayout"
+        app:layout_constraintTop_toBottomOf="@id/textViewFatAmount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
