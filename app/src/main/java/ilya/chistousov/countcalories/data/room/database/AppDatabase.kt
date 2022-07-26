@@ -7,12 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import ilya.chistousov.countcalories.data.room.dao.FoodDao
 import ilya.chistousov.countcalories.data.room.dao.ProfileDao
-import ilya.chistousov.countcalories.data.room.entity.FoodDbEntity
-import ilya.chistousov.countcalories.data.room.entity.ProfileDbEntity
+import ilya.chistousov.countcalories.data.room.entity.FoodEntity
+import ilya.chistousov.countcalories.data.room.entity.ProfileEntity
 import ilya.chistousov.countcalories.data.room.entity.typeconvrerter.DateConverter
 import ilya.chistousov.countcalories.data.room.entity.typeconvrerter.LocalDateTimeConverter
 
-@Database(entities = [FoodDbEntity::class, ProfileDbEntity::class],  version = 1, exportSchema = false)
+@Database(entities = [FoodEntity::class, ProfileEntity::class],  version = 1)
 @TypeConverters(LocalDateTimeConverter::class, DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

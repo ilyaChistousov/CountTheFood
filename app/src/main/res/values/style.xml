@@ -30,6 +30,24 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
+
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/hero</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="CustomHintTextAppearance">
+        <item name="android:fontFamily">@font/hero</item>
+    </style>
+
+    <style name="CustomDialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>
 
 

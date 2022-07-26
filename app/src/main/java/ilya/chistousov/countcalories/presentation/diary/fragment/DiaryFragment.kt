@@ -3,7 +3,7 @@ package ilya.chistousov.countcalories.presentation.diary.fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.*
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,9 +17,12 @@ import ilya.chistousov.countcalories.domain.model.Meal.*
 import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 import ilya.chistousov.countcalories.presentation.diary.viewmodel.*
 import ilya.chistousov.countcalories.presentation.meal.fragment.MealFragment.Companion.DEFAULT_VALUE
-import ilya.chistousov.countcalories.presentation.util.filterListFoodByDate
-import ilya.chistousov.countcalories.presentation.util.filterListFoodByMealAndDate
-import ilya.chistousov.countcalories.presentation.util.getYearFromDate
+import ilya.chistousov.countcalories.presentation.tabs.TabsFragmentDirections
+import ilya.chistousov.countcalories.util.filterListFoodByDate
+import ilya.chistousov.countcalories.util.filterListFoodByMealAndDate
+import ilya.chistousov.countcalories.util.findTopNavController
+import ilya.chistousov.countcalories.util.getYearFromDate
+import java.lang.IllegalArgumentException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -30,19 +33,9 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     FragmentDiaryBinding::inflate
 ) {
 
-    private val diaryViewModel: DiaryViewModel by viewModels {
-        diaryFactory.create()
-    }
-    private val profileViewModel: ProfileViewModel by viewModels {
-        profileFactory.create()
-    }
+    private lateinit var diaryViewModel: DiaryViewModel
+    private lateinit var profileViewModel: ProfileViewModel
     private val dateViewModel: DateViewModel by viewModels()
-
-    @Inject
-    lateinit var profileFactory: ProfileViewModelFactory.Factory
-
-    @Inject
-    lateinit var diaryFactory: DiaryViewModelFactory.Factory
 
     private var caloriesLeft = DEFAULT_VALUE
     private var needProteins = DEFAULT_VALUE
@@ -50,10 +43,10 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     private var needCarbs = DEFAULT_VALUE
 
     override fun onAttach(context: Context) {
-        context.appComponent.inject(this)
+        diaryViewModel = context.appComponent.factory.create(DiaryViewModel::class.java)
+        profileViewModel = context.appComponent.factory.create(ProfileViewModel::class.java)
         super.onAttach(context)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -92,7 +85,7 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     private fun showMealDetail(currentDate: LocalDate) {
         with(binding) {
             mealCardViewClickListener(currentDate)
-            addImageViewClickListener(currentDate)
+            addFoodImageViewClickListener(currentDate)
         }
     }
 
@@ -105,7 +98,7 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         }
     }
 
-    private fun addImageViewClickListener(currentDate: LocalDate) {
+    private fun addFoodImageViewClickListener(currentDate: LocalDate) {
         with(binding) {
             imageAddBreakfast.setOnClickListener { openMealFragment(BREAKFAST, currentDate) }
             imageAddLunch.setOnClickListener { openMealFragment(LUNCH, currentDate) }
@@ -115,8 +108,8 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     }
 
     private fun openMealFragment(meal: Meal, currentDate: LocalDate) {
-        val direction = DiaryFragmentDirections.actionDiaryFragmentToMealFragment(meal, currentDate)
-        findNavController().navigate(direction)
+        val direction = TabsFragmentDirections.actionTabsFragmentToMealFragment(meal, currentDate)
+        findTopNavController().navigate(direction)
     }
 
     private fun getAllFood(currentDate: LocalDate) {
@@ -145,13 +138,14 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
 
         when (meal) {
             BREAKFAST -> binding.tvBreakfastCalories.text =
-                String.format(resources.getString(R.string.caloriesAmount), calories.toString())
+                String.format(getString(R.string.caloriesAmount), calories.toString())
             LUNCH -> binding.tvLunchCalories.text =
-                String.format(resources.getString(R.string.caloriesAmount), calories.toString())
+                String.format(getString(R.string.caloriesAmount), calories.toString())
             DINNER -> binding.tvDinnerCalories.text =
-                String.format(resources.getString(R.string.caloriesAmount), calories.toString())
+                String.format(getString(R.string.caloriesAmount), calories.toString())
             SNACK -> binding.tvSnackCalories.text =
-                String.format(resources.getString(R.string.caloriesAmount), calories.toString())
+                String.format(getString(R.string.caloriesAmount), calories.toString())
+            else -> throw IllegalArgumentException("food must have a meal")
         }
     }
 
@@ -163,8 +157,8 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
 
         foods.forEach {
             currentCalories += it.calories
-            currentProteins += it.proteins.toInt()
-            currentFats += it.fats.toInt();
+            currentProteins += it.protein.toInt()
+            currentFats += it.fat.toInt()
             currentCarbs += it.carbs.toInt()
         }
 
@@ -174,9 +168,9 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
             textViewProteinsCount.text =
                 String.format(getString(R.string.proteins_amount_in_grams), currentProteins, needProteins)
             textViewFatsCount.text =
-                String.format(resources.getString(R.string.proteins_amount_in_grams), currentFats, needFats)
+                String.format(getString(R.string.proteins_amount_in_grams), currentFats, needFats)
             textViewCarbsCount.text =
-                String.format(resources.getString(R.string.proteins_amount_in_grams), currentCarbs, needCarbs)
+                String.format(getString(R.string.proteins_amount_in_grams), currentCarbs, needCarbs)
         }
 
         updateProgressBar(currentCalories, currentProteins, currentFats, currentCarbs)
@@ -233,11 +227,11 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     private fun setMaxProgressBar() {
         with(binding.cardViewSummary) {
             progressCalories.progressMax = caloriesLeft.toFloat()
-            progressCalories.backgroundProgressBarColor = resources.getColor(R.color.porcelain_white)
+            progressCalories.backgroundProgressBarColor = getColor(requireContext(), R.color.porcelain_white)
             progressCalories.progressBarWidth = 10F
             progressCalories.backgroundProgressBarWidth = 10F
-            progressCalories.progressBarColor = resources.getColor(R.color.green_gray)
-            progressCalories.progressBarColorEnd = resources.getColor(R.color.light_gray)
+            progressCalories.progressBarColor = getColor(requireContext(), R.color.green_gray)
+            progressCalories.progressBarColorEnd = getColor(requireContext(), R.color.light_gray)
 
             progressProteins.max = needProteins
             progressFats.max = needFats
@@ -282,8 +276,5 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
 
     companion object {
         private const val DATE_PATTERN = "EEE, d MMM"
-        private const val CURRENT_PROTEIN_KEY = "Protein key"
-        private const val CURRENT_FAT_KEY = "Fat key"
-        private const val CURRENT_CARBS_KEY = "Carbs key"
     }
 }

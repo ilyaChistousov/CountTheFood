@@ -2,11 +2,11 @@ package ilya.chistousov.countcalories.data.room.mapper
 
 interface BaseMapper<DB, M> {
 
-    fun mapFromDbEntityToModel(dbEntity: DB) : M
+    fun mapFromEntityToModel(entity: DB) : M
 
-    fun mapFromModelToDbEntity(model: M) : DB
+    fun mapFromModelToEntity(model: M) : DB
 
-    fun mapFromDbListToModelList(dbList: List<DB>)= dbList.map { mapFromDbEntityToModel(it) }
+    fun mapFromListToModelList(entities: List<DB>)= entities.map { mapFromEntityToModel(it) }
 
-    fun mapFromModelListToDbList(models: List<M>) = models.map { mapFromModelToDbEntity(it)}
+    fun mapFromModelListToList(models: List<M>) = models.map { mapFromModelToEntity(it)}
 }
