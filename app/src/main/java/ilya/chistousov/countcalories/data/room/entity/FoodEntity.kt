@@ -14,6 +14,7 @@ data class FoodEntity(
     val proteins: Float,
     val fats: Float,
     val carbs: Float,
+    val gram: Int,
     val meal: Meal,
     val addedDate: LocalDate
 )

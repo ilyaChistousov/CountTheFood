@@ -19,7 +19,7 @@ class FoodAdapter(
             with(binding) {
                 textViewFoodName.text = food.name
                 textViewCalories.text =
-                    String.format(root.context.getString(R.string.food_item_calories), food.calories)
+                    String.format(root.context.getString(R.string.food_item_calories), food.calories, food.gram)
                 binding.root.setOnClickListener {
                     clickListener.onItemClick(adapterPosition)
                 }

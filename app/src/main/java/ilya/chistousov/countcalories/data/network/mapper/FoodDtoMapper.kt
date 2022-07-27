@@ -10,12 +10,11 @@ class FoodDtoMapper @Inject constructor() : Mapper<FoodDto, Food> {
 
     override fun map(target: FoodDto): Food {
         return Food(
-            target.id,
-            target.name,
-            target.calories.toInt(),
-            target.protein,
-            target.fat,
-            target.carbohydrate,
+            name = target.name,
+            calories = target.calories.toInt(),
+            protein = target.protein,
+            fat = target.fat,
+            carbs = target.carbohydrate,
             addedDate = LocalDate.now()
         )
     }
@@ -24,12 +23,11 @@ class FoodDtoMapper @Inject constructor() : Mapper<FoodDto, Food> {
 class FoodDtoListMapper @Inject constructor() : Mapper<List<FoodDto>, List<Food>> {
     override fun map(target: List<FoodDto>): List<Food> {
         return target.map { Food(
-            it.id,
-            it.name,
-            it.calories.toInt(),
-            it.protein,
-            it.fat,
-            it.carbohydrate,
+            name = it.name,
+            calories = it.calories.toInt(),
+            protein = it.protein,
+            fat = it.fat,
+            carbs = it.carbohydrate,
             addedDate = LocalDate.now())
         }
     }

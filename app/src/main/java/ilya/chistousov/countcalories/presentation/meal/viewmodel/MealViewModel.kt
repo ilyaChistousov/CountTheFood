@@ -10,8 +10,9 @@ import ilya.chistousov.countcalories.domain.usecases.food.AddFoodUseCase
 import ilya.chistousov.countcalories.domain.usecases.food.DeleteFoodUseCase
 import ilya.chistousov.countcalories.domain.usecases.food.GetAllFoodUseCase
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MealViewModel(
+class MealViewModel @Inject constructor(
     getAllFoodUseCase: GetAllFoodUseCase,
     private val addFoodUseCase: AddFoodUseCase,
     private val deleteFoodUseCase: DeleteFoodUseCase

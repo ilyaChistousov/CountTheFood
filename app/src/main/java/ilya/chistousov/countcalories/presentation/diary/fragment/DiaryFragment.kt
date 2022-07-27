@@ -16,12 +16,8 @@ import ilya.chistousov.countcalories.domain.model.Goal.*
 import ilya.chistousov.countcalories.domain.model.Meal.*
 import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 import ilya.chistousov.countcalories.presentation.diary.viewmodel.*
-import ilya.chistousov.countcalories.presentation.meal.fragment.MealFragment.Companion.DEFAULT_VALUE
 import ilya.chistousov.countcalories.presentation.tabs.TabsFragmentDirections
-import ilya.chistousov.countcalories.util.filterListFoodByDate
-import ilya.chistousov.countcalories.util.filterListFoodByMealAndDate
-import ilya.chistousov.countcalories.util.findTopNavController
-import ilya.chistousov.countcalories.util.getYearFromDate
+import ilya.chistousov.countcalories.util.*
 import java.lang.IllegalArgumentException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -37,10 +33,10 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     private lateinit var profileViewModel: ProfileViewModel
     private val dateViewModel: DateViewModel by viewModels()
 
-    private var caloriesLeft = DEFAULT_VALUE
-    private var needProteins = DEFAULT_VALUE
-    private var needFats = DEFAULT_VALUE
-    private var needCarbs = DEFAULT_VALUE
+    private var caloriesLeft = DEFAULT_INT_VALUE
+    private var needProteins = DEFAULT_INT_VALUE
+    private var needFats = DEFAULT_INT_VALUE
+    private var needCarbs = DEFAULT_INT_VALUE
 
     override fun onAttach(context: Context) {
         diaryViewModel = context.appComponent.factory.create(DiaryViewModel::class.java)
@@ -91,24 +87,79 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
 
     private fun mealCardViewClickListener(currentDate: LocalDate) {
         with(binding) {
-            cardViewBreakfast.setOnClickListener { openMealFragment(BREAKFAST, currentDate) }
-            cardViewLunch.setOnClickListener { openMealFragment(LUNCH, currentDate) }
-            cardViewDinner.setOnClickListener { openMealFragment(DINNER, currentDate) }
-            cardViewSnack.setOnClickListener { openMealFragment(SNACK, currentDate) }
+            cardViewBreakfast.setOnClickListener {
+                openMealFragment(
+                    BREAKFAST,
+                    currentDate,
+                    getString(R.string.breakfast),
+                    R.drawable.breakfast
+                )
+            }
+            cardViewLunch.setOnClickListener {
+                openMealFragment(
+                    LUNCH,
+                    currentDate,
+                    getString(R.string.lunch),
+                    R.drawable.lunch
+                )
+            }
+            cardViewDinner.setOnClickListener {
+                openMealFragment(
+                    DINNER,
+                    currentDate,
+                    getString(R.string.dinner),
+                    R.drawable.dinner
+                )
+            }
+            cardViewSnack.setOnClickListener {
+                openMealFragment(
+                    SNACK,
+                    currentDate,
+                    getString(R.string.snack),
+                    R.drawable.snack
+                )
+            }
         }
     }
 
     private fun addFoodImageViewClickListener(currentDate: LocalDate) {
         with(binding) {
-            imageAddBreakfast.setOnClickListener { openMealFragment(BREAKFAST, currentDate) }
-            imageAddLunch.setOnClickListener { openMealFragment(LUNCH, currentDate) }
-            imageAddDinner.setOnClickListener { openMealFragment(DINNER, currentDate) }
-            imageAddSnack.setOnClickListener { openMealFragment(SNACK, currentDate) }
+            imageAddBreakfast.setOnClickListener {
+                openMealFragment(
+                    BREAKFAST, currentDate, getString(R.string.breakfast),
+                    R.drawable.breakfast
+                )
+            }
+            imageAddLunch.setOnClickListener {
+                openMealFragment(
+                    LUNCH, currentDate, getString(R.string.lunch),
+                    R.drawable.lunch
+                )
+            }
+            imageAddDinner.setOnClickListener {
+                openMealFragment(
+                    DINNER, currentDate, getString(R.string.dinner),
+                    R.drawable.dinner
+                )
+            }
+            imageAddSnack.setOnClickListener {
+                openMealFragment(
+                    SNACK, currentDate, getString(R.string.snack),
+                    R.drawable.snack
+                )
+            }
         }
     }
 
-    private fun openMealFragment(meal: Meal, currentDate: LocalDate) {
-        val direction = TabsFragmentDirections.actionTabsFragmentToMealFragment(meal, currentDate)
+    private fun openMealFragment(
+        meal: Meal,
+        currentDate: LocalDate,
+        mealName: String,
+        mealIconId: Int
+    ) {
+        val direction = TabsFragmentDirections.actionTabsFragmentToMealFragment(
+            meal, currentDate, mealName, mealIconId
+        )
         findTopNavController().navigate(direction)
     }
 
@@ -132,8 +183,7 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     }
 
     private fun updateUiInCardMeal(foods: List<Food>, meal: Meal) {
-        var calories = DEFAULT_VALUE.toInt()
-
+        var calories = DEFAULT_INT_VALUE
         foods.forEach { calories += it.calories }
 
         when (meal) {
@@ -150,10 +200,10 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     }
 
     private fun updateMainCardInfo(foods: List<Food>) {
-        var currentCalories = DEFAULT_VALUE
-        var currentProteins = DEFAULT_VALUE
-        var currentFats = DEFAULT_VALUE
-        var currentCarbs = DEFAULT_VALUE
+        var currentCalories = DEFAULT_INT_VALUE
+        var currentProteins = DEFAULT_INT_VALUE
+        var currentFats = DEFAULT_INT_VALUE
+        var currentCarbs = DEFAULT_INT_VALUE
 
         foods.forEach {
             currentCalories += it.calories
@@ -272,9 +322,5 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
             HEAVILY_ACTIVE -> 1.725
             EXTRA_ACTIVE -> 1.9
         }
-    }
-
-    companion object {
-        private const val DATE_PATTERN = "EEE, d MMM"
     }
 }

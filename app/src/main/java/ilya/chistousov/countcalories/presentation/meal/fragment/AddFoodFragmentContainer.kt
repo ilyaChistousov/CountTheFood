@@ -3,6 +3,7 @@ package ilya.chistousov.countcalories.presentation.meal.fragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayoutMediator
 import ilya.chistousov.countcalories.databinding.FragmentAddFoodContainerBinding
 import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
@@ -14,10 +15,12 @@ import ilya.chistousov.countcalories.presentation.meal.screen.SearchFoodFragment
 class AddFoodFragmentContainer : BaseFragment<FragmentAddFoodContainerBinding>(
     FragmentAddFoodContainerBinding::inflate
 ) {
+    val args: AddFoodFragmentContainerArgs by navArgs()
 
     private val foodFragmentAdapter by lazy {
         FoodFragmentAdapter(fragments, childFragmentManager, lifecycle)
     }
+
     private val fragments = arrayOf<Fragment>(
         SearchFoodFragment(),
         FavoriteFoodFragment(),

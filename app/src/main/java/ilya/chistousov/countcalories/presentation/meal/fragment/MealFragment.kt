@@ -1,9 +1,9 @@
 package ilya.chistousov.countcalories.presentation.meal.fragment
 
 import android.content.Context
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -12,12 +12,11 @@ import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentMealBinding
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
-import ilya.chistousov.countcalories.presentation.meal.adapter.FoodAdapter
-import ilya.chistousov.countcalories.util.filterListFoodByMealAndDate
 import ilya.chistousov.countcalories.presentation.foods.viewmodels.MealViewModel
-import ilya.chistousov.countcalories.presentation.foods.viewmodels.MealViewModelFactory
+import ilya.chistousov.countcalories.presentation.meal.adapter.FoodAdapter
 import ilya.chistousov.countcalories.presentation.meal.adapter.RecyclerViewOnItemClickListener
-import javax.inject.Inject
+import ilya.chistousov.countcalories.util.*
+import java.text.DecimalFormat
 
 class MealFragment : BaseFragment<FragmentMealBinding>(
     FragmentMealBinding::inflate
@@ -38,9 +37,11 @@ class MealFragment : BaseFragment<FragmentMealBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setTitleTopBarAndIcon()
         getAllFood()
         navigateToSearchFood()
         setSeparatorItemRecycler()
+        backToDiaryFragment()
     }
 
     private fun getAllFood() {
@@ -56,24 +57,37 @@ class MealFragment : BaseFragment<FragmentMealBinding>(
         binding.recyclerView.adapter = adapter
     }
 
-
     private fun getCurrentInfo(foodList: List<Food>) {
-        var caloriesSum = DEFAULT_VALUE
-        var proteinSum = DEFAULT_VALUE
-        var fatsSum = DEFAULT_VALUE
-        var carbsSum = DEFAULT_VALUE
+        var caloriesSum = DEFAULT_INT_VALUE
+        var proteinSum = DEFAULT_FLOAT_VALUE
+        var fatsSum = DEFAULT_FLOAT_VALUE
+        var carbsSum = DEFAULT_FLOAT_VALUE
 
         foodList.forEach {
             caloriesSum += it.calories
-            proteinSum += it.protein.toInt()
-            fatsSum = +it.fat.toInt()
-            carbsSum = +it.carbs.toInt()
+            proteinSum += it.protein
+            fatsSum = +it.fat
+            carbsSum = +it.carbs
+        }
+        with(binding) {
+            caloriesAmount.text = String.format(getString(R.string.food_detail_calories_amount), caloriesSum)
+            proteinAmount.text = String.format(
+                getString(R.string.food_detail_gram),
+                DecimalFormat(FLOAT_FORMAT).format(proteinSum)
+            )
+            fatAmount.text = String.format(
+                getString(R.string.food_detail_gram), DecimalFormat(FLOAT_FORMAT).format(fatsSum)
+            )
+            carbsAmount.text = String.format(
+                getString(R.string.food_detail_gram), DecimalFormat(FLOAT_FORMAT).format(carbsSum)
+            )
         }
     }
 
     private fun navigateToSearchFood() {
         binding.buttonAddFood.setOnClickListener {
-            findNavController().navigate(R.id.action_mealFragment_to_addFoodFragmentContainer)
+            val directions = MealFragmentDirections.actionMealFragmentToAddFoodFragmentContainer(args.meal)
+            findNavController().navigate(directions)
         }
     }
 
@@ -81,11 +95,22 @@ class MealFragment : BaseFragment<FragmentMealBinding>(
         binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
-    companion object {
-        const val DEFAULT_VALUE = 0
+    private fun backToDiaryFragment() {
+        binding.toolBar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun setTitleTopBarAndIcon() {
+        binding.toolBar.title = args.mealName
+        binding.imageMeal.setImageIcon(Icon.createWithResource(requireContext(), args.mealIconId))
     }
 
     override fun onItemClick(position: Int) {
-        TODO("Not yet implemented")
+        val currentFood = adapter.currentList[position]
+        val directions = MealFragmentDirections.actionMealFragmentToFoodDetailDialogFragment(
+            args.meal, currentFood
+        )
+        findNavController().navigate(directions)
     }
 }

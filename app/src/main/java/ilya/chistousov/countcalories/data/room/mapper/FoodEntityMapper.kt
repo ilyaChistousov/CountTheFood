@@ -14,6 +14,7 @@ class FoodEntityMapper @Inject constructor(): BaseMapper<FoodEntity, Food> {
             entity.proteins,
             entity.fats,
             entity.carbs,
+            entity.gram,
             entity.meal,
             entity.addedDate
         )
@@ -27,6 +28,7 @@ class FoodEntityMapper @Inject constructor(): BaseMapper<FoodEntity, Food> {
             model.protein,
             model.fat,
             model.carbs,
+            model.gram,
             model.meal,
             model.addedDate
         )

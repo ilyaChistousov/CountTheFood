@@ -8,7 +8,7 @@ interface FoodRepository {
 
     suspend fun addFood(food: Food)
 
-    fun getFood(foodId: Int) : LiveData<Food>
+    suspend fun getFood(foodId: Int) : Food?
 
     fun getAllFoods() : LiveData<List<Food>>
 

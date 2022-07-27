@@ -1,116 +1,101 @@
 package ilya.chistousov.countcalories.presentation.meal.fragment
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.*
-import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentFoodDetailBinding
+import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.presentation.meal.fragment.FoodDetailDialogFragment.CaloriesInNutrition.*
 import ilya.chistousov.countcalories.presentation.meal.viewmodel.AddFoodViewModel
-import ilya.chistousov.countcalories.presentation.meal.viewmodel.SearchFoodViewModelFactory
-import ilya.chistousov.countcalories.presentation.viewmodelfactory.MultiViewModelFactory
+import ilya.chistousov.countcalories.util.FLOAT_FORMAT
 import java.text.DecimalFormat
-import javax.inject.Inject
+import java.time.LocalDate
 import kotlin.math.roundToInt
 
 class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
 
+    enum class CaloriesInNutrition {
+        PROTEIN, FAT, CARBS
+    }
+
     private var _binding: FragmentFoodDetailBinding? = null
     private val binding get() = _binding!!
-    private val arg: FoodDetailDialogFragmentArgs by navArgs()
+    private val args: FoodDetailDialogFragmentArgs by navArgs()
     private lateinit var viewModel: AddFoodViewModel
 
     override fun onAttach(context: Context) {
         viewModel = context.appComponent.factory.create(AddFoodViewModel::class.java)
         super.onAttach(context)
-        dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         _binding = FragmentFoodDetailBinding.bind(view)
-        setFoodName()
-        setFoodArgs()
+        setDefaultFoodArgs()
         initProgressBarAndTextViewPercent()
         changeFoodGramAmount()
-        setBackgroundColorToButton()
         addFoodInDb()
-    }
-
-    private fun setFoodName() {
-        binding.foodName.text = arg.foodName
+        deleteFoodFromMeal()
     }
 
     private fun initProgressBarAndTextViewPercent() {
         with(binding) {
-            progressProtein.progress = findPercent(PROTEIN, arg.protein)
+            progressProtein.progress = findPercent(PROTEIN, args.food.protein)
             proteinPercent.text = String.format(
                 getString(R.string.food_detail_percent),
-                findPercent(PROTEIN, arg.protein).roundToInt().toString()
+                findPercent(PROTEIN, args.food.protein).roundToInt().toString()
             )
 
-            progressFat.progress = findPercent(FAT, arg.fat)
+            progressFat.progress = findPercent(FAT, args.food.fat)
             fatPercent.text = String.format(
                 getString(
                     R.string.food_detail_percent
                 ),
-                findPercent(FAT, arg.fat).roundToInt().toString()
+                findPercent(FAT, args.food.fat).roundToInt().toString()
             )
 
-            progressCarbs.progress = findPercent(CARBS, arg.carbs)
+            progressCarbs.progress = findPercent(CARBS, args.food.carbs)
             carbsPercent.text = String.format(
                 getString(R.string.food_detail_percent),
-                findPercent(CARBS, arg.carbs).roundToInt().toString()
+                findPercent(CARBS, args.food.carbs).roundToInt().toString()
             )
         }
     }
 
     private fun findPercent(nutrition: CaloriesInNutrition, value: Float): Float {
         return when (nutrition) {
-            PROTEIN -> (((value * 4) / arg.calories) * 100)
-            FAT -> (((value * 9) / arg.calories) * 100)
-            CARBS -> (((value * 4) / arg.calories) * 100)
+            PROTEIN -> (((value * 4) / args.food.calories) * 100)
+            FAT -> (((value * 9) / args.food.calories) * 100)
+            CARBS -> (((value * 4) / args.food.calories) * 100)
         }
     }
 
     private fun changeFoodGramAmount() {
         with(binding) {
-            //set default value to editText
-            editText.setText("100")
-
             editText.doOnTextChanged { text, _, _, _ ->
                 if (text!!.isNotEmpty()) {
-                    caloriesAmount.text = String.format(
-                        getString(R.string.food_detail_calories_amount),
-                        findNewCaloriesAmount(text.toString().toInt())
-                    )
-                    proteinAmount.text = String.format(
-                        getString(R.string.food_detail_gram),
-                        DecimalFormat(FLOAT_FORMAT).format(findNewVFloatValue(arg.protein, text.toString().toInt()))
-                    )
-                    fatAmount.text = String.format(
-                        getString(R.string.food_detail_gram),
-                        DecimalFormat(FLOAT_FORMAT).format(findNewVFloatValue(arg.fat, text.toString().toInt()))
-                    )
-                    carbsAmount.text = String.format(
-                        getString(R.string.food_detail_gram),
-                        DecimalFormat(FLOAT_FORMAT).format(findNewVFloatValue(arg.carbs, text.toString().toInt()))
-                    )
+                    caloriesAmount.text = findNewCaloriesAmount(text.toString().toInt()).toString()
+                    proteinAmount.text = DecimalFormat(FLOAT_FORMAT).format(
+                        findNewVFloatValue(args.food.protein, text.toString().toInt())
+                    ).toString()
+                    fatAmount.text = DecimalFormat(FLOAT_FORMAT).format(
+                        findNewVFloatValue(args.food.fat, text.toString().toInt())
+                    ).toString()
+                    carbsAmount.text = DecimalFormat(FLOAT_FORMAT).format(
+                        findNewVFloatValue(args.food.carbs, text.toString().toInt())
+                    ).toString()
                 } else {
-                    caloriesAmount.text = String.format(getString(R.string.food_detail_calories_amount), "0")
-                    proteinAmount.text = String.format(getString(R.string.food_detail_gram), "0.0")
-                    fatAmount.text = String.format(getString(R.string.food_detail_gram), "0.0")
-                    carbsAmount.text = String.format(getString(R.string.food_detail_gram), "0.0")
+                    caloriesAmount.text = "0"
+                    proteinAmount.text = "0.0"
+                    fatAmount.text = "0.0"
+                    carbsAmount.text = "0.0"
                 }
             }
         }
@@ -121,27 +106,48 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
     }
 
     private fun findNewCaloriesAmount(multiplier: Int): Int {
-        return ((arg.calories * multiplier) / 100)
+        return ((args.food.calories * multiplier) / 100)
     }
 
-    private fun setFoodArgs() {
+    private fun setDefaultFoodArgs() {
         with(binding) {
-            foodName.text = arg.foodName
-            caloriesAmount.text =
-                String.format(getString(R.string.food_detail_calories_amount), arg.calories.toString())
-            proteinAmount.text = String.format(getString(R.string.food_detail_gram), arg.protein.toString())
-            fatAmount.text = String.format(getString(R.string.food_detail_gram), arg.fat.toString())
-            carbsAmount.text = String.format(getString(R.string.food_detail_gram), arg.carbs.toString())
+            foodName.text = args.food.name
+            editText.setText(args.food.gram.toString())
+            caloriesAmount.text = args.food.calories.toString()
+            proteinAmount.text = args.food.protein.toString()
+            fatAmount.text = args.food.fat.toString()
+            carbsAmount.text = args.food.carbs.toString()
         }
     }
 
-    private fun setBackgroundColorToButton() {
-        binding.addFoodButton.setBackgroundColor(getColor(requireContext(), R.color.light_green))
+    private fun addFoodInDb() {
+        with(binding) {
+            addFoodButton.setOnClickListener {
+                val food = Food(
+                    id = args.food.id,
+                    name = args.food.name,
+                    calories = caloriesAmount.text.toString().toInt(),
+                    protein = proteinAmount.text.toString().toFloat(),
+                    fat = fatAmount.text.toString().toFloat(),
+                    carbs = carbsAmount.text.toString().toFloat(),
+                    gram = editText.text.toString().toInt(),
+                    meal = args.meal,
+                    addedDate = LocalDate.now()
+                )
+                viewModel.addFoodToDb(food)
+                findNavController().popBackStack(R.id.mealFragment, false)
+            }
+        }
     }
 
-    private fun addFoodInDb() {
-        binding.addFoodButton.setOnClickListener {
-
+    private fun deleteFoodFromMeal() {
+        //checking if food already save in db
+        if (args.food.id != 0) {
+            binding.deleteFoodButton.visibility = View.VISIBLE
+            binding.deleteFoodButton.setOnClickListener {
+                viewModel.deleteFood(args.food)
+                findNavController().popBackStack()
+            }
         }
     }
 
@@ -150,11 +156,4 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
         _binding = null
     }
 
-    enum class CaloriesInNutrition {
-        PROTEIN, FAT, CARBS
-    }
-
-    companion object {
-        private const val FLOAT_FORMAT = "0.0"
-    }
 }

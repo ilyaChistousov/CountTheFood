@@ -6,3 +6,7 @@ import android.text.Editable
 //fun CharSequence.toInt () : Int {
 //    return this.toString().toInt()
 //}
+//
+//fun CharSequence.toFloat () : Float {
+//    return this.toString().toFloat()
+//}
