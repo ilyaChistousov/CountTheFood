@@ -12,7 +12,7 @@ interface FoodDao {
     fun getAllFood() : LiveData<List<FoodEntity>>
 
     @Query("SELECT * FROM foods WHERE id = :foodId")
-    fun getFoodById(foodId: Int) : LiveData<FoodEntity>
+    suspend fun getFoodById(foodId: Int) : FoodEntity?
 
     @Query("SELECT * FROM foods WHERE meal = :meal")
     fun getFoodByMeal(meal: Meal) : LiveData<List<FoodEntity>>

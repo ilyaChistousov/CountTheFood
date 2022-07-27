@@ -47,7 +47,7 @@
     <string name="favorite_food">любимая еда</string>
     <string name="add_custom_food">добавить свою еду</string>
     <string name="ed_search">Поиск еды</string>
-    <string name="food_item_calories">%s ккал (100 г.)</string>
+    <string name="food_item_calories">%s ккал (%s г.)</string>
     <string name="gram">г.</string>
     <string name="nutrition_info">Данные о питательных веществах</string>
     <string name="calories">Калории</string>
@@ -56,7 +56,10 @@
     <string name="fat">Жиры</string>
     <string name="carbs">Углеводы</string>
     <string name="food_detail_gram">%s г</string>
-    <string name="food_detail_fat_gram">%s г</string>
-    <string name="food_detail_carbs_gram">%s г</string>
     <string name="food_detail_percent">%s %%</string>
+    <string name="cal">ккал</string>
+    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
+    <string name="add_favorite">Добавить в избранное</string>
+    <string name="delete_favorite">Удалит из избранного</string>
 </resources>

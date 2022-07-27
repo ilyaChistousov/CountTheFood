@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.assisted.AssistedInject
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.domain.usecases.foodApi.GetAllFoodFromApiByNameUseCase
 import ilya.chistousov.countcalories.util.Resource
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchFoodViewModel @AssistedInject constructor(
+class SearchFoodViewModel @Inject constructor(
     private val getFoodByNameFromApi: GetAllFoodFromApiByNameUseCase
 ) : ViewModel() {
 

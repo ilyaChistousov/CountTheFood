@@ -59,6 +59,12 @@
         <action
             android:id="@+id/action_mealFragment_to_foodDetailDialogFragment"
             app:destination="@id/foodDetailDialogFragment" />
+        <argument
+            android:name="mealName"
+            app:argType="string" />
+        <argument
+            android:name="mealIconId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/addFoodFragmentContainer"
@@ -68,6 +74,9 @@
         <action
             android:id="@+id/action_addFoodFragmentContainer_to_foodDetailDialogFragment"
             app:destination="@id/foodDetailDialogFragment" />
+        <argument
+            android:name="meal"
+            app:argType="ilya.chistousov.countcalories.domain.model.Meal" />
     </fragment>
     <dialog
         android:id="@+id/foodDetailDialogFragment"
@@ -75,19 +84,10 @@
         android:label="fragment_food_detail"
         tools:layout="@layout/fragment_food_detail" >
         <argument
-            android:name="foodName"
-            app:argType="string" />
+            android:name="meal"
+            app:argType="ilya.chistousov.countcalories.domain.model.Meal" />
         <argument
-            android:name="calories"
-            app:argType="integer" />
-        <argument
-            android:name="protein"
-            app:argType="float" />
-        <argument
-            android:name="fat"
-            app:argType="float" />
-        <argument
-            android:name="carbs"
-            app:argType="float" />
+            android:name="food"
+            app:argType="ilya.chistousov.countcalories.domain.model.Food" />
     </dialog>
 </navigation>

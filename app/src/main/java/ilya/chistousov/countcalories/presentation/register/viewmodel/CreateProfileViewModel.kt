@@ -64,13 +64,13 @@ class CreateProfileViewModel(private val createProfileUseCase: CreateProfileUseC
 
     fun createProfile() {
         val profile = Profile(
-            _gender.value!!,
-            _goal.value!!,
-            _birthDate.value!!,
-            _activityLevel.value!!,
-            _currentGrowth.value!!,
-            _currentWeight.value!!,
-            _desiredWeight.value!!
+            Gender.MALE,
+            Goal.WEIGHT_GAIN,
+            Date(),
+           ActivityLevel.ACTIVE,
+            180,
+           80,
+            100
         )
         viewModelScope.launch { createProfileUseCase(profile) }
     }

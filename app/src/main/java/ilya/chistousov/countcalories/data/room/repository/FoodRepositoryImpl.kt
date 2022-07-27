@@ -18,11 +18,8 @@ class FoodRepositoryImpl @Inject constructor(
         dao.addFood(mapper.mapFromModelToEntity(food))
     }
 
-    override fun getFood(foodId: Int): LiveData<Food> {
-        return Transformations.map(dao.getFoodById(foodId)) {
-            mapper.mapFromEntityToModel(it)
-        }
-    }
+    override suspend fun getFood(foodId: Int) =
+        dao.getFoodById(foodId)?.let { mapper.mapFromEntityToModel(it) }
 
     override fun getAllFoods(): LiveData<List<Food>> {
         return Transformations.map(dao.getAllFood()) {

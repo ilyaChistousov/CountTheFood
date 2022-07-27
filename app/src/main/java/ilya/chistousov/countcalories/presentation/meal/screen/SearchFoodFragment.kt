@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentSearchFoodBinding
@@ -11,6 +12,8 @@ import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 import ilya.chistousov.countcalories.presentation.meal.adapter.FoodAdapter
 import ilya.chistousov.countcalories.presentation.meal.adapter.RecyclerViewOnItemClickListener
+import ilya.chistousov.countcalories.presentation.meal.fragment.AddFoodFragmentContainer
+import ilya.chistousov.countcalories.presentation.meal.fragment.AddFoodFragmentContainerArgs
 import ilya.chistousov.countcalories.presentation.meal.fragment.AddFoodFragmentContainerDirections
 import ilya.chistousov.countcalories.presentation.meal.viewmodel.SearchFoodViewModel
 import ilya.chistousov.countcalories.util.Resource
@@ -68,10 +71,11 @@ class SearchFoodFragment : BaseFragment<FragmentSearchFoodBinding>(
     }
 
     override fun onItemClick(position: Int) {
-        val currentItem = foodAdapter.currentList[position]
+        val currentFood = foodAdapter.currentList[position]
+        val meal = (parentFragment as AddFoodFragmentContainer).args.meal
         val direction =
             AddFoodFragmentContainerDirections.actionAddFoodFragmentContainerToFoodDetailDialogFragment(
-                currentItem.name, currentItem.calories, currentItem.protein, currentItem.fat, currentItem.carbs
+                meal, currentFood
             )
         findNavController().navigate(direction)
     }

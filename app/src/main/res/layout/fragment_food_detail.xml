@@ -23,7 +23,7 @@
             android:fontFamily="@font/hero"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/editText"
@@ -39,7 +39,7 @@
             android:importantForAutofill="no"
             app:layout_constraintTop_toBottomOf="@id/foodName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/gram"
@@ -52,7 +52,7 @@
             android:textColor="@color/black"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/editText"
-            app:layout_constraintTop_toBottomOf="@id/foodName"/>
+            app:layout_constraintTop_toBottomOf="@id/foodName" />
 
         <TextView
             android:id="@+id/nutritionInfo"
@@ -64,7 +64,7 @@
             android:text="@string/nutrition_info"
             app:layout_constraintTop_toBottomOf="@id/editText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/progressProtein"
@@ -78,7 +78,7 @@
             app:cpb_progressbar_color="@color/light_black"
             app:layout_constraintTop_toBottomOf="@id/nutritionInfo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/progressFat"/>
+            app:layout_constraintEnd_toStartOf="@id/progressFat" />
 
         <TextView
             android:id="@+id/proteinPercent"
@@ -92,7 +92,7 @@
             app:layout_constraintStart_toStartOf="@id/progressProtein"
             app:layout_constraintTop_toTopOf="@id/progressProtein"
             app:layout_constraintEnd_toEndOf="@id/progressProtein"
-            app:layout_constraintBottom_toBottomOf="@id/progressProtein"/>
+            app:layout_constraintBottom_toBottomOf="@id/progressProtein" />
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/progressFat"
@@ -106,7 +106,7 @@
             app:cpb_progressbar_color="@color/light_black"
             app:layout_constraintTop_toBottomOf="@id/nutritionInfo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/fatPercent"
@@ -120,7 +120,7 @@
             app:layout_constraintStart_toStartOf="@id/progressFat"
             app:layout_constraintTop_toTopOf="@id/progressFat"
             app:layout_constraintEnd_toEndOf="@id/progressFat"
-            app:layout_constraintBottom_toBottomOf="@id/progressFat"/>
+            app:layout_constraintBottom_toBottomOf="@id/progressFat" />
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/progressCarbs"
@@ -134,7 +134,7 @@
             app:cpb_progressbar_color="@color/light_black"
             app:layout_constraintTop_toBottomOf="@id/nutritionInfo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/progressFat"/>
+            app:layout_constraintStart_toEndOf="@id/progressFat" />
 
         <TextView
             android:id="@+id/carbsPercent"
@@ -148,7 +148,7 @@
             app:layout_constraintStart_toStartOf="@id/progressCarbs"
             app:layout_constraintTop_toTopOf="@id/progressCarbs"
             app:layout_constraintEnd_toEndOf="@id/progressCarbs"
-            app:layout_constraintBottom_toBottomOf="@id/progressCarbs"/>
+            app:layout_constraintBottom_toBottomOf="@id/progressCarbs" />
 
         <TextView
             android:id="@+id/proteinTitle"
@@ -160,7 +160,7 @@
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/progressProtein"
             app:layout_constraintEnd_toStartOf="@id/fatTitle"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/fatTitle"
@@ -171,7 +171,7 @@
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/progressFat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/carbsTitle"
@@ -183,7 +183,7 @@
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/progressCarbs"
             app:layout_constraintStart_toEndOf="@id/fatTitle"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/calories"
@@ -196,21 +196,34 @@
             android:textColor="@color/black"
             android:text="@string/calories"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/proteinTitle"/>
+            app:layout_constraintTop_toBottomOf="@id/proteinTitle" />
 
         <TextView
             android:id="@+id/caloriesAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:textSize="20sp"
-            tools:text="150 ккал"
+            tools:text="150"
             android:fontFamily="@font/hero"
             android:textColor="@color/black"
-            android:text="@string/food_detail_calories_amount"
+            app:layout_constraintEnd_toStartOf="@id/cal"
+            app:layout_constraintTop_toBottomOf="@id/proteinTitle" />
+
+        <TextView
+            android:id="@+id/cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="20sp"
+            tools:text="ккал"
+            android:fontFamily="@font/hero"
+            android:textColor="@color/black"
+            android:text="@string/cal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/proteinTitle"/>
+            app:layout_constraintTop_toBottomOf="@id/proteinTitle" />
 
         <TextView
             android:id="@+id/protein"
@@ -223,10 +236,23 @@
             android:textColor="@color/black"
             android:text="@string/food_detail_protein"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/calories"/>
+            app:layout_constraintTop_toBottomOf="@id/calories" />
 
         <TextView
             android:id="@+id/proteinAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/hero"
+            android:textColor="@color/black"
+            tools:text="15.5"
+            app:layout_constraintEnd_toStartOf="@id/proteinGram"
+            app:layout_constraintTop_toBottomOf="@id/caloriesAmount" />
+
+        <TextView
+            android:id="@+id/proteinGram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -234,10 +260,9 @@
             android:textSize="20sp"
             android:fontFamily="@font/hero"
             android:textColor="@color/black"
-            tools:text="15.5 г"
-            android:text="@string/food_detail_gram"
+            android:text="@string/gram"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/caloriesAmount"/>
+            app:layout_constraintTop_toBottomOf="@id/caloriesAmount" />
 
         <TextView
             android:id="@+id/fat"
@@ -250,10 +275,23 @@
             android:textColor="@color/black"
             android:text="@string/fat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/protein"/>
+            app:layout_constraintTop_toBottomOf="@id/protein" />
 
         <TextView
             android:id="@+id/fatAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="4dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/hero"
+            android:textColor="@color/black"
+            tools:text="15.5"
+            app:layout_constraintEnd_toStartOf="@id/fatGram"
+            app:layout_constraintTop_toBottomOf="@id/proteinAmount" />
+
+        <TextView
+            android:id="@+id/fatGram"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -261,10 +299,9 @@
             android:textSize="20sp"
             android:fontFamily="@font/hero"
             android:textColor="@color/black"
-            android:text="@string/food_detail_gram"
-            tools:text="15.5 г"
+            android:text="@string/gram"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/proteinAmount"/>
+            app:layout_constraintTop_toBottomOf="@id/proteinAmount" />
 
         <TextView
             android:id="@+id/carbs"
@@ -285,25 +322,72 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/hero"
-            android:text="@string/food_detail_gram"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/carbsGram"
             app:layout_constraintTop_toBottomOf="@id/fatAmount"
-            tools:text="15.5 г" />
+            tools:text="15.5" />
 
-        <Button
+        <TextView
+            android:id="@+id/carbsGram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/hero"
+            android:textColor="@color/black"
+            android:text="@string/gram"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fatAmount" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/addFoodButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/hero"
-            android:text="@string/add"
+            android:text="@string/save"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/light_green"
+            app:cornerRadius="20dp"
             app:layout_constraintTop_toBottomOf="@id/carbs"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addFoodFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hero"
+            android:text="@string/add_favorite"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/purple_200"
+            app:icon="@drawable/favorite"
+            app:cornerRadius="20dp"
+            app:layout_constraintTop_toBottomOf="@id/addFoodButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteFoodButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hero"
+            android:text="@string/delete"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            app:icon="@drawable/delete"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addFoodFavorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
