@@ -7,7 +7,6 @@ import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentLoginBinding
 import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 
-
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {

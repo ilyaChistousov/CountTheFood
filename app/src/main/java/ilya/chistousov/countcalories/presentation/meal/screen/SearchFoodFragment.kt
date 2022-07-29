@@ -35,7 +35,6 @@ class SearchFoodFragment : BaseFragment<FragmentSearchFoodBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showSearchedFood()
-        setSeparatorItemRecycler()
     }
 
     private fun showSearchedFood() {
@@ -64,10 +63,6 @@ class SearchFoodFragment : BaseFragment<FragmentSearchFoodBinding>(
     private fun updateUi(foods: List<Food>) {
         foodAdapter.submitList(foods)
         binding.recyclerView.adapter = foodAdapter
-    }
-
-    private fun setSeparatorItemRecycler() {
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
     override fun onItemClick(position: Int) {

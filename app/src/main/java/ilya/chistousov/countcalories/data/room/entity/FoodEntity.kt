@@ -16,5 +16,6 @@ data class FoodEntity(
     val carbs: Float,
     val gram: Int,
     val meal: Meal,
-    val addedDate: LocalDate
+    val addedDate: LocalDate,
+    val isCustom: Boolean
 )

@@ -40,7 +40,6 @@ class MealFragment : BaseFragment<FragmentMealBinding>(
         setTitleTopBarAndIcon()
         getAllFood()
         navigateToSearchFood()
-        setSeparatorItemRecycler()
         backToDiaryFragment()
     }
 
@@ -86,13 +85,9 @@ class MealFragment : BaseFragment<FragmentMealBinding>(
 
     private fun navigateToSearchFood() {
         binding.buttonAddFood.setOnClickListener {
-            val directions = MealFragmentDirections.actionMealFragmentToAddFoodFragmentContainer(args.meal)
+            val directions = MealFragmentDirections.actionMealFragmentToAddFoodFragmentContainer(args.meal, args.mealName)
             findNavController().navigate(directions)
         }
-    }
-
-    private fun setSeparatorItemRecycler() {
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
     }
 
     private fun backToDiaryFragment() {

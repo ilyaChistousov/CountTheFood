@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TextViewStyle">
+    <style name="TextViewStyleCardSummary">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">8dp</item>
@@ -52,6 +52,18 @@
     <style name="ToolBarTitle">
         <item name="android:fontFamily">@font/hero</item>
         <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="AddFoodTextStyle">
+        <item name="android:fontFamily">@font/hero</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SuffixEditTextStyle">
+        <item name="android:fontFamily">@font/hero</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>
 

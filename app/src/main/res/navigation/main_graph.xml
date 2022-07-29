@@ -40,7 +40,9 @@
         tools:layout="@layout/fragment_tabs">
         <action
             android:id="@+id/action_tabsFragment_to_mealFragment"
-            app:destination="@id/mealFragment" />
+            app:destination="@id/mealFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:popEnterAnim="@anim/slide_in_up" />
     </fragment>
     <fragment
         android:id="@+id/mealFragment"
@@ -55,10 +57,14 @@
             app:argType="java.time.LocalDate" />
         <action
             android:id="@+id/action_mealFragment_to_addFoodFragmentContainer"
-            app:destination="@id/addFoodFragmentContainer" />
+            app:destination="@id/addFoodFragmentContainer"
+            app:enterAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_left" />
         <action
             android:id="@+id/action_mealFragment_to_foodDetailDialogFragment"
-            app:destination="@id/foodDetailDialogFragment" />
+            app:destination="@id/foodDetailDialogFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:popExitAnim="@anim/slide_in_up" />
         <argument
             android:name="mealName"
             app:argType="string" />
@@ -77,6 +83,14 @@
         <argument
             android:name="meal"
             app:argType="ilya.chistousov.countcalories.domain.model.Meal" />
+        <argument
+            android:name="mealName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_addFoodFragmentContainer_to_addCustomFoodDialogFragment"
+            app:destination="@id/addCustomFoodDialogFragment"
+            app:enterAnim="@anim/slide_in_down"
+            app:popExitAnim="@anim/slide_in_up" />
     </fragment>
     <dialog
         android:id="@+id/foodDetailDialogFragment"
@@ -90,4 +104,9 @@
             android:name="food"
             app:argType="ilya.chistousov.countcalories.domain.model.Food" />
     </dialog>
+    <dialog
+        android:id="@+id/addCustomFoodDialogFragment"
+        android:name="ilya.chistousov.countcalories.presentation.meal.fragment.AddCustomFoodDialogFragment"
+        android:label="fragment_add_custom_food_dialog"
+        tools:layout="@layout/fragment_add_custom_food_dialog" />
 </navigation>

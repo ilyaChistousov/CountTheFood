@@ -36,13 +36,18 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
         _binding = FragmentFoodDetailBinding.bind(view)
-        setDefaultFoodArgs()
+        setupDialog()
+        setDefaultFoodValue()
         initProgressBarAndTextViewPercent()
         changeFoodGramAmount()
         addFoodInDb()
         deleteFoodFromMeal()
+        closeDialog()
+    }
+
+    private fun setupDialog() {
+        dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
     }
 
     private fun initProgressBarAndTextViewPercent() {
@@ -79,19 +84,21 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
 
     private fun changeFoodGramAmount() {
         with(binding) {
-            editText.doOnTextChanged { text, _, _, _ ->
+            inputGram.doOnTextChanged { text, _, _, _ ->
                 if (text!!.isNotEmpty()) {
+                    inputGramLayout.error = null
                     caloriesAmount.text = findNewCaloriesAmount(text.toString().toInt()).toString()
                     proteinAmount.text = DecimalFormat(FLOAT_FORMAT).format(
-                        findNewVFloatValue(args.food.protein, text.toString().toInt())
+                        findNewNutritionValue(args.food.protein, text.toString().toInt())
                     ).toString()
                     fatAmount.text = DecimalFormat(FLOAT_FORMAT).format(
-                        findNewVFloatValue(args.food.fat, text.toString().toInt())
+                        findNewNutritionValue(args.food.fat, text.toString().toInt())
                     ).toString()
                     carbsAmount.text = DecimalFormat(FLOAT_FORMAT).format(
-                        findNewVFloatValue(args.food.carbs, text.toString().toInt())
+                        findNewNutritionValue(args.food.carbs, text.toString().toInt())
                     ).toString()
                 } else {
+                    inputGramLayout.error = getString(R.string.error_input)
                     caloriesAmount.text = "0"
                     proteinAmount.text = "0.0"
                     fatAmount.text = "0.0"
@@ -101,7 +108,7 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
         }
     }
 
-    private fun findNewVFloatValue(previousValue: Float, multiplier: Int): Float {
+    private fun findNewNutritionValue(previousValue: Float, multiplier: Int): Float {
         return ((previousValue * multiplier) / 100)
     }
 
@@ -109,10 +116,10 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
         return ((args.food.calories * multiplier) / 100)
     }
 
-    private fun setDefaultFoodArgs() {
+    private fun setDefaultFoodValue() {
         with(binding) {
             foodName.text = args.food.name
-            editText.setText(args.food.gram.toString())
+            inputGram.setText(args.food.gram.toString())
             caloriesAmount.text = args.food.calories.toString()
             proteinAmount.text = args.food.protein.toString()
             fatAmount.text = args.food.fat.toString()
@@ -123,31 +130,49 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
     private fun addFoodInDb() {
         with(binding) {
             addFoodButton.setOnClickListener {
-                val food = Food(
-                    id = args.food.id,
-                    name = args.food.name,
-                    calories = caloriesAmount.text.toString().toInt(),
-                    protein = proteinAmount.text.toString().toFloat(),
-                    fat = fatAmount.text.toString().toFloat(),
-                    carbs = carbsAmount.text.toString().toFloat(),
-                    gram = editText.text.toString().toInt(),
-                    meal = args.meal,
-                    addedDate = LocalDate.now()
-                )
-                viewModel.addFoodToDb(food)
-                findNavController().popBackStack(R.id.mealFragment, false)
+                if(inputGramLayout.error == null) {
+                    val food = if (args.food.isCustom) {
+                        createFood()
+                    } else {
+                        createFood(args.food.id)
+                    }
+                    viewModel.addFood(food)
+                    findNavController().popBackStack(R.id.mealFragment, false)
+                }
             }
         }
     }
 
+    private fun createFood(foodId: Int = 0): Food {
+        with(binding) {
+            return Food(
+                id = foodId,
+                name = args.food.name,
+                calories = caloriesAmount.text.toString().toInt(),
+                protein = proteinAmount.text.toString().toFloat(),
+                fat = fatAmount.text.toString().toFloat(),
+                carbs = carbsAmount.text.toString().toFloat(),
+                gram = inputGram.text.toString().toInt(),
+                meal = args.meal,
+                addedDate = LocalDate.now()
+            )
+        }
+    }
+
     private fun deleteFoodFromMeal() {
-        //checking if food already save in db
+        //checking if the food is saved in the db
         if (args.food.id != 0) {
             binding.deleteFoodButton.visibility = View.VISIBLE
             binding.deleteFoodButton.setOnClickListener {
                 viewModel.deleteFood(args.food)
                 findNavController().popBackStack()
             }
+        }
+    }
+
+    private fun closeDialog() {
+        binding.imageButtonExit.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
