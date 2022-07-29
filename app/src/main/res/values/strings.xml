@@ -45,7 +45,7 @@
     <string name="snack_image">snack image</string>
     <string name="search_food">поиск еды</string>
     <string name="favorite_food">любимая еда</string>
-    <string name="add_custom_food">добавить свою еду</string>
+    <string name="add_custom_food">Добавить свой продукт</string>
     <string name="ed_search">Поиск еды</string>
     <string name="food_item_calories">%s ккал (%s г.)</string>
     <string name="gram">г.</string>
@@ -60,6 +60,12 @@
     <string name="cal">ккал</string>
     <string name="save">Сохранить</string>
     <string name="delete">Удалить</string>
-    <string name="add_favorite">Добавить в избранное</string>
-    <string name="delete_favorite">Удалит из избранного</string>
+    <string name="custom_food_intro">Здесь располагаются все продукты, которыя были созданы вручную</string>
+    <string name="enter_food_name">Наименование \nпродукта</string>
+    <string name="composition_nutrition">Состав на 100 г.</string>
+    <string name="calories_custom">Калорийность</string>
+    <string name="protein_custom">Белки</string>
+    <string name="fat_custom">Жиры</string>
+    <string name="carbs_custom">Углеводы</string>
+    <string name="error_input">Поле не должно быть пустым</string>
 </resources>

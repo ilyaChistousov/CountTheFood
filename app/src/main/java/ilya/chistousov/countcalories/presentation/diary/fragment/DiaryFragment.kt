@@ -3,6 +3,8 @@ package ilya.chistousov.countcalories.presentation.diary.fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat.*
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -18,11 +20,10 @@ import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 import ilya.chistousov.countcalories.presentation.diary.viewmodel.*
 import ilya.chistousov.countcalories.presentation.tabs.TabsFragmentDirections
 import ilya.chistousov.countcalories.util.*
-import java.lang.IllegalArgumentException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
-import javax.inject.Inject
+import kotlin.math.roundToInt
 import kotlin.text.*
 
 class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
@@ -64,13 +65,41 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     private fun selectNextDay() {
         binding.imageViewNextDate.setOnClickListener {
             dateViewModel.selectNextDay()
+            binding.innerLayout.startAnimation(addSlideAnimation(RIGHT_ANIM))
         }
     }
 
     private fun selectPreviousDay() {
         binding.imageViewPreviousDate.setOnClickListener {
             dateViewModel.selectPreviousDay()
+            binding.innerLayout.startAnimation(addSlideAnimation(LEFT_ANIM))
         }
+    }
+
+    private fun selectDate(currentDate: LocalDate) {
+        binding.textViewDate.setOnClickListener {
+            val navDirection = DiaryFragmentDirections.actionDiaryFragmentToDatePickerDialogFragment(
+                currentDate
+            )
+            findNavController().navigate(navDirection)
+            setFragmentResultListener(DatePickerDialogFragment.REQUEST_DATE_KEY) { _, data ->
+                val localDate = data.getSerializable(DatePickerDialogFragment.EXTRA_DATE) as LocalDate
+                dateViewModel.setDate(localDate)
+            }
+            setFragmentResultListener(DatePickerDialogFragment.REQUEST_ANIM_KEY) { _, data ->
+                val animDirection = data.getString(DatePickerDialogFragment.EXTRA_ANIM) as String
+                binding.innerLayout.startAnimation(addSlideAnimation(animDirection))
+            }
+        }
+    }
+
+    private fun addSlideAnimation(direction: String) : Animation {
+        val animationId = when (direction) {
+            LEFT_ANIM -> R.anim.slide_in_left
+            RIGHT_ANIM -> R.anim.slide_in_right
+            else -> throw IllegalArgumentException("Not such animation")
+        }
+        return AnimationUtils.loadAnimation(activity,animationId)
     }
 
     private fun setDateToDiaryFragment(currentDate: LocalDate) {
@@ -81,7 +110,6 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
     private fun showMealDetail(currentDate: LocalDate) {
         with(binding) {
             mealCardViewClickListener(currentDate)
-            addFoodImageViewClickListener(currentDate)
         }
     }
 
@@ -116,35 +144,6 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
                     SNACK,
                     currentDate,
                     getString(R.string.snack),
-                    R.drawable.snack
-                )
-            }
-        }
-    }
-
-    private fun addFoodImageViewClickListener(currentDate: LocalDate) {
-        with(binding) {
-            imageAddBreakfast.setOnClickListener {
-                openMealFragment(
-                    BREAKFAST, currentDate, getString(R.string.breakfast),
-                    R.drawable.breakfast
-                )
-            }
-            imageAddLunch.setOnClickListener {
-                openMealFragment(
-                    LUNCH, currentDate, getString(R.string.lunch),
-                    R.drawable.lunch
-                )
-            }
-            imageAddDinner.setOnClickListener {
-                openMealFragment(
-                    DINNER, currentDate, getString(R.string.dinner),
-                    R.drawable.dinner
-                )
-            }
-            imageAddSnack.setOnClickListener {
-                openMealFragment(
-                    SNACK, currentDate, getString(R.string.snack),
                     R.drawable.snack
                 )
             }
@@ -226,19 +225,6 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         updateProgressBar(currentCalories, currentProteins, currentFats, currentCarbs)
     }
 
-    private fun selectDate(currentDate: LocalDate) {
-        binding.textViewDate.setOnClickListener {
-            val navDirection = DiaryFragmentDirections.actionDiaryFragmentToDatePickerDialogFragment(
-                currentDate
-            )
-            findNavController().navigate(navDirection)
-            setFragmentResultListener(DatePickerDialogFragment.REQUEST_KEY) { _, data ->
-                val localDate = data.getSerializable(DatePickerDialogFragment.EXTRA_DATE) as LocalDate
-                dateViewModel.setDate(localDate)
-            }
-        }
-    }
-
     private fun getCurrentProfile() {
         profileViewModel.currentProfile.observe(viewLifecycleOwner) {
             val age = it.birthDate.getYearFromDate()
@@ -311,16 +297,16 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         } else {
             ((10 * weight) + (6.25 * growth) - (5 * age) + 5) * getActivityLevelMultiplier(activityLevel)
         }
-        return caloriesForKeepingWeight.toInt()
+        return caloriesForKeepingWeight.roundToInt()
     }
 
-    private fun getActivityLevelMultiplier(activityLevel: ActivityLevel): Double {
+    private fun getActivityLevelMultiplier(activityLevel: ActivityLevel): Float {
         return when (activityLevel) {
-            PASSIVE -> 1.2
-            INACTIVE -> 1.375
-            ACTIVE -> 1.55
-            HEAVILY_ACTIVE -> 1.725
-            EXTRA_ACTIVE -> 1.9
+            PASSIVE -> 1.2F
+            INACTIVE -> 1.375F
+            ACTIVE -> 1.55F
+            HEAVILY_ACTIVE -> 1.725F
+            EXTRA_ACTIVE -> 1.9F
         }
     }
 }

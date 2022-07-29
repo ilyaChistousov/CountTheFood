@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.domain.usecases.food.AddFoodUseCase
 import ilya.chistousov.countcalories.domain.usecases.food.DeleteFoodUseCase
+import ilya.chistousov.countcalories.domain.usecases.food.GetAllCustomFood
 import ilya.chistousov.countcalories.domain.usecases.food.GetFoodUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -12,11 +13,15 @@ import javax.inject.Inject
 class AddFoodViewModel @Inject constructor(
     private val addFoodUseCase: AddFoodUseCase,
     private val getFoodUseCase: GetFoodUseCase,
-    private val deleteFoodUseCase: DeleteFoodUseCase) : ViewModel() {
+    private val deleteFoodUseCase: DeleteFoodUseCase,
+    private val getAllCustomFood: GetAllCustomFood
+) : ViewModel() {
 
-    fun addFoodToDb(food: Food) = viewModelScope.launch {
+    val customFoods = getAllCustomFood()
+
+    fun addFood(food: Food) = viewModelScope.launch {
         val savedFood = getFoodUseCase(food.id)
-        if(savedFood != null) {
+        if (savedFood != null) {
             val updateFood = Food(
                 id = savedFood.id,
                 food.name,
@@ -29,8 +34,7 @@ class AddFoodViewModel @Inject constructor(
                 food.addedDate
             )
             addFoodUseCase(updateFood)
-        }
-        else {
+        } else {
             addFoodUseCase(food)
         }
     }

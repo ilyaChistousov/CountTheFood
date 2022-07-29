@@ -14,7 +14,8 @@ data class Food(
     val carbs: Float,
     val gram:Int = 100,
     val meal: Meal = Meal.NONE,
-    val addedDate: LocalDate
+    val addedDate: LocalDate,
+    val isCustom: Boolean = false
 ) : Parcelable
 
 enum class Meal {

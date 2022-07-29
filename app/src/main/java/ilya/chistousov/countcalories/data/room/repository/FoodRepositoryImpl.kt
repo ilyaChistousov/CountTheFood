@@ -36,4 +36,10 @@ class FoodRepositoryImpl @Inject constructor(
             mapper.mapFromListToModelList(it)
         }
     }
+
+    override fun getAllCustomFood(): LiveData<List<Food>> {
+        return Transformations.map(dao.getAllCustomFood()) {
+            mapper.mapFromListToModelList(it)
+        }
+    }
 }

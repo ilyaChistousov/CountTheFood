@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.meal.fragment.AddCustomFoodDialogFragment">
+
+        <ImageButton
+            android:id="@+id/imageButtonExit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/clear"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="1dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/add_custom_food"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:textAppearance="@style/AddFoodTextStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textEnterFoodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:text="@string/enter_food_name"
+            android:gravity="center"
+            android:textAppearance="@style/AddFoodTextStyle"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textTitle" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/foodNameLayout"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:boxStrokeColor="@color/light_green"
+            app:errorIconDrawable="@null"
+            app:boxCornerRadiusBottomStart="40dp"
+            app:boxCornerRadiusTopEnd="40dp"
+            app:boxCornerRadiusBottomEnd="40dp"
+            app:boxCornerRadiusTopStart="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textEnterFoodName"
+            app:layout_constraintTop_toBottomOf="@id/textTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextFoodName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:inputType="text"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                android:textAppearance="@style/AddFoodTextStyle"
+                android:textSize="15sp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textFoodNutrition100g"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="19sp"
+            android:text="@string/composition_nutrition"
+            android:textAppearance="@style/AddFoodTextStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/foodNameLayout" />
+
+        <TextView
+            android:id="@+id/proteinTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="@string/protein_custom"
+            android:textAppearance="@style/AddFoodTextStyle"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fatTitle"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintTop_toBottomOf="@id/textFoodNutrition100g" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/proteinLayout"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            app:suffixText="г."
+            app:suffixTextAppearance="@style/SuffixEditTextStyle"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:boxStrokeColor="@color/light_green"
+            app:errorIconDrawable="@null"
+            app:boxCornerRadiusBottomStart="40dp"
+            app:boxCornerRadiusTopEnd="40dp"
+            app:boxCornerRadiusBottomEnd="40dp"
+            app:boxCornerRadiusTopStart="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fatLayout"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintTop_toBottomOf="@id/proteinTitle" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/proteinEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                tools:text="1"
+                android:maxLength="5"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                android:gravity="center"
+                android:textAppearance="@style/AddFoodTextStyle"
+                android:textSize="15sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/fatTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/fat_custom"
+            android:textAppearance="@style/AddFoodTextStyle"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFoodNutrition100g" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fatLayout"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:suffixText="г."
+            app:suffixTextAppearance="@style/SuffixEditTextStyle"
+            app:errorIconDrawable="@null"
+            app:boxStrokeColor="@color/light_green"
+            app:boxCornerRadiusBottomStart="40dp"
+            app:boxCornerRadiusTopEnd="40dp"
+            app:boxCornerRadiusBottomEnd="40dp"
+            app:boxCornerRadiusTopStart="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fatTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fatEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLength="5"
+                android:gravity="center"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                tools:text="123"
+                android:textAppearance="@style/AddFoodTextStyle"
+                android:textSize="15sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/carbsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/carbs_custom"
+            android:textAppearance="@style/AddFoodTextStyle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fatTitle"
+            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintTop_toBottomOf="@id/textFoodNutrition100g" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/carbsLayout"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:suffixText="г."
+            app:suffixTextAppearance="@style/SuffixEditTextStyle"
+            app:errorIconDrawable="@null"
+            app:boxStrokeColor="@color/light_green"
+            app:boxCornerRadiusBottomStart="40dp"
+            app:boxCornerRadiusTopEnd="40dp"
+            app:boxCornerRadiusBottomEnd="40dp"
+            app:boxCornerRadiusTopStart="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fatLayout"
+            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintTop_toBottomOf="@id/carbsTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/carbsEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="numberDecimal"
+                android:maxLength="5"
+                tools:text="123"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                android:gravity="center"
+                android:textAppearance="@style/AddFoodTextStyle"
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/caloriesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/calories_custom"
+            android:textSize="16sp"
+            android:textAppearance="@style/AddFoodTextStyle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fatLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/caloriesLayout"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            app:suffixText="ккал"
+            app:suffixTextAppearance="@style/SuffixEditTextStyle"
+            app:errorIconDrawable="@null"
+            app:boxStrokeColor="@color/light_green"
+            app:boxCornerRadiusBottomStart="40dp"
+            app:boxCornerRadiusTopEnd="40dp"
+            app:boxCornerRadiusBottomEnd="40dp"
+            app:boxCornerRadiusTopStart="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/caloriesTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/caloriesEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:maxLength="5"
+                tools:text="200"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                android:gravity="center"
+                android:textAppearance="@style/AddFoodTextStyle"
+                android:textSize="15sp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addFoodButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/light_green"
+            android:text="@string/add"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textAppearance="@style/AddFoodTextStyle"
+            app:cornerRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/caloriesLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

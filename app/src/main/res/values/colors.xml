@@ -19,4 +19,5 @@
     <color name="porcelain_white">#ECECEC</color>
     <color name="light_gray">#BFC9CA</color>
     <color name="green_gray">#8AB6A9</color>
+    <color name="light_red">#FA8072</color>
 </resources>

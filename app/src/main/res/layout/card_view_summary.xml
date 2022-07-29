@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/textViewProteinsTitle"
-            style="@style/TextViewStyle"
+            style="@style/TextViewStyleCardSummary"
             android:text="@string/protein"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/progressCalories"
@@ -66,7 +66,7 @@
 
         <TextView
             android:id="@+id/textViewProteinsCount"
-            style="@style/TextViewStyle"
+            style="@style/TextViewStyleCardSummary"
             android:text="@string/proteins_amount_in_grams"
             app:layout_constraintEnd_toStartOf="@id/progressCalories"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
 
         <TextView
             android:id="@+id/textViewCarbsTitle"
-            style="@style/TextViewStyle"
+            style="@style/TextViewStyleCardSummary"
             android:layout_marginTop="16dp"
             android:text="@string/carbs_diary"
             app:layout_constraintEnd_toStartOf="@id/spaceBetweenFatsAndCarbs"
@@ -107,7 +107,7 @@
 
         <TextView
             android:id="@+id/textViewCarbsCount"
-            style="@style/TextViewStyle"
+            style="@style/TextViewStyleCardSummary"
             android:text="@string/fats_amount_in_grams"
             app:layout_constraintEnd_toStartOf="@id/spaceBetweenFatsAndCarbs"
             app:layout_constraintStart_toEndOf="@id/spaceBetweenProteinsAndFats"
@@ -123,7 +123,7 @@
 
         <TextView
             android:id="@+id/textViewFatsTitle"
-            style="@style/TextViewStyle"
+            style="@style/TextViewStyleCardSummary"
             android:text="@string/fats_diary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +149,7 @@
 
         <TextView
             android:id="@+id/textViewFatsCount"
-            style="@style/TextViewStyle"
+            style="@style/TextViewStyleCardSummary"
             android:text="@string/carbs_amount_in_grams"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/progressCalories"

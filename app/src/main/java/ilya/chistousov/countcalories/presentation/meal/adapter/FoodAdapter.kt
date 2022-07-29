@@ -2,6 +2,7 @@ package ilya.chistousov.countcalories.presentation.meal.adapter
 
 import android.content.res.Resources
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FoodItemBinding
 import ilya.chistousov.countcalories.domain.model.Food
+import ilya.chistousov.countcalories.domain.model.Meal
 
 class FoodAdapter(
     private val clickListener: RecyclerViewOnItemClickListener
@@ -22,6 +24,9 @@ class FoodAdapter(
                     String.format(root.context.getString(R.string.food_item_calories), food.calories, food.gram)
                 binding.root.setOnClickListener {
                     clickListener.onItemClick(adapterPosition)
+                }
+                if (food.meal != Meal.NONE) {
+                    addFoodImage.visibility = View.GONE
                 }
             }
         }

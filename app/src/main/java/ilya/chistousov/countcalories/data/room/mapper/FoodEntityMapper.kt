@@ -16,7 +16,8 @@ class FoodEntityMapper @Inject constructor(): BaseMapper<FoodEntity, Food> {
             entity.carbs,
             entity.gram,
             entity.meal,
-            entity.addedDate
+            entity.addedDate,
+            entity.isCustom
         )
     }
 
@@ -30,7 +31,8 @@ class FoodEntityMapper @Inject constructor(): BaseMapper<FoodEntity, Food> {
             model.carbs,
             model.gram,
             model.meal,
-            model.addedDate
+            model.addedDate,
+            model.isCustom
         )
     }
 }

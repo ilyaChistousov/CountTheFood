@@ -3,6 +3,7 @@ package ilya.chistousov.countcalories.data.room.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import ilya.chistousov.countcalories.data.room.entity.FoodEntity
+import ilya.chistousov.countcalories.domain.model.Food
 import ilya.chistousov.countcalories.domain.model.Meal
 
 @Dao
@@ -23,4 +24,6 @@ interface FoodDao {
     @Delete
     suspend fun deleteFood(food: FoodEntity)
 
+    @Query("SELECT * FROM foods WHERE isCustom = 1")
+    fun getAllCustomFood() : LiveData<List<FoodEntity>>
 }

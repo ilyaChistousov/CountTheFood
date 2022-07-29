@@ -15,4 +15,6 @@ interface FoodRepository {
     suspend fun deleteFood(food: Food)
 
     fun getFoodByMeal(meal: Meal) : LiveData<List<Food>>
+
+    fun getAllCustomFood() : LiveData<List<Food>>
 }
