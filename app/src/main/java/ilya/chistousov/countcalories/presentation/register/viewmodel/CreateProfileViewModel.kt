@@ -1,91 +1,32 @@
 package ilya.chistousov.countcalories.presentation.register.viewmodel
 
-import androidx.lifecycle.*
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
-import ilya.chistousov.countcalories.domain.model.ActivityLevel
-import ilya.chistousov.countcalories.domain.model.Gender
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import ilya.chistousov.countcalories.domain.model.Goal
-import ilya.chistousov.countcalories.domain.model.Profile
-import ilya.chistousov.countcalories.domain.usecases.profile.CreateProfileUseCase
+import ilya.chistousov.countcalories.domain.repository.ProfileRepository
 import kotlinx.coroutines.launch
-import java.util.*
+import javax.inject.Inject
 
-class CreateProfileViewModel(private val createProfileUseCase: CreateProfileUseCase) : ViewModel() {
+class CreateProfileViewModel @Inject constructor(
+    private val profileRepository: ProfileRepository,
+) : ViewModel() {
 
-    private val _activityLevel = MutableLiveData<ActivityLevel>()
-    val activityLevel: LiveData<ActivityLevel> = _activityLevel
+    private val _selectedGoal = profileRepository.getGoal()
+    val selectedGoal: LiveData<Goal> get() = _selectedGoal
 
-    private val _birthDate = MutableLiveData<Date>()
-    val birthDate: LiveData<Date> = _birthDate
 
-    private val _currentGrowth = MutableLiveData<Int>()
-    val currentGrowth: LiveData<Int> = _currentGrowth
-
-    private val _currentWeight = MutableLiveData<Int>()
-    val currentWeight: LiveData<Int> = _currentWeight
-
-    private val _desiredWeight = MutableLiveData<Int>()
-    val desiredWeight: LiveData<Int> = _desiredWeight
-
-    private val _gender = MutableLiveData<Gender>()
-    val gender: LiveData<Gender> = _gender
-
-    private val _goal = MutableLiveData<Goal>()
-    val goal: LiveData<Goal> = _goal
-
-    fun setGoal(goal: Goal) {
-        this._goal.value = goal
+    fun putString(key: String, value: String) = viewModelScope.launch {
+        profileRepository.putString(key, value)
     }
 
-    fun setActivityLevel(activityLevel: ActivityLevel) {
-        this._activityLevel.value = activityLevel
+    fun putInt(key: String, value: Int) = viewModelScope.launch {
+        profileRepository.putInt(key, value)
     }
 
-    fun setBirthDate(birthDate: Date) {
-        this._birthDate.value = birthDate
+    fun putFloat(key: String, value: Float) = viewModelScope.launch {
+        profileRepository.putFloat(key, value)
     }
 
-    fun setCurrentGrowth(currentGrowth: Int) {
-        this._currentGrowth.value = currentGrowth
-    }
-
-    fun setCurrentWeight(currentWeight: Int) {
-        this._currentWeight.value = currentWeight
-    }
-
-    fun setDesiredWeight(desiredWeight: Int) {
-        this._desiredWeight.value = desiredWeight
-    }
-
-    fun setGender(gender: Gender) {
-        this._gender.value = gender
-    }
-
-    fun createProfile() {
-        val profile = Profile(
-            Gender.MALE,
-            Goal.WEIGHT_GAIN,
-            Date(),
-           ActivityLevel.ACTIVE,
-            180,
-           80,
-            100
-        )
-        viewModelScope.launch { createProfileUseCase(profile) }
-    }
-}
-
-class CreateProfileViewModelFactory @AssistedInject constructor(private val createProfileUseCase: CreateProfileUseCase) :
-    ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return CreateProfileViewModel(createProfileUseCase) as T
-    }
-
-    @AssistedFactory
-    interface Factory {
-        fun create() : CreateProfileViewModelFactory
-    }
+    fun createProfile() = viewModelScope.launch { profileRepository.createProfile() }
 }

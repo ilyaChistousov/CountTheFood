@@ -1,16 +1,16 @@
 package ilya.chistousov.countcalories.domain.model
 
+import java.time.LocalDate
 import java.util.*
 
 data class Profile(
     val gender: Gender,
     val goal: Goal,
-    val birthDate: Date,
+    val birthDate: LocalDate,
     val activityLevel: ActivityLevel,
     val currentGrowth: Int,
-    val currentWeight: Int,
-    val desiredWeight: Int
-    )
+    val currentWeight: Float,
+    val desiredWeight: Float)
 
 enum class Goal {
     WEIGHT_LOSS, KEEPING_CURRENT_WEIGHT, WEIGHT_GAIN

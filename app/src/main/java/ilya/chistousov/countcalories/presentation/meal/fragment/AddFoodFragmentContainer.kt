@@ -39,26 +39,12 @@ class AddFoodFragmentContainer : BaseFragment<FragmentAddFoodContainerBinding>(
     }
 
     private fun initTabs() {
-        binding.viewPagerContainer.adapter = foodFragmentAdapter
-        TabLayoutMediator(binding.tabLayout, binding.viewPagerContainer) { tab, position ->
-            tab.text = tabsName[position]
-        }.attach()
-
-
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                tab.icon?.alpha = 255
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                tab.icon?.alpha = 50
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-                tab.icon?.alpha = 255
-            }
-
-        })
+        with(binding) {
+            viewPagerContainer.adapter = foodFragmentAdapter
+            TabLayoutMediator(tabLayout, viewPagerContainer) { tab, position ->
+                tab.text = tabsName[position]
+            }.attach()
+        }
     }
 
     private fun setupToolBarTitle() {

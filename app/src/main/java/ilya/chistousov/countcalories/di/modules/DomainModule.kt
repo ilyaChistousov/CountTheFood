@@ -2,14 +2,14 @@ package ilya.chistousov.countcalories.di.modules
 
 import dagger.Binds
 import dagger.Module
-import ilya.chistousov.countcalories.data.firebase.repository.RegisterAccountRepositoryImpl
+import ilya.chistousov.countcalories.data.firebase.repository.AccountRepositoryImpl
 import ilya.chistousov.countcalories.data.network.repository.FoodApiRepositoryImpl
 import ilya.chistousov.countcalories.data.room.repository.FoodRepositoryImpl
 import ilya.chistousov.countcalories.data.room.repository.ProfileRepositoryImpl
 import ilya.chistousov.countcalories.domain.repository.FoodApiRepository
 import ilya.chistousov.countcalories.domain.repository.FoodRepository
 import ilya.chistousov.countcalories.domain.repository.ProfileRepository
-import ilya.chistousov.countcalories.domain.repository.RegisterAccountRepository
+import ilya.chistousov.countcalories.domain.repository.AccountRepository
 
 @Module
 interface DomainModule {
@@ -22,8 +22,8 @@ interface DomainModule {
 
     @Binds
     fun bindRegisterAccountRepository(
-        registerAccountRepositoryImpl: RegisterAccountRepositoryImpl
-    ): RegisterAccountRepository
+        registerAccountRepositoryImpl: AccountRepositoryImpl
+    ): AccountRepository
 
     @Binds
     fun bindFoodApiRepository(

@@ -4,16 +4,21 @@ import android.util.Log
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import java.net.SocketTimeoutException
 
-fun <T, E> Response<T>.handleResponse(mapper: Mapper<T, E>): Resource<E> {
+fun <T, E> Response<T>.handleResponse(mapper: Mapper<T, E>): ilya.chistousov.countcalories.util.Response<E> {
     return try {
-        return Resource.Success(mapper.map(body()!!))
+        return ilya.chistousov.countcalories.util.Response.Success(mapper.map(body()!!))
     } catch (ex: IOException) {
         ex.printStackTrace()
-        Resource.Error("Cannot load data")
+        ilya.chistousov.countcalories.util.Response.Error("Cannot load data")
     } catch (ex: HttpException) {
         ex.printStackTrace()
-        Resource.Error("Cannot load data")
+        ilya.chistousov.countcalories.util.Response.Error("Cannot load data")
+    } catch (ex: SocketTimeoutException) {
+        Log.d("Response", "$ex")
+        ex.printStackTrace()
+        ilya.chistousov.countcalories.util.Response.Error("Cannot load data")
     }
 }
 

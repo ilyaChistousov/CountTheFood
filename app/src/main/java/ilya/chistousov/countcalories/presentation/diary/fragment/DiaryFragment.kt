@@ -1,6 +1,7 @@
 package ilya.chistousov.countcalories.presentation.diary.fragment
 
 import android.content.Context
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
@@ -55,12 +56,29 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         dateViewModel.currentDate.observe(viewLifecycleOwner) {
             selectNextDay()
             selectPreviousDay()
-            setDateToDiaryFragment(it)
+            addDateText(it)
             getAllFood(it)
             showMealDetail(it)
             selectDate(it)
         }
     }
+
+    private fun addDateText(currentDate: LocalDate) {
+        val dayOfYear = LocalDate.now().dayOfYear
+        with(binding.textViewDate) {
+            text = when {
+                dayOfYear == currentDate.dayOfYear -> "Сегодня"
+                dayOfYear -1 == currentDate.dayOfYear -> "Вчера"
+                dayOfYear +1 == currentDate.dayOfYear -> "Завтра"
+                else -> {
+                    val formatter = DateTimeFormatter.ofPattern(DATE_PATTERN, Locale("ru"))
+                    currentDate.format(formatter)
+                }
+            }
+
+        }
+    }
+
 
     private fun selectNextDay() {
         binding.imageViewNextDate.setOnClickListener {
@@ -93,18 +111,13 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
         }
     }
 
-    private fun addSlideAnimation(direction: String) : Animation {
+    private fun addSlideAnimation(direction: String): Animation {
         val animationId = when (direction) {
             LEFT_ANIM -> R.anim.slide_in_left
             RIGHT_ANIM -> R.anim.slide_in_right
             else -> throw IllegalArgumentException("Not such animation")
         }
-        return AnimationUtils.loadAnimation(activity,animationId)
-    }
-
-    private fun setDateToDiaryFragment(currentDate: LocalDate) {
-        val formatter = DateTimeFormatter.ofPattern(DATE_PATTERN, Locale("ru"))
-        binding.textViewDate.text = currentDate.format(formatter)
+        return AnimationUtils.loadAnimation(activity, animationId)
     }
 
     private fun showMealDetail(currentDate: LocalDate) {
@@ -227,7 +240,7 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
 
     private fun getCurrentProfile() {
         profileViewModel.currentProfile.observe(viewLifecycleOwner) {
-            val age = it.birthDate.getYearFromDate()
+            val age = it.birthDate.year
             caloriesLeft = when (it.goal) {
                 KEEPING_CURRENT_WEIGHT -> {
                     getNecessaryCalories(it.gender, it.currentWeight, it.currentGrowth, age, it.activityLevel)
@@ -287,7 +300,7 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
 
     private fun getNecessaryCalories(
         gender: Gender,
-        weight: Int,
+        weight: Float,
         growth: Int,
         age: Int,
         activityLevel: ActivityLevel

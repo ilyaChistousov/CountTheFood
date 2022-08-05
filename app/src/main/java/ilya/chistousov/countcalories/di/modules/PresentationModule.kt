@@ -10,6 +10,8 @@ import ilya.chistousov.countcalories.presentation.diary.viewmodel.ProfileViewMod
 import ilya.chistousov.countcalories.presentation.foods.viewmodels.MealViewModel
 import ilya.chistousov.countcalories.presentation.meal.viewmodel.AddFoodViewModel
 import ilya.chistousov.countcalories.presentation.meal.viewmodel.SearchFoodViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
+import ilya.chistousov.countcalories.presentation.register.viewmodel.AccountViewModel
 
 @Module
 interface PresentationModule {
@@ -31,6 +33,14 @@ interface PresentationModule {
     fun bindMealViewModel(mealViewModel: MealViewModel) : ViewModel
 
     @Binds
+    @[IntoMap ViewModelKey(AccountViewModel::class)]
+    fun bindRegisterAccountViewModel(accountViewModel: AccountViewModel) : ViewModel
+
+    @Binds
     @[IntoMap ViewModelKey(SearchFoodViewModel::class)]
     fun bindSearchFoodViewModel(searchFoodViewModel: SearchFoodViewModel) : ViewModel
+
+    @Binds
+    @[IntoMap ViewModelKey(CreateProfileViewModel::class)]
+    fun bindCreateProfileViewModel(createProfileViewModel: CreateProfileViewModel) : ViewModel
 }

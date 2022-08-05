@@ -1,10 +1,10 @@
 package ilya.chistousov.countcalories.presentation.diary.viewmodel
 
 import androidx.lifecycle.ViewModel
-import ilya.chistousov.countcalories.domain.usecases.profile.GetProfileUseCase
+import ilya.chistousov.countcalories.domain.repository.ProfileRepository
 import javax.inject.Inject
 
-class ProfileViewModel @Inject constructor(getProfileUseCase: GetProfileUseCase) : ViewModel() {
+class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
-    val currentProfile = getProfileUseCase()
+    val currentProfile = repository.getProfile()
 }

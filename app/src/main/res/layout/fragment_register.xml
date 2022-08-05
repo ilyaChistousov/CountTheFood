@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/finish_register_text"
-        style="@android:style/TextAppearance.Widget.TextView"
+        android:textAppearance="@style/CustomTextStyle"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/toolBar"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:text="@string/email"
-        style="@android:style/TextAppearance.Widget.TextView"
+        android:textAppearance="@style/CustomTextStyle"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -55,6 +56,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
+            android:textAppearance="@style/CustomTextStyle"
+            android:textSize="16sp"
             android:inputType="textEmailAddress"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -66,7 +69,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:text="@string/password"
-        style="@android:style/TextAppearance.Widget.TextView"
+        android:textAppearance="@style/CustomTextStyle"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/emailLayout"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -90,17 +94,20 @@
             android:layout_width="match_parent"
             android:inputType="textPassword"
             android:maxLength="16"
+            android:textAppearance="@style/CustomTextStyle"
+            android:textSize="16sp"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonFinishRegister"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/finish_register"
         android:backgroundTint="@color/light_green"
         android:textAllCaps="false"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

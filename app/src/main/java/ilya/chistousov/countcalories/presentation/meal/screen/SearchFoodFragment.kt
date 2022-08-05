@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.DividerItemDecoration
 import ilya.chistousov.countcalories.appComponent
 import ilya.chistousov.countcalories.databinding.FragmentSearchFoodBinding
 import ilya.chistousov.countcalories.domain.model.Food
@@ -13,10 +11,9 @@ import ilya.chistousov.countcalories.presentation.basefragment.BaseFragment
 import ilya.chistousov.countcalories.presentation.meal.adapter.FoodAdapter
 import ilya.chistousov.countcalories.presentation.meal.adapter.RecyclerViewOnItemClickListener
 import ilya.chistousov.countcalories.presentation.meal.fragment.AddFoodFragmentContainer
-import ilya.chistousov.countcalories.presentation.meal.fragment.AddFoodFragmentContainerArgs
 import ilya.chistousov.countcalories.presentation.meal.fragment.AddFoodFragmentContainerDirections
 import ilya.chistousov.countcalories.presentation.meal.viewmodel.SearchFoodViewModel
-import ilya.chistousov.countcalories.util.Resource
+import ilya.chistousov.countcalories.util.Response
 
 class SearchFoodFragment : BaseFragment<FragmentSearchFoodBinding>(
     FragmentSearchFoodBinding::inflate
@@ -38,18 +35,23 @@ class SearchFoodFragment : BaseFragment<FragmentSearchFoodBinding>(
     }
 
     private fun showSearchedFood() {
-        binding.searchFoodEditText.setOnFocusChangeListener { _, focused ->
-            with(binding) {
+        with(binding) {
+            searchFoodEditText.setOnFocusChangeListener { _, focused ->
                 if (!focused && searchFoodEditText.text != null) {
                     searchFoodViewModel.searchFoodByName(searchFoodEditText.text.toString())
                     searchFoodViewModel.foodFromApi.observe(viewLifecycleOwner) { resource ->
-                        when(resource) {
-                            is Resource.Loading -> progressBar.visibility = View.VISIBLE
-                            is Resource.Success -> {
-                                progressBar.visibility = View.GONE
-                                updateUi(resource.data!!)
+                        when (resource) {
+                            is Response.Loading -> progressBar.visibility = View.VISIBLE
+                            is Response.Success -> {
+                                if (resource.data!!.isEmpty()) {
+                                    progressBar.visibility = View.GONE
+                                    errorTextView.visibility = View.VISIBLE
+                                } else {
+                                    progressBar.visibility = View.GONE
+                                    updateUi(resource.data)
+                                }
                             }
-                            is Resource.Error -> {
+                            is Response.Error -> {
                                 progressBar.visibility = View.GONE
                                 errorTextView.visibility = View.VISIBLE
                             }

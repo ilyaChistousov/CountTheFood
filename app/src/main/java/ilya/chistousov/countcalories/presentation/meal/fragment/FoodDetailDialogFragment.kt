@@ -1,6 +1,8 @@
 package ilya.chistousov.countcalories.presentation.meal.fragment
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -48,6 +50,7 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
 
     private fun setupDialog() {
         dialog?.window?.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     private fun initProgressBarAndTextViewPercent() {
@@ -180,5 +183,4 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
         super.onDestroyView()
         _binding = null
     }
-
 }
