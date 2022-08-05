@@ -1,77 +1,124 @@
 package ilya.chistousov.countcalories.presentation.register.screen
 
-import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import androidx.fragment.app.viewModels
-import ilya.chistousov.countcalories.appComponent
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import androidx.core.view.isVisible
+import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.FragmentBirthDateBinding
-import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModel
-import ilya.chistousov.countcalories.presentation.register.viewmodel.CreateProfileViewModelFactory
-import ilya.chistousov.countcalories.util.getDate
+import ilya.chistousov.countcalories.presentation.register.fragment.RegisterFragmentContainer.Companion.FIFTH_SCREEN
+import ilya.chistousov.countcalories.util.BIRTH_DATE
+import java.time.LocalDate
+import java.time.Month
+import java.time.Month.*
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+import java.time.format.TextStyle
 import java.util.*
-import javax.inject.Inject
 
 class BirthDateScreen :
     BaseScreen<FragmentBirthDateBinding>(
         FragmentBirthDateBinding::inflate
     ) {
+    private val months = listOf(
+        JANUARY, FEBRUARY, MARCH, APRIL,
+        MAY, JUNE, JULY, AUGUST, SEPTEMBER,
+        OCTOBER, NOVEMBER, DECEMBER
+    )
 
-    private val createProfileViewModel: CreateProfileViewModel by viewModels {
-        createProfileFactory.create()
-    }
-
-    @Inject
-    lateinit var createProfileFactory: CreateProfileViewModelFactory.Factory
-
-    override fun onAttach(context: Context) {
-        context.appComponent.inject(this)
-        super.onAttach(context)
-    }
+    private var selectedBirthDate = LocalDate.now()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setDatePicker()
-        goingToNextFragment()
-        getSelectedDate()
-        showPreviousScreen()
-    }
-
-    private fun goingToNextFragment() {
-        binding.buttonNextFragment.setOnClickListener {
-            createProfileViewModel.setBirthDate(binding.datePicker.getDate())
-            parentBinding.viewPager.currentItem = 4
+        if (savedInstanceState != null) {
+            getSelectedValue(savedInstanceState.getSerializable(BIRTH_DATE) as LocalDate)
+            binding.buttonNextFragment.isEnabled = true
         }
+        setNextScreen()
+        setAutoComplete()
     }
 
-    private fun setDatePicker() {
-        binding.datePicker.maxDate = Date().time
-        binding.datePicker.minDate = getMinDate()
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(BIRTH_DATE, selectedBirthDate)
     }
 
-
-    private fun getMinDate(): Long {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.YEAR, -80)
-        return calendar.timeInMillis
-    }
-
-    private fun getSelectedDate() {
-        createProfileViewModel.birthDate.observe(viewLifecycleOwner) {
-            if (it != null) {
-                val calendar = Calendar.getInstance()
-                calendar.time = it
-                binding.datePicker.updateDate(
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH)
-                )
+    private fun setNextScreen() {
+        binding.buttonNextFragment.setOnClickListener {
+            selectedBirthDate = validateDate()
+            Log.d("BirthDate", "$selectedBirthDate")
+            if (!binding.errorDate.isVisible) {
+                createProfileViewModel.putString(BIRTH_DATE, getInputValueAsString())
+                parentBinding.viewPager.currentItem = FIFTH_SCREEN
             }
         }
     }
 
-    private fun showPreviousScreen() {
-        binding.toolBar.setNavigationOnClickListener {
-            parentBinding.viewPager.currentItem = 2
+    private fun validateDate(): LocalDate {
+        var selectedDate = LocalDate.now()
+        with(binding) {
+            try {
+                selectedDate = LocalDate.parse(
+                    getInputValueAsString(),
+                    DateTimeFormatter.BASIC_ISO_DATE
+                )
+                errorDate.visibility = View.GONE
+
+            } catch (ex: DateTimeParseException) {
+                errorDate.visibility = View.VISIBLE
+            } catch (ex: NoSuchElementException) {
+                errorDate.visibility = View.VISIBLE
+            } catch (ex : NumberFormatException) {
+                errorDate.visibility = View.VISIBLE
+            }
+            return selectedDate
         }
+    }
+
+    private fun getInputValueAsString() : String {
+        val selectedDay = binding.autoCompleteDay.text.toString()
+        val selectedMonth = binding.autoCompleteMonth.text.toString()
+        val selectedMonthValue = months
+            .filter { it.getDisplayName(TextStyle.SHORT, Locale("ru")) == selectedMonth }
+            .map { it.value }.first()
+        val monthInString = if (selectedMonthValue < 10) "0$selectedMonthValue" else "$selectedMonthValue"
+        val dayFormat = if (selectedDay.toInt() < 10) "0$selectedDay" else selectedDay
+        val selectedYear = binding.autoCompleteYear.text.toString()
+
+        return "$selectedYear$monthInString$dayFormat"
+    }
+
+    private fun setAutoComplete() {
+        val days = (1..31).toList()
+        val localDate = LocalDate.now()
+        val years = (1965..(localDate.year - 10)).toList()
+
+        with(binding) {
+            autoCompleteDay.setAdapter(ArrayAdapter(requireContext(), R.layout.auto_complete_item, days))
+            setClickOnAutoComplete(autoCompleteDay)
+
+            setClickOnAutoComplete(autoCompleteMonth, months)
+
+            autoCompleteYear.setAdapter(ArrayAdapter(requireContext(), R.layout.auto_complete_item, years))
+            setClickOnAutoComplete(autoCompleteYear)
+        }
+    }
+
+    private fun setClickOnAutoComplete(autoComplete: AutoCompleteTextView, months: List<Month> = emptyList()) {
+        autoComplete.isFocusable = false
+
+        if (months.isNotEmpty()) {
+            val map = months.map { it.getDisplayName(TextStyle.SHORT, Locale("ru")) }
+            autoComplete.setAdapter(ArrayAdapter(requireContext(), R.layout.auto_complete_item, map))
+        }
+
+        autoComplete.setOnClickListener { autoComplete.showDropDown() }
+    }
+
+    private fun getSelectedValue(selectedBirthDate: LocalDate) {
+        binding.autoCompleteDay.setText(selectedBirthDate.dayOfMonth.toString())
+        binding.autoCompleteMonth.setText(selectedBirthDate.month.toString())
+        binding.autoCompleteYear.setText(selectedBirthDate.year.toString())
     }
 }

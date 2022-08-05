@@ -12,7 +12,7 @@ import ilya.chistousov.countcalories.data.room.entity.ProfileEntity
 import ilya.chistousov.countcalories.data.room.entity.typeconvrerter.DateConverter
 import ilya.chistousov.countcalories.data.room.entity.typeconvrerter.LocalDateTimeConverter
 
-@Database(entities = [FoodEntity::class, ProfileEntity::class],  version = 1)
+@Database(entities = [FoodEntity::class, ProfileEntity::class],  version = 1, exportSchema = false)
 @TypeConverters(LocalDateTimeConverter::class, DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

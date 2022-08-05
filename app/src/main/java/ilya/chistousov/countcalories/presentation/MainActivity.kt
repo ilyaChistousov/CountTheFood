@@ -3,10 +3,8 @@ package ilya.chistousov.countcalories.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavGraph
 import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import ilya.chistousov.countcalories.R
 import ilya.chistousov.countcalories.databinding.ActivityMainBinding
 
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         val currentUser = firebaseAuth.currentUser
         navGraph.setStartDestination(
             if (currentUser == null) {
-                R.id.loginFragment
+                R.id.welcomeFragment
             } else {
                 R.id.tabsFragment
             }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".presentation.meal.fragment.AddCustomFoodDialogFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="20dp"
@@ -10,8 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.meal.fragment.AddCustomFoodDialogFragment">
+        android:layout_height="match_parent">
 
         <ImageButton
             android:id="@+id/imageButtonExit"
@@ -33,7 +33,7 @@
             android:text="@string/add_custom_food"
             android:textStyle="bold"
             android:textSize="19sp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +46,7 @@
             android:layout_marginStart="24dp"
             android:text="@string/enter_food_name"
             android:gravity="center"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textTitle" />
@@ -77,7 +77,7 @@
                 android:gravity="center"
                 android:inputType="text"
                 android:textCursorDrawable="@drawable/cursor_drawable"
-                android:textAppearance="@style/AddFoodTextStyle"
+                android:textAppearance="@style/CustomTextStyle"
                 android:textSize="15sp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -90,7 +90,7 @@
             android:textStyle="bold"
             android:textSize="19sp"
             android:text="@string/composition_nutrition"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/foodNameLayout" />
@@ -102,7 +102,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:text="@string/protein_custom"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/fatTitle"
@@ -137,7 +137,7 @@
                 android:maxLength="5"
                 android:textCursorDrawable="@drawable/cursor_drawable"
                 android:gravity="center"
-                android:textAppearance="@style/AddFoodTextStyle"
+                android:textAppearance="@style/CustomTextStyle"
                 android:textSize="15sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/fat_custom"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +180,7 @@
                 android:gravity="center"
                 android:textCursorDrawable="@drawable/cursor_drawable"
                 tools:text="123"
-                android:textAppearance="@style/AddFoodTextStyle"
+                android:textAppearance="@style/CustomTextStyle"
                 android:textSize="15sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/carbs_custom"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/fatTitle"
@@ -225,7 +225,7 @@
                 tools:text="123"
                 android:textCursorDrawable="@drawable/cursor_drawable"
                 android:gravity="center"
-                android:textAppearance="@style/AddFoodTextStyle"
+                android:textAppearance="@style/CustomTextStyle"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -236,7 +236,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/calories_custom"
             android:textSize="16sp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fatLayout" />
@@ -268,7 +268,7 @@
                 tools:text="200"
                 android:textCursorDrawable="@drawable/cursor_drawable"
                 android:gravity="center"
-                android:textAppearance="@style/AddFoodTextStyle"
+                android:textAppearance="@style/CustomTextStyle"
                 android:textSize="15sp"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -281,8 +281,8 @@
             android:backgroundTint="@color/light_green"
             android:text="@string/add"
             android:textAllCaps="false"
-            android:textSize="18sp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textSize="16sp"
+            android:textAppearance="@style/CustomTextStyle"
             app:cornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

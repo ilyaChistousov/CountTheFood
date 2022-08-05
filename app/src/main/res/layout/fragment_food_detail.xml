@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             app:layout_constraintEnd_toStartOf="@id/imageButtonExit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +59,7 @@
                 android:inputType="number"
                 android:background="#00000000"
                 android:textCursorDrawable="@drawable/cursor_drawable"
-                android:textAppearance="@style/AddFoodTextStyle" />
+                android:textAppearance="@style/CustomTextStyle" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +67,7 @@
             android:id="@+id/nutritionInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/nutrition_info"
             app:layout_constraintTop_toBottomOf="@id/inputGramLayout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +91,7 @@
             android:id="@+id/proteinPercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             tools:text="14 %"
             android:text="@string/food_detail_percent"
             app:layout_constraintStart_toStartOf="@id/progressProtein"
@@ -117,7 +117,7 @@
             android:id="@+id/fatPercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             tools:text="14%"
             android:text="@string/food_detail_percent"
             app:layout_constraintStart_toStartOf="@id/progressFat"
@@ -143,7 +143,7 @@
             android:id="@+id/carbsPercent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             tools:text="14%"
             android:text="@string/food_detail_percent"
             app:layout_constraintStart_toStartOf="@id/progressCarbs"
@@ -192,7 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/calories"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/proteinTitle" />
@@ -204,7 +204,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="4dp"
             tools:text="200"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:textColor="@color/black"
             app:layout_constraintEnd_toStartOf="@id/cal"
             app:layout_constraintTop_toBottomOf="@id/proteinTitle" />
@@ -215,7 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/cal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/proteinTitle" />
@@ -226,7 +226,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/food_detail_protein"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/caloriesTitle" />
@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="4dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             tools:text="15.5"
             app:layout_constraintEnd_toStartOf="@id/proteinGram"
             app:layout_constraintTop_toBottomOf="@id/caloriesAmount" />
@@ -248,7 +248,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/gram"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/caloriesAmount" />
@@ -259,7 +259,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/fat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/protein" />
@@ -270,7 +270,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="4dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             tools:text="15.5"
             app:layout_constraintEnd_toStartOf="@id/fatGram"
             app:layout_constraintTop_toBottomOf="@id/proteinAmount" />
@@ -281,7 +281,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/gram"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/proteinAmount" />
@@ -293,7 +293,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/carbs"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fat" />
@@ -305,7 +305,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             app:layout_constraintEnd_toStartOf="@id/carbsGram"
             app:layout_constraintTop_toBottomOf="@id/fatAmount"
             tools:text="15.5" />
@@ -316,7 +316,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:text="@string/gram"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fatAmount" />
@@ -325,7 +325,7 @@
             android:id="@+id/addFoodButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:textSize="16sp"
             android:text="@string/save"
             android:textAllCaps="false"
@@ -340,7 +340,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete"
-            android:textAppearance="@style/AddFoodTextStyle"
+            android:textAppearance="@style/CustomTextStyle"
             android:backgroundTint="@android:color/holo_red_dark"
             android:textAllCaps="false"
             android:textSize="16sp"
