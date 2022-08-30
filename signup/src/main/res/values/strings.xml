@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="choose_goal">Выберите вашу текущую цель</string>
+    <string name="male">Мужской</string>
+    <string name="female">Женский</string>
+    <string name="choose_gender">Укажите ваш пол</string>
+    <string name="choose_birthdate">Укажите вашу дату рождения</string>
+    <string name="choose_activity_level">Выберите ваш уровень активности</string>
+    <string name="passive_activity">Сидячий</string>
+    <string name="passive_description">Минимальный уровень физической активности, сидячая работа, отсутствие физических упражнений</string>
+    <string name="inactive_activity">Малоактивный</string>
+    <string name="inactive_activity_description">Интенсивные аэробные упражнения не менее 20 минут 1-3 раза в неделю такие как : ходьба, бег трусцой, бакскетбол, танцы и т.д.</string>
+    <string name="active_activity">Активный</string>
+    <string name="active_activity_description">Интенсивные аэробные упражнения не менее 30 минут 3-4 раза в неделю</string>
+    <string name="heavily_activity">Очень активный</string>
+    <string name="heavily_activity_description">Интенсивные физические упражнения и занятия спортом 5-7 раз в неделю. Так же в эту категорию подходит тяжелая физическая работа</string>
+    <string name="extra_active">Сверхактивный</string>
+    <string name="extra_active_description">Включает чрезвычайно активные и/или очень энергозатратные виды деятельности: занятия спортом с почти ежедневным графиком и несколькими тренировками в течение дня</string>
+    <string name="day">День</string>
+    <string name="month">Месяц</string>
+    <string name="year">Год</string>
+    <string name="error_date">Введена некорректная дата.\nДля продолжения необходимо изменить дату</string>
+    <string name="finish_registration">Остался последний шаг для\nзавершения регистрации</string>
+    <string name="inter_email">Ввести адрес электронной почты</string>
+    <string name="input_gmail">Завершить регистрацию с электронной почтой Google</string>
+    <string name="already_sign_up">Такой адрес электронной почты уже зарегистирован</string>
+    <string name="sign_up_error">Ошибка регистрации</string>
+    <string name="next">Далее</string>
+    <string name="retry">Повторить</string>
+    <string name="centimeters">см</string>
+    <string name="kilogram">кг</string>
+    <string name="growth">ваш рост</string>
+    <string name="current_weight">текущий вес</string>
+    <string name="desired_weight">желаемый вес</string>
+    <string name="password">Пароль</string>
+    <string name="email">Эл. почта</string>
+    <string name="finish_register">Завершить регистрацию</string>
+    <string name="finish_register_text">Введите электронную почту и пароль\n для завершения регистрации</string>
+    <string name="invalid_email_input">Неверно введенная электронная почта</string>
+    <string name="error_input_growth">Введен некорректный рост</string>
+    <string name="error_input_weight">Введен некорректный вес</string>
+</resources>

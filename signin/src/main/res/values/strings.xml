@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reset_password">Забыли пароль?</string>
+    <string name="change_password">Смена пароля</string>
+    <string name="change_password_button">Сменить пароль</string>
+    <string name="email">Эл. почта</string>
+    <string name="sign_in_google">Войти с GOOGLE</string>
+    <string name="sign_in_email">Войти с электронной почтой</string>
+    <string name="sign_in_google_error">Аккаунт не найден. Повторите попытку или перейдите на страницу регистрации</string>
+    <string name="sign_in_error">Ошибка входа</string>
+    <string name="retry">Повторить</string>
+    <string name="email_or_password_error">Адрес электронной почты или пароль указаны неверно</string>
+    <string name="sign_in">Вход</string>
+    <string name="password">Пароль</string>
+    <string name="invalid_email_input">Неверно введенная электронная почта</string>
+</resources>

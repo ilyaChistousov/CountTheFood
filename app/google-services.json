@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "965997958000",
-    "project_id": "countcalories-1c24c",
-    "storage_bucket": "countcalories-1c24c.appspot.com"
+    "project_number": "643127542885",
+    "project_id": "countthefood-67122",
+    "storage_bucket": "countthefood-67122.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:965997958000:android:748c73e19f01a69a2075b5",
+        "mobilesdk_app_id": "1:643127542885:android:8bdf4da2d040524fcc328c",
         "android_client_info": {
-          "package_name": "ilya.chistousov.countcalories"
+          "package_name": "ilya.chistousov.countthefood"
         }
       },
       "oauth_client": [
         {
-          "client_id": "965997958000-led8d21pc42b5n606quipi2ncibns68e.apps.googleusercontent.com",
+          "client_id": "643127542885-iip0be1iihoqjn1ssg7919jo4quf7h2r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ilya.chistousov.countcalories",
-            "certificate_hash": "bb132bdc58f27e970c629806fc16cc45693246d0"
+            "package_name": "ilya.chistousov.countthefood",
+            "certificate_hash": "3ee435c2b0028aedf8c996a04f904273958b0ec5"
           }
         },
         {
-          "client_id": "965997958000-3impeq94fiv23gbsr21iq5302e8k78ic.apps.googleusercontent.com",
+          "client_id": "643127542885-lg88a52t7d3vb6nd6lski67nms3o5oef.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAz-51Sr2da2DWXYuRoxbChL70deQh8GyI"
+          "current_key": "AIzaSyAf5dPfeZ5l3Wdin4I5wCcJBdmxTSrtLPQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "965997958000-3impeq94fiv23gbsr21iq5302e8k78ic.apps.googleusercontent.com",
+              "client_id": "643127542885-lg88a52t7d3vb6nd6lski67nms3o5oef.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

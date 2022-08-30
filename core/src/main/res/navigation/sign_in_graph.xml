@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sign_in_graph"
+    app:startDestination="@id/signInBottomSheetDialogFragment">
+
+    <dialog
+        android:id="@+id/signInBottomSheetDialogFragment"
+        android:name="ilya.chistousov.countthefood.signin.presentation.fragment.SignInBottomSheetDialogFragment"
+        android:label="SignInBottomSheetDialogFragment" >
+        <action
+            android:id="@+id/action_signInBottomSheetDialogFragment_to_signInWithEmailAndPasswordFragment"
+            app:destination="@id/signInWithEmailAndPasswordFragment" />
+        <action
+            android:id="@+id/action_signInBottomSheetDialogFragment_to_errorSignInWithGoogleDialogFragment"
+            app:destination="@id/errorSignInWithGoogleDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/errorSignInWithEmailDialogFragment"
+        android:name="ilya.chistousov.countthefood.signin.presentation.fragment.ErrorSignInWithEmailDialogFragment"
+        android:label="ErrorSignInWithEmailDialogFragment" />
+    <fragment
+        android:id="@+id/signInWithEmailAndPasswordFragment"
+        android:name="ilya.chistousov.countthefood.signin.presentation.fragment.SignInWithEmailAndPasswordFragment"
+        android:label="SignInWithEmailAndPasswordFragment" >
+        <action
+            android:id="@+id/action_signInWithEmailAndPasswordFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+        <action
+            android:id="@+id/action_signInWithEmailAndPasswordFragment_to_errorSignInWithEmailDialogFragment2"
+            app:destination="@id/errorSignInWithEmailDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/errorSignInWithGoogleDialogFragment"
+        android:name="ilya.chistousov.countthefood.signin.presentation.fragment.ErrorSignInWithGoogleDialogFragment"
+        android:label="ErrorSignInWithGoogleDialogFragment" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="ilya.chistousov.countthefood.signin.presentation.fragment.ResetPasswordFragment"
+        android:label="ResetPasswordFragment" />
+</navigation>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/food_graph"
+    app:startDestination="@id/diaryFragment">
+
+    <fragment
+        android:id="@+id/diaryFragment"
+        android:name="ilya.chistousov.countthefood.food.presentation.diary.fragment.DiaryFragment"
+        android:label="DiaryFragment" >
+        <action
+            android:id="@+id/action_diaryFragment_to_datePickerDialogFragment"
+            app:destination="@id/datePickerDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/datePickerDialogFragment"
+        android:name="ilya.chistousov.countthefood.food.presentation.diary.fragment.DatePickerDialogFragment"
+        android:label="DatePickerDialogFragment" >
+        <argument
+            android:name="currentDate"
+            app:argType="java.time.LocalDate" />
+    </dialog>
+</navigation>

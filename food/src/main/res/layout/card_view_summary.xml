@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/light_green"
+    app:cardElevation="2dp"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/progressCalories"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@id/textViewFatsTitle"
+            app:layout_constraintStart_toEndOf="@id/textViewProteinsTitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewCaloriesAmount"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/hero"
+            android:gravity="center"
+            android:text="@string/calories_amount_main"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/progressCalories"
+            app:layout_constraintEnd_toEndOf="@id/progressCalories"
+            app:layout_constraintStart_toStartOf="@id/progressCalories"
+            app:layout_constraintTop_toTopOf="@id/progressCalories" />
+
+        <TextView
+            android:id="@+id/textViewProteinsTitle"
+            style="@style/TextViewStyleCardSummary"
+            android:text="@string/protein"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/progressCalories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressProteins"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:maxHeight="10dp"
+            android:minHeight="5dp"
+            android:progressDrawable="@drawable/progress_bar_style"
+            android:saveEnabled="false"
+            app:layout_constraintBottom_toTopOf="@id/textViewProteinsCount"
+            app:layout_constraintEnd_toStartOf="@id/progressCalories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewProteinsTitle" />
+
+        <TextView
+            android:id="@+id/textViewProteinsCount"
+            style="@style/TextViewStyleCardSummary"
+            android:text="@string/amount_in_grams"
+            app:layout_constraintEnd_toStartOf="@id/progressCalories"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progressProteins" />
+
+        <Space
+            android:id="@+id/spaceBetweenProteinsAndFats"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/progressCarbs"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewCarbsTitle"
+            style="@style/TextViewStyleCardSummary"
+            android:layout_marginTop="16dp"
+            android:text="@string/carbs_diary"
+            app:layout_constraintEnd_toStartOf="@id/spaceBetweenFatsAndCarbs"
+            app:layout_constraintStart_toEndOf="@id/spaceBetweenProteinsAndFats"
+            app:layout_constraintTop_toBottomOf="@id/progressCalories" />
+
+        <ProgressBar
+            android:id="@+id/progressCarbs"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:maxHeight="10dp"
+            android:minHeight="5dp"
+            android:progressDrawable="@drawable/progress_bar_style"
+            android:saveEnabled="false"
+            app:layout_constraintEnd_toStartOf="@id/spaceBetweenFatsAndCarbs"
+            app:layout_constraintStart_toEndOf="@id/spaceBetweenProteinsAndFats"
+            app:layout_constraintTop_toBottomOf="@id/textViewCarbsTitle" />
+
+        <TextView
+            android:id="@+id/textViewCarbsCount"
+            style="@style/TextViewStyleCardSummary"
+            android:text="@string/amount_in_grams"
+            app:layout_constraintEnd_toStartOf="@id/spaceBetweenFatsAndCarbs"
+            app:layout_constraintStart_toEndOf="@id/spaceBetweenProteinsAndFats"
+            app:layout_constraintTop_toBottomOf="@id/progressCarbs" />
+
+        <Space
+            android:id="@+id/spaceBetweenFatsAndCarbs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/progressCarbs" />
+
+        <TextView
+            android:id="@+id/textViewFatsTitle"
+            style="@style/TextViewStyleCardSummary"
+            android:text="@string/fats_diary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/progressCalories"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressFats"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:maxHeight="10dp"
+            android:minHeight="5dp"
+            android:progressDrawable="@drawable/progress_bar_style"
+            android:saveEnabled="false"
+            app:layout_constraintBottom_toTopOf="@id/textViewFatsCount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/progressCalories"
+            app:layout_constraintTop_toBottomOf="@id/textViewFatsTitle" />
+
+        <TextView
+            android:id="@+id/textViewFatsCount"
+            style="@style/TextViewStyleCardSummary"
+            android:text="@string/amount_in_grams"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/progressCalories"
+            app:layout_constraintTop_toBottomOf="@id/progressFats" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
