@@ -1,30 +1,24 @@
 <resources>
     <string name="app_name">CountCalories</string>
-    <string name="web_client_id">965997958000-3impeq94fiv23gbsr21iq5302e8k78ic.apps.googleusercontent.com</string>
+    <string name="web_client_id">643127542885-lg88a52t7d3vb6nd6lski67nms3o5oef.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="diary">Дневник</string>
     <string name="water">Вода</string>
     <string name="analytics">Статистика</string>
-    <string name="caloriesAmount">Ккал: %s</string>
     <string name="proteinsAmount">Б: %s</string>
     <string name="fatsCount">Ж: %s</string>
     <string name="carbsCount">У: %s</string>
-    <string name="breakfast">Завтрак</string>
     <string name="lunch">Обед</string>
     <string name="dinner">Ужин</string>
     <string name="snack">Перекус</string>
     <string name="add_food">Введите название еды</string>
     <string name="add_food_to_meal">Добавить еду</string>
     <string name="add">Добавить</string>
-    <string name="calories_amount_main">%s / %s\nккал</string>
-    <string name="protein">белки</string>
-    <string name="fats_diary">жиры</string>
-    <string name="proteins_amount_in_grams">%s / %s г.</string>
+
     <string name="fats_amount_in_grams">%s / %s г.</string>
     <string name="carbs_amount_in_grams">%s / %s г.</string>
-    <string name="carbs_diary">углеводы</string>
+
     <string name="previous_date">предыдущая дата</string>
-    <string name="next_date">следующая дата</string>
     <string name="next_screen">Следующий экран</string>
     <string name="next_fragment">Следующий фрагмент</string>
     <string name="next">Далее</string>
@@ -35,10 +29,8 @@
     <string name="error_input_weight_gain">В выбранной вашей цели, желаемый вес не может быть меньше текущего</string>
     <string name="error_input_growth">Введен некорректный рост</string>
     <string name="password">Пароль</string>
-    <string name="email">Эл. почта</string>
     <string name="finish_register">Завершить регистрацию</string>
     <string name="finish_register_text">Введите электронную почту и пароль\n для завершения регистрации</string>
-    <string name="invalid_email_input">Неверно введенная электронная почта</string>
     <string name="calories_eaten">%s \nКкал\nсъедено</string>
     <string name="breakfast_image">breakfast image</string>
     <string name="lunch_image">lunch image</string>
@@ -47,18 +39,11 @@
     <string name="search_food">поиск еды</string>
     <string name="favorite_food">любимая еда</string>
     <string name="add_custom_food">Добавить свой продукт</string>
-    <string name="ed_search">Поиск еды</string>
-    <string name="food_item_calories">%s ккал (%s г.)</string>
     <string name="gram">г.</string>
-    <string name="nutrition_info">Данные о питательных веществах</string>
     <string name="calories">Калории</string>
-    <string name="food_detail_calories_amount">%s ккал</string>
     <string name="food_detail_protein">Белки</string>
     <string name="fat">Жиры</string>
     <string name="carbs">Углеводы</string>
-    <string name="food_detail_gram">%s г</string>
-    <string name="food_detail_percent">%s %%</string>
-    <string name="cal">ккал</string>
     <string name="save">Сохранить</string>
     <string name="delete">Удалить</string>
     <string name="custom_food_intro">Здесь располагаются все продукты, которыя были созданы вручную</string>
@@ -68,7 +53,6 @@
     <string name="protein_custom">Белки</string>
     <string name="fat_custom">Жиры</string>
     <string name="carbs_custom">Углеводы</string>
-    <string name="error_input">Поле не должно быть пустым</string>
     <string name="start">Начать</string>
     <string name="has_account">Уже есть аккаунт? Войти</string>
     <string name="growth">ваш рост</string>
@@ -98,18 +82,8 @@
     <string name="finish_registration">Остался последний шаг для\nзавершения регистрации</string>
     <string name="inter_email">Ввести адрес электронной почты</string>
     <string name="input_gmail">Завершить регистрацию с электронной почтой Google</string>
-    <string name="retry">Повторить</string>
     <string name="already_sign_up">Такой адрес электронной почты уже зарегистирован</string>
     <string name="sign_up_error">Ошибка регистрации</string>
-    <string name="login">Вход</string>
-    <string name="login_google">Войти с GOOGLE</string>
-    <string name="login_email">Войти с электронной почтой</string>
-    <string name="sign_in_error">Ошибка входа</string>
-    <string name="email_or_password_error">Адрес электронной почты или пароль указаны неверно</string>
-    <string name="sign_in_google_error">Аккаунт не найден. Повторите попытку или перейдите на страницу регистрации</string>
-    <string name="register">Регистрация</string>
-    <string name="reset_password">Забыли пароль?</string>
-    <string name="change_password">Смена пароля</string>
-    <string name="change_password_button">Сменить пароль</string>
+    <string name="sign_up">Регистрация</string>
     <string name="sign_in">Войти</string>
 </resources>

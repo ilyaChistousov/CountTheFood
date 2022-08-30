@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/welcomeFragment">
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="ilya.chistousov.countthefood.presentation.WelcomeFragment"
+        android:label="WelcomeFragment" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_sign_in_graph"
+            app:destination="@id/sign_in_graph" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_sign_up_graph"
+            app:destination="@id/sign_up_graph" />
+    </fragment>
+    <include app:graph="@navigation/sign_in_graph" />
+    <include app:graph="@navigation/sign_up_graph" />
+    <fragment
+        android:id="@+id/tabsFragment"
+        android:name="ilya.chistousov.countthefood.presentation.TabsFragment"
+        android:label="TabsFragment" >
+        <action
+            android:id="@+id/action_tabsFragment_to_mealFragment"
+            app:destination="@id/mealFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_tabsFragment" app:destination="@id/tabsFragment" />
+    <fragment
+        android:id="@+id/mealFragment"
+        android:name="ilya.chistousov.countthefood.food.presentation.meal.fragment.MealFragment"
+        android:label="fragment_meal"
+        tools:layout="@layout/fragment_meal" >
+        <action
+            android:id="@+id/action_mealFragment_to_addFoodFragmentContainer"
+            app:destination="@id/addFoodFragmentContainer" />
+        <action
+            android:id="@+id/action_mealFragment_to_foodDetailDialogFragment"
+            app:destination="@id/foodDetailDialogFragment" />
+        <argument
+            android:name="meal"
+            app:argType="ilya.chistousov.countthefood.core.model.Meal" />
+        <argument
+            android:name="addedDate"
+            app:argType="java.time.LocalDate" />
+        <argument
+            android:name="mealName"
+            app:argType="string" />
+        <argument
+            android:name="mealIconId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFoodFragmentContainer"
+        android:name="ilya.chistousov.countthefood.food.presentation.meal.fragment.AddFoodFragmentContainer"
+        android:label="fragment_add_food_container"
+        tools:layout="@layout/fragment_add_food_container" >
+        <action
+            android:id="@+id/action_addFoodFragmentContainer_to_foodDetailDialogFragment"
+            app:destination="@id/foodDetailDialogFragment" />
+        <argument
+            android:name="meal"
+            app:argType="ilya.chistousov.countthefood.core.model.Meal" />
+        <argument
+            android:name="mealName"
+            app:argType="string" />
+    </fragment>
+    <dialog
+        android:id="@+id/foodDetailDialogFragment"
+        android:name="ilya.chistousov.countthefood.food.presentation.meal.fragment.FoodDetailDialogFragment"
+        android:label="fragment_food_detail"
+        tools:layout="@layout/fragment_food_detail" >
+        <argument
+            android:name="meal"
+            app:argType="ilya.chistousov.countthefood.core.model.Meal" />
+        <argument
+            android:name="food"
+            app:argType="ilya.chistousov.countthefood.core.model.Food" />
+    </dialog>
+</navigation>

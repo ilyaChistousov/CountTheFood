@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sign_up_graph"
+    app:startDestination="@id/signUpFragmentContainer">
+
+    <fragment
+        android:id="@+id/signUpFragmentContainer"
+        android:name="ilya.chistousov.countthefood.signup.presentation.fragment.SignUpFragmentContainer"
+        android:label="SignUpFragmentContainer" >
+        <action
+            android:id="@+id/action_signUpFragmentContainer_to_errorSignUpDialogFragment"
+            app:destination="@id/errorSignUpDialogFragment" />
+        <action
+            android:id="@+id/action_signUpFragmentContainer_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="ilya.chistousov.countthefood.signup.presentation.fragment.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_errorSignUpDialogFragment"
+            app:destination="@id/errorSignUpDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/errorSignUpDialogFragment"
+        android:name="ilya.chistousov.countthefood.signup.presentation.fragment.ErrorSignUpDialogFragment"
+        android:label="ErrorSignUpDialogFragment" />
+</navigation>

@@ -12,5 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "CountCalories"
+rootProject.name = "CountTheFood"
 include ':app'
+include ':core'
+include ':signup'
+include ':signin'
+include ':food'

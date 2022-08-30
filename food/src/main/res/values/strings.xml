@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_input">Поле не должно быть пустым</string>
+    <string name="calories_amount_main">%s / %s\nккал</string>
+    <string name="protein">белки</string>
+    <string name="amount_in_grams">%s / %s г.</string>
+    <string name="fats_diary">жиры</string>
+    <string name="carbs_diary">углеводы</string>
+    <string name="food_item_calories">%s ккал (%s г.)</string>
+    <string name="next_date">следующая дата</string>
+    <string name="breakfast">Завтрак</string>
+    <string name="calories_amount">Ккал: %s</string>
+    <string name="lunch">Обед</string>
+    <string name="dinner">Ужин</string>
+    <string name="snack">Перекус</string>
+    <string name="nutrition_info">Данные о питательных веществах</string>
+    <string name="food_detail_percent">%s %%</string>
+    <string name="calories">Калории</string>
+    <string name="cal">ккал</string>
+    <string name="food_detail_protein">Белки</string>
+    <string name="gram">г.</string>
+    <string name="fat">Жиры</string>
+    <string name="carbs">Углеводы</string>
+    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="ed_search">Поиск еды</string>
+    <string name="food_detail_gram">%s г</string>
+    <string name="food_detail_calories_amount">%s ккал</string>
+</resources>

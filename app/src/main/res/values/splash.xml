@@ -3,6 +3,6 @@
     <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="postSplashScreenTheme">@style/Theme.CountCalories</item>
+        <item name="postSplashScreenTheme">@style/Theme.CountTheFood</item>
     </style>
 </resources>
