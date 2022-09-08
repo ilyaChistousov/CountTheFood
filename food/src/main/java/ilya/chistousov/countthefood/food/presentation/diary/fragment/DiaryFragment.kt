@@ -10,7 +10,6 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countthefood.core.basefragment.BaseFragment
 import ilya.chistousov.countthefood.core.model.ActivityLevel
@@ -25,7 +24,7 @@ import ilya.chistousov.countthefood.food.presentation.diary.viewmodel.DateViewMo
 import ilya.chistousov.countthefood.food.presentation.diary.viewmodel.DiaryViewModel
 import ilya.chistousov.countthefood.food.presentation.diary.viewmodel.ProfileViewModel
 import ilya.chistousov.countthefood.food.util.*
-import ilya.chistousov.countthefood.presentation.TabsFragmentDirections
+import ilya.chistousov.countthefood.fragment.TabsFragmentDirections
 import ilya.chistousov.food.R
 import ilya.chistousov.food.databinding.FragmentDiaryBinding
 import java.time.LocalDate
@@ -247,16 +246,17 @@ class DiaryFragment : BaseFragment<FragmentDiaryBinding>(
 
     private fun getCurrentProfile() {
         profileViewModel.currentProfile.observe(viewLifecycleOwner) {
-            val age = it.birthDate.year
+            val age = it.birthDate
+            val year = LocalDate.parse(age).year
             caloriesLeft = when (it.goal) {
                 KEEPING_CURRENT_WEIGHT -> {
-                    getNecessaryCalories(it.gender, it.currentWeight, it.currentGrowth, age, it.activityLevel)
+                    getNecessaryCalories(it.gender, it.currentWeight, it.currentGrowth, year, it.activityLevel)
                 }
                 WEIGHT_LOSS -> {
-                    getNecessaryCalories(it.gender, it.currentWeight, it.currentGrowth, age, it.activityLevel) - 500
+                    getNecessaryCalories(it.gender, it.currentWeight, it.currentGrowth, year, it.activityLevel) - 500
                 }
                 WEIGHT_GAIN -> {
-                    getNecessaryCalories(it.gender, it.currentWeight, it.currentGrowth, age, it.activityLevel) + 500
+                    getNecessaryCalories(it.gender, it.currentWeight, it.currentGrowth, year, it.activityLevel) + 500
                 }
             }
 

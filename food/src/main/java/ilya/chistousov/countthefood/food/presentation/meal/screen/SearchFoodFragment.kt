@@ -8,7 +8,7 @@ import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import ilya.chistousov.countthefood.core.basefragment.BaseFragment
 import ilya.chistousov.countthefood.core.model.Food
-import ilya.chistousov.countthefood.core.result.Result
+import ilya.chistousov.countthefood.api.result.Result
 import ilya.chistousov.countthefood.food.di.FoodComponentViewModel
 import ilya.chistousov.countthefood.food.presentation.meal.adapter.FoodAdapter
 import ilya.chistousov.countthefood.food.presentation.meal.adapter.RecyclerViewOnItemClickListener

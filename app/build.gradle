@@ -32,6 +32,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs = ["-Xjvm-default=all"]
     }
 
     viewBinding {
@@ -46,6 +47,8 @@ dependencies {
     implementation project(":signin")
     implementation project(":signup")
     implementation project(":food")
+    implementation project(":api")
+    implementation project(":database")
 
     //room
     kapt "androidx.room:room-compiler:$room_version"

@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import ilya.chistousov.countthefood.data.room.database.AppDatabase
+import ilya.chistousov.countthefood.room.database.AppDatabase
 import javax.inject.Singleton
 
 @Module
@@ -21,10 +21,7 @@ class LocalDataStore {
     fun provideFoodDao(database: AppDatabase) = database.foodDao()
 
     @Provides
-    fun provideCreateProfileDao(database: AppDatabase) = database.createProfileDao()
-
-    @Provides
-    fun provideGetProfileDao(database: AppDatabase) = database.getProfileDao()
+    fun provideProfileDao(database: AppDatabase) = database.profileDao()
 
     @Provides
     fun provideSharedPreferences(context: Context) : SharedPreferences {

@@ -1,10 +1,18 @@
 package ilya.chistousov.countthefood.food.di
 
 import dagger.Component
+import ilya.chistousov.counthefood.database.dao.FoodDao
+import ilya.chistousov.counthefood.database.dao.ProfileDao
+import ilya.chistousov.counthefood.database.entity.FoodEntity
+import ilya.chistousov.counthefood.database.entity.ProfileEntity
+import ilya.chistousov.countthefood.api.dto.FoodDto
+import ilya.chistousov.countthefood.api.dto.ProfileFoodDto
+import ilya.chistousov.countthefood.api.service.FoodService
+import ilya.chistousov.countthefood.api.service.ProfileService
+import ilya.chistousov.countthefood.core.mapper.BaseMapper
+import ilya.chistousov.countthefood.core.model.Food
+import ilya.chistousov.countthefood.core.model.Profile
 import ilya.chistousov.countthefood.core.viewmodelfactory.MultiViewModelFactory
-import ilya.chistousov.countthefood.food.data.dao.FoodDao
-import ilya.chistousov.countthefood.food.data.dao.GetProfileDao
-import ilya.chistousov.countthefood.food.data.network.service.ApiFoodService
 import kotlin.properties.Delegates.notNull
 
 @Component(
@@ -23,9 +31,13 @@ internal interface FoodComponent {
 
 interface FoodDeps {
     val foodDao: FoodDao
-    val getProfileDao: GetProfileDao
-    val apiFoodService: ApiFoodService
+    val profileDao: ProfileDao
+    val foodService: FoodService
+    val profileService: ProfileService
     val fragmentContainerId: Int
+    val foodMapper: BaseMapper<FoodEntity, Food>
+    val profileMapper: BaseMapper<ProfileEntity, Profile>
+    val profileFoodDtoMapper: BaseMapper<ProfileFoodDto, Food>
 }
 
 object FoodDepsProvider {

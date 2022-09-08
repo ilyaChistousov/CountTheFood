@@ -16,7 +16,7 @@
         android:theme="@style/Theme.CountTheFood"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".fragment.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.App.SplashScreen"
             tools:ignore="LockedOrientationActivity">

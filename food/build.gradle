@@ -40,11 +40,8 @@ android {
 dependencies {
 
     implementation project(":core")
-
-    //room
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-runtime:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
+    implementation project(":api")
+    implementation project(":database")
 
     //dagger
     implementation "com.google.dagger:dagger:$dagger_version"
@@ -65,10 +62,8 @@ dependencies {
     //circularProgressBar
     implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 
-    //retrofit & okhttp
+    //retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     //firebase
     implementation "com.google.firebase:firebase-auth-ktx:$firebase_auth_version"

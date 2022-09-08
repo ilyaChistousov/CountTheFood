@@ -60,9 +60,7 @@ class BirthDateScreen :
         with(binding) {
             try {
                 selectedDate = LocalDate.parse(
-                    getInputValueAsString(),
-                    DateTimeFormatter.BASIC_ISO_DATE
-                )
+                    getInputValueAsString())
                 errorDate.visibility = View.GONE
 
             } catch (ex: DateTimeParseException) {
@@ -81,12 +79,17 @@ class BirthDateScreen :
         val selectedMonth = binding.autoCompleteMonth.text.toString()
         val selectedMonthValue = months
             .filter { it.getDisplayName(TextStyle.SHORT, Locale("ru")) == selectedMonth }
-            .map { it.value }.first()
-        val monthInString = if (selectedMonthValue < 10) "0$selectedMonthValue" else "$selectedMonthValue"
-        val dayFormat = if (selectedDay.toInt() < 10) "0$selectedDay" else selectedDay
+            .map { it.value }
+            .first()
         val selectedYear = binding.autoCompleteYear.text.toString()
+        val birthDate =
+            LocalDate.of(selectedYear.toInt(), selectedMonthValue, selectedDay.toInt())
+//        val monthInString = if (selectedMonthValue < 10) "0$selectedMonthValue" else "$selectedMonthValue"
+//        val dayFormat = if (selectedDay.toInt() < 10) "0$selectedDay" else selectedDay
 
-        return "$selectedYear$monthInString$dayFormat"
+//        return "$selectedYear$monthInString$dayFormat"
+        selectedBirthDate = birthDate
+        return birthDate.toString()
     }
 
     private fun setAutoComplete() {

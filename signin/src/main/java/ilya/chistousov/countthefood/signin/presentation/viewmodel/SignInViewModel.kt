@@ -12,9 +12,14 @@ class SignInViewModel @Inject constructor(
     val googleSignInClient: GoogleSignInClient
 ) : ViewModel() {
 
-    fun signInWithEmailAndPassword(email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+    fun signInWithEmailAndPassword(
+        email: String,
+        password: String,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit
+    ) {
         viewModelScope.launch {
-            signInRepository.signInWithEmailAndPassword(email, password,onSuccess, onFailure)
+            signInRepository.signInWithEmailAndPassword(email, password, onSuccess, onFailure)
         }
     }
 
@@ -27,6 +32,12 @@ class SignInViewModel @Inject constructor(
     fun resetPassword(email: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
         viewModelScope.launch {
             signInRepository.resetPassword(email, onSuccess, onFailure)
+        }
+    }
+
+    fun createProfile(email: String) {
+        viewModelScope.launch {
+            signInRepository.createProfile(email)
         }
     }
 }
