@@ -31,7 +31,7 @@ class EmailScreen : BaseScreen<FragmentEmailBinding>(
                         val googleEmail = task.result.email
                         createProfileViewModel.putString(EMAIL, googleEmail!!)
                         createProfileViewModel.createProfile()
-                        findNavController().navigate(ilya.chistousov.countthefood.core.R.id.action_global_tabsFragment)
+                        findNavController().navigate(ilya.chistousov.countthefood.core.R.id.action_global_loadingScreen)
                     },
                     onFailure = {
                         findNavController().navigate(

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import ilya.chistousov.countthefood.signin.R
 import ilya.chistousov.countthefood.signin.databinding.FragmentSignInBottomSheetDialogBinding
 import ilya.chistousov.countthefood.signin.di.SignInComponentViewModel
 import ilya.chistousov.countthefood.signin.presentation.viewmodel.SignInViewModel
@@ -26,11 +27,13 @@ class SignInBottomSheetDialogFragment : BottomSheetDialogFragment() {
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
         try {
-            val idToken = task.getResult(ApiException::class.java).idToken
-            if (idToken != null) {
-                signInViewModel.signInWithGoogle(idToken,
-                    onSuccess = { findNavController().navigate(
-                        ilya.chistousov.countthefood.core.R.id.action_global_tabsFragment
+            val result = task.getResult(ApiException::class.java)
+            if (result != null) {
+                signInViewModel.signInWithGoogle(result.idToken!!,
+                    onSuccess = {
+                        signInViewModel.createProfile(result.email!!)
+                        findNavController().navigate(
+                        ilya.chistousov.countthefood.core.R.id.action_global_loadingScreen
                     ) },
                     onFailure = { findNavController().navigate(
                         ilya.chistousov.countthefood.core.R.id.action_signInBottomSheetDialogFragment_to_errorSignInWithGoogleDialogFragment)})

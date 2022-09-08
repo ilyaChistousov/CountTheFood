@@ -1,11 +1,9 @@
 package ilya.chistousov.countthefood.core.model
 
-import java.time.LocalDate
-
 data class Profile(
     val gender: Gender,
     val goal: Goal,
-    val birthDate: LocalDate,
+    val birthDate: String,
     val activityLevel: ActivityLevel,
     val currentGrowth: Int,
     val currentWeight: Float,

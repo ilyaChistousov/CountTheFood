@@ -1,13 +1,15 @@
 package ilya.chistousov.countthefood.food.presentation.meal.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ilya.chistousov.countthefood.core.model.Food
-import ilya.chistousov.countthefood.core.result.Result
+import ilya.chistousov.countthefood.api.result.Result
 import ilya.chistousov.countthefood.food.domain.repository.FoodRepository
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class SearchFoodViewModel @Inject constructor(

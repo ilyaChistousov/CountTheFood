@@ -21,9 +21,9 @@ class AddFoodViewModel @Inject constructor(
                 food.protein,
                 food.fat,
                 food.carbs,
+                food.grams,
                 food.meal,
-                food.addedDate,
-                food.grams
+                food.addedDate
             )
                 foodRepository.addFood(updateFood)
         } else {

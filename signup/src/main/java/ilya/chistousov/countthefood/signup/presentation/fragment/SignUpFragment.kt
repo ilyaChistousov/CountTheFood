@@ -13,6 +13,7 @@ import ilya.chistousov.countthefood.signup.databinding.FragmentSignUpBinding
 import ilya.chistousov.countthefood.signup.di.SignUpComponentViewModel
 import ilya.chistousov.countthefood.signup.presentation.viewmodel.CreateProfileViewModel
 import ilya.chistousov.countthefood.signup.presentation.viewmodel.SignUpViewModel
+import ilya.chistousov.countthefood.signup.utils.EMAIL
 
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
     FragmentSignUpBinding::inflate
@@ -37,13 +38,12 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
     private fun finishRegistration() {
         binding.buttonFinishRegister.setOnClickListener {
             if (binding.emailLayout.helperText == null) {
-                registerAccount()
-                createProfile()
+                signUp()
             }
         }
     }
 
-    private fun registerAccount() {
+    private fun signUp() {
         signUpViewModel.signUpWithEmailAndPassword(
             binding.emailEditText.text.toString(),
             binding.passwordEditText.text.toString(),
@@ -53,7 +53,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
                 )
             }, onSuccess = {
                 createProfile()
-                findNavController().navigate(ilya.chistousov.countthefood.core.R.id.action_global_tabsFragment)
+                findNavController().navigate(ilya.chistousov.countthefood.core.R.id.action_global_loadingScreen)
             })
     }
 
@@ -75,6 +75,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
     }
 
     private fun createProfile() {
+        createProfileViewModel.putString(EMAIL, binding.emailEditText.text.toString())
         createProfileViewModel.createProfile()
     }
 

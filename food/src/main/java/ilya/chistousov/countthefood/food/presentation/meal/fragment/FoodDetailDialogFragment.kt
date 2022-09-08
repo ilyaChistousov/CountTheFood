@@ -154,9 +154,9 @@ class FoodDetailDialogFragment : DialogFragment(R.layout.fragment_food_detail) {
                 proteinAmount.text.toString().toFloat(),
                 fatAmount.text.toString().toFloat(),
                 carbsAmount.text.toString().toFloat(),
+                args.food.grams,
                 args.meal,
                 LocalDate.now(),
-                inputGram.text.toString().toInt()
             )
         }
     }

@@ -1,12 +1,14 @@
 package ilya.chistousov.countthefood.signup.data.repository
 
+import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import ilya.chistousov.countthefood.signup.domain.repository.SignUpRepository
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
-class SignUpRepositoryImpl @Inject constructor (
+class SignUpRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val googleClient: GoogleSignInClient
 ) : SignUpRepository {
@@ -14,10 +16,14 @@ class SignUpRepositoryImpl @Inject constructor (
     override suspend fun signUpWithEmailAndPassword(
         email: String, password: String, onSuccess: () -> Unit, onFailure: () -> Unit
     ) {
-        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
-            onSuccess()
-        }.addOnFailureListener {
-            onFailure()
+        try {
+            auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
+                onSuccess()
+            }.addOnFailureListener {
+                onFailure()
+            }
+        } catch (ex: SocketTimeoutException) {
+            Log.d("SIGN_UP", ex.toString())
         }
     }
 

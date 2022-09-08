@@ -6,7 +6,7 @@
     app:startDestination="@id/welcomeFragment">
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="ilya.chistousov.countthefood.presentation.WelcomeFragment"
+        android:name="ilya.chistousov.countthefood.fragment.WelcomeFragment"
         android:label="WelcomeFragment" >
         <action
             android:id="@+id/action_welcomeFragment_to_sign_in_graph"
@@ -17,15 +17,25 @@
     </fragment>
     <include app:graph="@navigation/sign_in_graph" />
     <include app:graph="@navigation/sign_up_graph" />
+
+    <action android:id="@+id/action_global_loadingScreen" app:destination="@id/loadingScreen"/>
+
+    <fragment
+        android:id="@+id/loadingScreen"
+        android:name="ilya.chistousov.countthefood.fragment.LoadingScreen"
+        android:label="LoadingScreen">
+        <action
+            android:id="@+id/action_loadingScreen_to_tabsFragment"
+            app:destination="@+id/tabsFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/tabsFragment"
-        android:name="ilya.chistousov.countthefood.presentation.TabsFragment"
+        android:name="ilya.chistousov.countthefood.fragment.TabsFragment"
         android:label="TabsFragment" >
         <action
             android:id="@+id/action_tabsFragment_to_mealFragment"
             app:destination="@id/mealFragment" />
     </fragment>
-    <action android:id="@+id/action_global_tabsFragment" app:destination="@id/tabsFragment" />
     <fragment
         android:id="@+id/mealFragment"
         android:name="ilya.chistousov.countthefood.food.presentation.meal.fragment.MealFragment"

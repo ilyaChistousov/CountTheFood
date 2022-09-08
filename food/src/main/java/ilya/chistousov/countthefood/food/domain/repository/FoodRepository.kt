@@ -3,7 +3,7 @@ package ilya.chistousov.countthefood.food.domain.repository
 import androidx.lifecycle.LiveData
 import ilya.chistousov.countthefood.core.model.Food
 import ilya.chistousov.countthefood.core.model.Meal
-import ilya.chistousov.countthefood.core.result.Result
+import ilya.chistousov.countthefood.api.result.Result
 
 interface FoodRepository {
 

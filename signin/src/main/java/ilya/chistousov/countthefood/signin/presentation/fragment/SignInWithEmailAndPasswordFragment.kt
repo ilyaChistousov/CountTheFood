@@ -36,11 +36,14 @@ class SignInWithEmailAndPasswordFragment : BaseFragment<FragmentSignInWithEmailA
     private fun loginAccount() {
         binding.signInButton.setOnClickListener {
             if (binding.emailLayout.helperText == null) {
+                val email = binding.emailEditText.text.toString()
                 signInViewModel.signInWithEmailAndPassword(
-                    binding.emailEditText.text.toString(),
+                    email,
                     binding.passwordEditText.text.toString(),
-                    onSuccess = { findNavController().navigate(
-                        ilya.chistousov.countthefood.core.R.id.action_global_tabsFragment) },
+                    onSuccess = {
+                        signInViewModel.createProfile(email)
+                        findNavController().navigate(
+                        ilya.chistousov.countthefood.core.R.id.action_global_loadingScreen) },
                     onFailure = { findNavController().navigate(
                         ilya.chistousov.countthefood.core.R.id.action_signInWithEmailAndPasswordFragment_to_errorSignInWithEmailDialogFragment2) }
                 )
